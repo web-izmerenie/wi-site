@@ -1,0 +1,59 @@
+/**
+ * Main styles module
+ *
+ * @author Viacheslav Lotsmanov
+ * @license GNU/AGPLv3
+ * @see {@link https://github.com/web-izmerenie/wi-site/blob/master/LICENSE-AGPLv3|License}
+ */
+
+@require 'nib'
+
+@require 'variables'
+@require 'mixins'
+@require 'fonts'
+
+global-reset()
+reset-html5()
+
+html, body
+	reset-box-model()
+	font-metrics 0 0
+	size: 100%
+
+body
+	background white
+	color black
+
+header
+	$height = 112px
+	$logo-height = 55px
+
+	size 100% $height
+	z-index 1
+	position fixed
+	top 0
+	left 0
+	//background $header-bg-color
+
+	.logo
+		display block
+		position absolute
+		left 29px
+		top (($height - $logo-height) / 2)
+		text-decoration none
+
+		img.logo_image, .logo_text
+			display inline-block
+			vertical-align: middle
+
+		img.logo_image
+			size $logo-height
+
+		.logo_text
+			custom-font('SansRoundedLightC', normal, 22px, 24px)
+			color white
+			text-transform uppercase
+			margin-left 19px
+			padding-top: 2px
+
+@require 'general_cards'

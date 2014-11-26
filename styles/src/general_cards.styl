@@ -1,0 +1,37 @@
+/**
+ * General cards styles
+ *
+ * @author Viacheslav Lotsmanov
+ * @license GNU/AGPLv3
+ * @see {@link https://github.com/web-izmerenie/wi-site/blob/master/LICENSE-AGPLv3|License}
+ */
+
+.general_cards
+	size 100%
+	z-index 0
+	position relative
+
+	.card_1
+		$gradient-from = #315d9a
+		$gradient-to = #2b75ba
+
+		size 100%
+		min-height $min-height
+		background linear-gradient(top, $gradient-from, $gradient-to)
+		z-index 0
+		position relative
+
+		.bg
+			size 100%
+			background url(img-path('card_1/bg_texture.png')) center center repeat
+			position absolute
+			left 0
+			top 0
+			z-index 0
+
+		.content
+			display inline-block
+			z-index 1
+
+			h1
+				//

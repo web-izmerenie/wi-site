@@ -1,0 +1,51 @@
+/**
+ * Custom fonts
+ *
+ * @author Viacheslav Lotsmanov
+ * @license GNU/AGPLv3
+ * @see {@link https://github.com/web-izmerenie/wi-site/blob/master/LICENSE-AGPLv3|License}
+ */
+
+declare-font(
+	$name, $weight=normal, $style=normal,
+	$file-base-name=$name, $svg-font-id=$name
+)
+	@font-face {
+		font-family $name
+
+		$path = pathjoin($fonts-path, $file-base-name)
+
+		src url($path + '.woff' + $rev-qs) format('woff'),
+			url($path + '.otf' + $rev-qs) format('opentype'),
+			url($path + '.svg' + $rev-qs + '#' + $svg-font-id) format('svg')
+
+		font-weight $weight
+		font-style $style
+	}
+
+declare-font('SansRoundedLightC', 300)
+declare-font(
+	'Proxima Nova Rg', 400, normal, 'ProximaNova-Reg', 'ProximaNova-Regular')
+declare-font(
+	'Proxima Nova Rg', 700, normal, 'ProximaNova-Bold', 'ProximaNova-Bold')
+declare-font(
+	'Proxima Nova Lt', 300, normal, 'ProximaNova-Light', 'ProximaNova-Light')
+declare-font('RotondaC', 400, normal, 'rotondac', 'RotondaC')
+declare-font('RotondaC', 700, normal, 'rotondac-bold', 'RotondaC-Bold')
+
+custom-font($name, $weight=normal, $font-size=inherit, $line-height=inherit)
+	font-family $name, serif
+	font-metrics $font-size, $line-height
+
+	if $name is 'SansRoundedLightC'
+		font-weight 300
+	else if $name is 'Proxima Nova Rg' and $weight is normal
+		font-weight 400
+	else if $name is 'Proxima Nova Rg' and $weight is bold
+		font-weight 700
+	else if $name is 'Proxima Nova Lt'
+		font-weight 300
+	else if $name is 'RotondaC' and $weight is normal
+		font-weight 400
+	else if $name is 'RotondaC' and $weight is bold
+		font-weight 700
