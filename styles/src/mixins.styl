@@ -24,6 +24,12 @@ rel-path($rel-path)
 img-path($rel-path)
 	pathjoin($images-path, $rel-path) + $rev-qs
 
+icon-src($rel-path)
+	pathjoin($icons-path, $rel-path) + $rev-qs
+
+vector-icon-src($rel-path)
+	pathjoin($vector-icons-path, $rel-path) + $rev-qs
+
 // bg
 
 bg-img($path)
