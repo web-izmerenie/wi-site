@@ -12,6 +12,18 @@ $icon-arrow = {
 	height: 20px
 }
 
+$icon-show-menu = {
+	src: (pathjoin($icons-path, 'show-menu.png') + $rev-qs)
+	width: 55px
+	height: 55px
+}
+
+$icon-show-menu = {
+	src: (pathjoin($icons-path, 'show-menu-active.png') + $rev-qs)
+	width: $icon-show-menu.width
+	height: $icon-show-menu.height
+}
+
 vector-icon($icon)
 	$src = $icon.src
 	size(($icon.width), ($icon.height))
