@@ -25,34 +25,6 @@ body
 	background white
 	color black
 
-header
-	$height = 112px
-	$logo-height = 55px
-
-	size 100% $height
-	z-index 1
-	fixed(0, auto, auto, 0)
-	//background $header-bg-color
-
-	.logo
-		display block
-		position absolute
-		left 29px
-		top (($height - $logo-height) / 2)
-		text-decoration none
-
-		img.logo-image, .logo-text
-			display inline-block
-			vertical-align: middle
-
-		img.logo-image
-			size $logo-height
-
-		.logo-text
-			custom-font('SansRoundedLightC', normal, 22px, 24px)
-			color white
-			text-transform uppercase
-			margin-left 19px
-			padding-top: 2px
+@require 'header'
 
 @require 'general-cards'
