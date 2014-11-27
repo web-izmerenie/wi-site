@@ -44,6 +44,10 @@
           "jquery": {
             "path": "./node_modules/jquery",
             "exports": ""
+          },
+          "jquery.transit": {
+            "relativePath": "./lib/jquery.transit",
+            "exports": ""
           }
         }
       }

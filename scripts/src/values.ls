@@ -7,8 +7,6 @@
  */
 
 module.exports.values =
-	\min-width : 760 # px
 	\animation-speed : 200 # ms
-	\animation-curve : \easeIn
 
 module.exports.required = [\lang]

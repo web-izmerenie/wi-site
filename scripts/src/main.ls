@@ -7,10 +7,10 @@
  */
 
 require! {
-	prelude : _
 	jquery : $
 	'./basics'
 }
 
 basics.init !->
-	console.log basics
+	$html = $ \html
+	if $html.hasClass \general-page then require './pages/general'

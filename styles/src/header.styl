@@ -9,17 +9,25 @@
 header
 	$height = 112px
 	$logo-size = 55px
+	$logo-left = 29px
+	$logo-top = (($height - $logo-size) / 2)
+	$call-menu-top = 28px
+	$call-menu-right = 15px
 
-	size 100% $height
+	size 100%
 	z-index 1
 	fixed(0, auto, auto, 0)
-	overflow hidden
+
+	body.loaded &
+		size 100% $height
 
 	.logo
-		display block
+		display inline-block
 		text-decoration none
-		absolute((($height - $logo-size) / 2), auto, auto, 29px)
 		z-index 1
+		white-space nowrap
+		absolute(50%, auto, auto, 50%)
+		transform translate(-50%, -50%)
 
 		img.logo-image, .logo-text
 			display inline-block
@@ -27,20 +35,41 @@ header
 
 		img.logo-image
 			size $logo-size
+			transform rotate(0deg)
 
 		.logo-text
 			custom-font('SansRoundedLightC', normal, 22px, 24px)
 			color white
 			text-transform uppercase
-			margin-left 19px
 			padding-top 2px
+			opacity 0
+			width 0
+			overflow hidden
+			transition:
+				width $animation-speed $animation-curve
+				opacity $animation-speed $animation-curve
+
+		body.loaded &
+			absolute($logo-top, auto, auto, $logo-left)
+
+			img.logo-image
+				transform translateX(0) translateY(0)
+
+			.logo-text
+				width auto
+				opacity 1
+				margin-left 19px
 
 	.call-menu
 		display block
 		text-decoration none
-		absolute(28px, 15px)
+		absolute($call-menu-top, 0)
 		size(($icon-show-menu.width), ($icon-show-menu.height))
 		z-index 2
+		opacity 0
+		transition:
+			opacity $animation-speed $animation-curve
+			right $animation-speed $animation-curve
 
 		&:before, &:after
 			pseudo-block()
@@ -58,7 +87,11 @@ header
 			icon($icon-show-menu-active)
 			opacity 0
 
-	.opened-menu
+		body.loaded &
+			right $call-menu-right
+			opacity 1
+
+	.menu
 		$menu-text-color = #9daeb8
 		$menu-active-text-color = #f5ce08
 		$menu-active-bg-color = #122939
@@ -76,7 +109,7 @@ header
 		nav
 			size auto 100%
 			absolute(0, 113px)
-			white-space no-wrap
+			white-space nowrap
 
 			& > a, & > span
 				text-decoration none
