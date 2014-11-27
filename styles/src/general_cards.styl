@@ -9,29 +9,58 @@
 .general_cards
 	size 100%
 	z-index 0
-	position relative
+	relative()
 
 	.card_1
-		$gradient-from = #315d9a
-		$gradient-to = #2b75ba
+		$bg-from-color = #315d9a
+		$bg-to-color = #2b75ba
+		$next-button-color = #10476e
 
 		size 100%
 		min-height $min-height
-		background linear-gradient(top, $gradient-from, $gradient-to)
+		background linear-gradient(top, $bg-from-color, $bg-to-color)
 		z-index 0
-		position relative
+		relative()
+		text-align center
 
 		.bg
 			size 100%
-			background url(img-path('card_1/bg_texture.png')) center center repeat
-			position absolute
-			left 0
-			top 0
+			absolute(0, auto, auto, 0)
 			z-index 0
+			bg('card_1/bg_texture.png', center center repeat)
 
 		.content
 			display inline-block
 			z-index 1
+			color white
+			text-align center
+			relative(50%)
+			transform translateY(-50%)
 
 			h1
-				//
+				custom-font('Proxima Nova Rg', bold, 72px, 73px)
+				text-align center
+
+			h2
+				custom-font('Proxima Nova Lt', normal, 24px, 26px)
+				text-align center
+				padding-top (66px - 35px)
+
+			.next
+				$size = 100px
+
+				display inline-block
+				size $size
+				background $next-button-color
+				border-radius ($size / 2)
+				relative()
+				margin-top (68px - 6px)
+
+				&:before
+					$left = (($size - $icon-arrow.width) / 2)
+					$top = (($size - $icon-arrow.height) / 2)
+					$top += 3px
+
+					pseudo-block()
+					absolute($top, auto, auto, $left)
+					vector-icon($icon-arrow)

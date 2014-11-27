@@ -11,6 +11,7 @@
 @require 'variables'
 @require 'mixins'
 @require 'fonts'
+@require 'icons'
 
 global-reset()
 reset-html5()
@@ -30,9 +31,7 @@ header
 
 	size 100% $height
 	z-index 1
-	position fixed
-	top 0
-	left 0
+	fixed(0, auto, auto, 0)
 	//background $header-bg-color
 
 	.logo

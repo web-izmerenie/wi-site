@@ -1,0 +1,18 @@
+/**
+ * Icons variables and mixins
+ *
+ * @author Viacheslav Lotsmanov
+ * @license GNU/AGPLv3
+ * @see {@link https://github.com/web-izmerenie/wi-site/blob/master/LICENSE-AGPLv3|License}
+ */
+
+$icon-arrow = {
+	src: (pathjoin($vector-icons-path, 'down-arrow.svg') + $rev-qs)
+	width: 32px
+	height: 20px
+}
+
+vector-icon($icon)
+	$src = $icon.src
+	size(($icon.width), ($icon.height))
+	background url($src) 0 0 no-repeat
