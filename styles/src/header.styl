@@ -13,12 +13,13 @@ header
 	size 100% $height
 	z-index 1
 	fixed(0, auto, auto, 0)
-	//background $header-bg-color
+	overflow hidden
 
 	.logo
 		display block
 		text-decoration none
 		absolute((($height - $logo-size) / 2), auto, auto, 29px)
+		z-index 1
 
 		img.logo-image, .logo-text
 			display inline-block
@@ -39,8 +40,76 @@ header
 		text-decoration none
 		absolute(28px, 15px)
 		size(($icon-show-menu.width), ($icon-show-menu.height))
+		z-index 2
 
-		&:before
+		&:before, &:after
 			pseudo-block()
 			absolute(0, auto, auto, 0)
+			transition:
+				opacity $animation-speed $animation-curve,
+				transform ($animation-speed*2) $animation-curve
+			transform rotate(0deg)
+
+		&:before
 			icon($icon-show-menu)
+			opacity 1
+
+		&:after
+			icon($icon-show-menu-active)
+			opacity 0
+
+	.opened-menu
+		$menu-text-color = #9daeb8
+		$menu-active-text-color = #f5ce08
+		$menu-active-bg-color = #122939
+		$menu-text-fs = 18px
+		$menu-margin = 23px
+
+		display block
+		background $header-bg-color
+		size 0% 100%
+		z-index 0
+		absolute(0, 0)
+		overflow hidden
+		transition width ($animation-speed*4) $animation-curve
+
+		nav
+			size auto 100%
+			absolute(0, 113px)
+			white-space no-wrap
+
+			& > a, & > span
+				text-decoration none
+				display inline-block
+				size auto, 100%
+				custom-font(
+					'Proxima Nova Rg', normal,
+					$menu-text-fs, ($menu-text-fs + 2px))
+				box-sizing border-box
+				text-transform uppercase
+				color $menu-text-color
+				margin-left $menu-margin
+				padding-top 61px - 16px
+
+				&:first-child
+					margin-left 0
+
+			& > a.active, & > span
+				background $menu-active-bg-color
+				color $menu-active-text-color
+				custom-font(
+					'Proxima Nova Rg', bold,
+					$menu-text-fs, ($menu-text-fs + 2px))
+				padding-x $menu-margin
+
+	&.menu-active
+		.call-menu
+			&:before, &:after
+				transform rotate(90deg)
+			&:before
+				opacity 0
+			&:after
+				opacity 1
+
+		.opened-menu
+			width 100%
