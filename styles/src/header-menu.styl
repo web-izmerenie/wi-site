@@ -1,0 +1,99 @@
+/**
+ * Menu in header styles
+ *
+ * @author Viacheslav Lotsmanov
+ * @license GNU/AGPLv3
+ * @see {@link https://github.com/web-izmerenie/wi-site/blob/master/LICENSE-AGPLv3|License}
+ */
+
+$call-menu-top = 28px
+$call-menu-right = 29px
+
+.call-menu
+	display block
+	text-decoration none
+	absolute($call-menu-top, 0)
+	size(($icons.show-menu.width), ($icons.show-menu.height))
+	z-index 2
+	opacity 0
+	transition opacity $animation-speed $animation-curve,
+		right $animation-speed $animation-curve
+
+	&:before, &:after
+		pseudo-block()
+		absolute(0, auto, auto, 0)
+		transition opacity $animation-speed $animation-curve,
+			transform $animation-speed $animation-curve
+		transform rotate(0deg)
+
+	&:before
+		icon($icons.show-menu)
+		opacity 1
+
+	&:after
+		icon($icons.show-menu-active)
+		opacity 0
+
+	body.loaded &
+		right $call-menu-right
+		opacity 1
+
+.menu
+	$menu-text-color = #9daeb8
+	$menu-active-text-color = #f5ce08
+	$menu-active-bg-color = #122939
+	$menu-text-fs = 18px
+	$menu-margin = 23px
+
+	display block
+	background $header-bg-color
+	size 100% 0%
+	z-index 0
+	absolute(0, 0)
+	overflow hidden
+	transition height $animation-speed $animation-curve
+
+	nav
+		size auto 100%
+		absolute(0, 113px)
+		white-space nowrap
+
+		& > a, & > span
+			text-decoration none
+			display inline-block
+			size auto, 100%
+			custom-font(
+				'Proxima Nova Rg', normal,
+				$menu-text-fs, ($menu-text-fs + 2px))
+			box-sizing border-box
+			text-transform uppercase
+			color $menu-text-color
+			margin-left $menu-margin
+			padding-top 61px - 16px
+			transition color $animation-speed $animation-curve
+
+			&:first-child
+				margin-left 0
+
+		& > a.active, & > span
+			background $menu-active-bg-color
+			color $menu-active-text-color
+			custom-font(
+				'Proxima Nova Rg', bold,
+				$menu-text-fs, ($menu-text-fs + 2px))
+			padding-x $menu-margin
+
+		& > a:hover, & > a.active:hover
+			color white
+
+&.menu-active
+	.call-menu
+		&:before, &:after
+			transform rotate(90deg)
+		&:before
+			opacity 0
+		&:after
+			opacity 1
+
+	.menu
+		height 100%
