@@ -130,6 +130,7 @@ header
 				color $menu-text-color
 				margin-left $menu-margin
 				padding-top 61px - 16px
+				transition color $animation-speed $animation-curve
 
 				&:first-child
 					margin-left 0
@@ -141,6 +142,9 @@ header
 					'Proxima Nova Rg', bold,
 					$menu-text-fs, ($menu-text-fs + 2px))
 				padding-x $menu-margin
+
+			& > a:hover, & > a.active:hover
+				color white
 
 	&.menu-active
 		.call-menu
