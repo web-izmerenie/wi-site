@@ -39,9 +39,7 @@ timer!
 
 preload !->
 	loading-animation := false
-	$logo-img .stop! .transition rotate: \360deg, (speed * 4), \linear, !->
-		$card1-bg
-			.stop!
-			.transition opacity: 1, scale: 1, (speed * 4), \in-out, !->
-				$logo .addClass \logo-move
-				set-timeout (!-> $body .addClass \loaded), (speed * 4)
+	<-! $logo-img .stop! .transition rotate: \360deg, (speed * 4), \linear
+	<-! $card1-bg .stop! .transition opacity: 1, scale: 1, (speed * 4), \in-out
+	$logo .addClass \logo-move
+	set-timeout (!-> $body .addClass \loaded), (speed * 4)
