@@ -9,14 +9,19 @@
 header
 	$height = 112px
 	$logo-size = 55px
-	$logo-left = 29px
-	$logo-top = (($height - $logo-size) / 2)
 	$call-menu-top = 28px
-	$call-menu-right = 15px
+	$call-menu-right = 29px
+	$speed = ($animation-speed * 4)
 
 	size 100%
 	z-index 1
-	fixed(0, auto, auto, 0)
+	absolute(0, auto, auto, 0)
+	transition height $animation-speed $animation-curve
+
+	.fixed-header
+		fixed(0, auto, auto, 0)
+		size 100%, $height
+		z-index 1
 
 	body.loaded &
 		size 100% $height
@@ -24,10 +29,13 @@ header
 	.logo
 		display inline-block
 		text-decoration none
-		z-index 1
+		z-index 2
 		white-space nowrap
 		absolute(50%, auto, auto, 50%)
 		transform translate(-50%, -50%)
+		transition transform $speed $animation-curve,
+			left $speed $animation-curve,
+			top $speed $animation-curve
 
 		img.logo-image, .logo-text
 			display inline-block
@@ -44,17 +52,18 @@ header
 			padding-top 2px
 			opacity 0
 			width 0
+			margin-left 0
 			overflow hidden
-			transition:
-				width $animation-speed $animation-curve
-				opacity $animation-speed $animation-curve
+			transition width $animation-speed $animation-curve,
+				opacity $animation-speed $animation-curve,
+				margin-left $animation-speed $animation-curve
+
+		&.logo-move
+			transform translate(0, 0)
+			left 29px
+			top (($height - $logo-size) / 2)
 
 		body.loaded &
-			absolute($logo-top, auto, auto, $logo-left)
-
-			img.logo-image
-				transform translateX(0) translateY(0)
-
 			.logo-text
 				width auto
 				opacity 1
@@ -67,15 +76,13 @@ header
 		size(($icons.show-menu.width), ($icons.show-menu.height))
 		z-index 2
 		opacity 0
-		transition:
-			opacity $animation-speed $animation-curve
+		transition opacity $animation-speed $animation-curve,
 			right $animation-speed $animation-curve
 
 		&:before, &:after
 			pseudo-block()
 			absolute(0, auto, auto, 0)
-			transition:
-				opacity $animation-speed $animation-curve,
+			transition opacity $animation-speed $animation-curve,
 				transform ($animation-speed*2) $animation-curve
 			transform rotate(0deg)
 
@@ -104,7 +111,7 @@ header
 		z-index 0
 		absolute(0, 0)
 		overflow hidden
-		transition width ($animation-speed*4) $animation-curve
+		transition width $speed $animation-curve
 
 		nav
 			size auto 100%

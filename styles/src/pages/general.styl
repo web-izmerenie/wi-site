@@ -16,6 +16,7 @@
 		$bg-to-color = #2b75ba
 		$next-button-color = #10476e
 		$next-button-size = 100px
+		$speed = ($animation-speed * 4)
 
 		size 100%
 		min-height $min-height
@@ -54,9 +55,8 @@
 
 			h1, h2, .next
 				opacity 0
-				transition:
-					opacity $animation-speed $animation-curve
-					margin-bottom $animation-speed $animation-curve
+				transition opacity ($animation-speed*2) $animation-curve,
+					margin-bottom ($animation-speed*2) $animation-curve
 
 			.next
 				$size = $next-button-size
@@ -76,3 +76,8 @@
 					pseudo-block()
 					absolute($top, auto, auto, $left)
 					icon($icons.arrow)
+
+			body.loaded &
+				h1, h2, .next
+					margin-bottom 0
+					opacity 1
