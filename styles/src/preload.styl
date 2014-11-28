@@ -1,0 +1,24 @@
+/**
+ * Mixins for preloading images
+ *
+ * @author Viacheslav Lotsmanov
+ * @license GNU/AGPLv3
+ * @see {@link https://github.com/web-izmerenie/wi-site/blob/master/LICENSE-AGPLv3|License}
+ */
+
+for $key, $value in $icons
+	$src = $value.src
+	.preload-icon-{$key}
+		background-image url($src)
+
+body > .preloaders
+	display block
+	size 1px
+	absolute(-1px, auto, auto, -1px)
+	overflow hidden
+
+	& > ins
+		display block
+		size 1px
+		absolute(0, auto, auto, 0)
+		overflow hidden

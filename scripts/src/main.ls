@@ -8,9 +8,9 @@
 
 require! {
 	jquery : $
-	'./basics'
+	'./basics' : b
 }
 
-basics.init !->
+b.init !-> # when dom and styles is ready
 	$html = $ \html
 	if $html.hasClass \general-page then require './pages/general'

@@ -7,9 +7,9 @@
  */
 
 require! {
-	prelude : _p
 	jquery : $
-	'../basics'
+	'../basics' : b
+	'../preload'
 }
 
 require \jquery.transit
@@ -21,14 +21,20 @@ $header = $ \header
 $logo = $ \.logo
 $logo-img = $logo.find \img
 
-speed = (basics.get-val \animation-speed) * 4
+speed = (b.get-val \animation-speed) * 4
 curve = \linear
 
-# page loading
+loading-animation = true
 
 timer = !->
+	if not loading-animation then return
 	$logo-img.transition rotate: \360deg, speed, curve, !->
+		if not loading-animation then return
 		$logo-img.css rotate: \0deg
 		timer!
-
 timer!
+
+preload !->
+	loading-animation := false
+	$logo-img .stop! .transition rotate: \0deg, speed, curve, !->
+		void

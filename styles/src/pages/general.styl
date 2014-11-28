@@ -69,10 +69,10 @@
 				margin-top (68px - 6px)
 
 				&:before
-					$left = (($size - $icon-arrow.width) / 2)
-					$top = (($size - $icon-arrow.height) / 2)
+					$left = (($size - $icons.arrow.width) / 2)
+					$top = (($size - $icons.arrow.height) / 2)
 					$top += 3px
 
 					pseudo-block()
 					absolute($top, auto, auto, $left)
-					icon($icon-arrow)
+					icon($icons.arrow)
