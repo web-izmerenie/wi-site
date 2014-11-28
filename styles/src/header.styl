@@ -83,7 +83,7 @@ header
 			pseudo-block()
 			absolute(0, auto, auto, 0)
 			transition opacity $animation-speed $animation-curve,
-				transform ($animation-speed*2) $animation-curve
+				transform $animation-speed $animation-curve
 			transform rotate(0deg)
 
 		&:before
@@ -107,11 +107,11 @@ header
 
 		display block
 		background $header-bg-color
-		size 0% 100%
+		size 100% 0%
 		z-index 0
 		absolute(0, 0)
 		overflow hidden
-		transition width $speed $animation-curve
+		transition height $animation-speed $animation-curve
 
 		nav
 			size auto 100%
@@ -151,5 +151,5 @@ header
 			&:after
 				opacity 1
 
-		.opened-menu
-			width 100%
+		.menu
+			height 100%
