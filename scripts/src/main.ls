@@ -13,4 +13,7 @@ require! {
 
 b.init !-> # when dom and styles is ready
 	$html = $ \html
+
+	require './header'
+
 	if $html.hasClass \general-page then require './pages/general'

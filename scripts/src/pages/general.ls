@@ -14,13 +14,12 @@ require! {
 
 require \jquery.transit
 
-$body = $ \body
+$html = $ \html
+
+$body = $html .find \body
 $header = $body .find \header
 $logo = $header .find '>.logo'
 $logo-img = $logo .find \img
-$logo-text = $logo .find \.logo-text
-$call-menu = $header .find \.call-menu
-$menu = $header .find \.menu
 
 $cards = $ \.general-cards
 $card1 = $cards .find \.card-1
@@ -31,6 +30,9 @@ speed = b.get-val \animation-speed
 
 loading-animation = true
 
+$card1-next .click ->
+	false
+
 timer = !->
 	if not loading-animation then return
 	$logo-img.transition rotate: \360deg, speed, \linear, !->
@@ -39,24 +41,6 @@ timer = !->
 		timer!
 timer!
 
-interface-ready = false
-
-$logo .click ->
-	false
-
-$call-menu .click ->
-	return false if not interface-ready
-
-	if $header .hasClass \menu-active
-		$header .removeClass \menu-active
-	else
-		$header .addClass \menu-active
-
-	false
-
-$card1-next .click ->
-	false
-
 preload !->
 	loading-animation := false
 	<-! $logo-img .stop! .transition rotate: \360deg, (speed * 4), \linear
@@ -64,5 +48,5 @@ preload !->
 	$logo .addClass \logo-move
 	set-timeout (!->
 		$body .addClass \loaded
-		interface-ready := true
+		$html .addClass \interface-ready
 	), (speed * 4)
