@@ -23,9 +23,20 @@ header
 
 	.fixed-header
 		fixed(0, auto, auto, 0)
-		size 100%, 0
+		size 100% 0
 		min-width $min-width
 		z-index 2
+
+		@media (max-width: ($responsive-1))
+			fixed(0, 0)
+			size 0 100%
+			min-width 0
+			max-width 220px
+			transition width ($animation-speed*2) $animation-curve
+
+	@media (max-width: ($responsive-1))
+		&.menu-active .fixed-header
+			width 220px
 
 	body.loaded &
 		size 100% $header-height-3

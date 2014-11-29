@@ -56,8 +56,17 @@
 	z-index 3
 	absolute(0, 0)
 	overflow hidden
-	transition height $animation-speed $animation-curve
+	transition width ($animation-speed*2) $animation-curve,
+		height $animation-speed $animation-curve
 	min-width $min-width
+
+	@media (max-width: ($responsive-1))
+		size 0 100%
+		min-width 0
+		max-width 220px
+
+		.logo
+			display none
 
 	.logo .logo-text
 		@media (min-width: ($responsive-2)) and (max-width 1110px)
@@ -106,6 +115,22 @@
 		& > a:hover, & > a.active:hover
 			color white
 
+		@media (max-width: ($responsive-1))
+			size 220px auto
+			absolute(50%, 0)
+			transform translateY(-50%)
+
+			& > a, & > span
+				display block
+				size 100% 58px
+				padding-top 21px
+				padding-right 0
+				margin-left 0
+				padding-left 26px
+
+			& > a.active, & > span
+				padding-right 0
+
 &.menu-active
 	.call-menu
 		&:before, &:after
@@ -120,3 +145,6 @@
 
 		@media (max-width: ($responsive-2))
 			height $header-height-2
+
+		@media (max-width: ($responsive-1))
+			size 100%
