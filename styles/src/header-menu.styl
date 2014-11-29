@@ -11,7 +11,7 @@
 	text-decoration none
 	absolute(28px, 0)
 	size(($icons.show-menu.width), ($icons.show-menu.height))
-	z-index 2
+	z-index 4
 	opacity 0
 	transition opacity $animation-speed $animation-curve,
 		right $animation-speed $animation-curve
@@ -52,11 +52,19 @@
 
 	display block
 	background $header-bg-color
-	size 100% 0%
-	z-index 0
+	size 100% 0
+	z-index 3
 	absolute(0, 0)
 	overflow hidden
 	transition height $animation-speed $animation-curve
+	min-width $min-width
+
+	.logo .logo-text
+		@media (min-width: ($responsive-2)) and (max-width 1110px)
+			display none
+
+		@media (min-width: ($responsive-1)) and (max-width 940px)
+			display none
 
 	nav
 		size auto 100%
@@ -108,4 +116,7 @@
 			opacity 1
 
 	.menu
-		height 100%
+		height $header-height-3
+
+		@media (max-width: ($responsive-2))
+			height $header-height-2

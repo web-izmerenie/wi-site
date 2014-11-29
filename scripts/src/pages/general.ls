@@ -16,7 +16,7 @@ require \jquery.transit
 
 $body = $ \body
 $header = $body .find \header
-$logo = $header .find \.logo
+$logo = $header .find '>.logo'
 $logo-img = $logo .find \img
 $logo-text = $logo .find \.logo-text
 $call-menu = $header .find \.call-menu
@@ -45,7 +45,7 @@ $logo .click ->
 	false
 
 $call-menu .click ->
-	if not interface-ready then false
+	return false if not interface-ready
 
 	if $header .hasClass \menu-active
 		$header .removeClass \menu-active
