@@ -27,7 +27,7 @@ $logo.click ->
 	false
 
 $call-menu.click ->
-	return false if main-page and not $html.hasClass \interface-ready
+	return false if main-page and not $body.hasClass \loaded
 
 	if $header.hasClass \menu-active
 		$header.removeClass \menu-active

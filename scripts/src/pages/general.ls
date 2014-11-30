@@ -33,20 +33,36 @@ loading-animation = true
 $card1-next .click ->
 	false
 
-timer = !->
+loading-loop = !->
 	if not loading-animation then return
-	$logo-img.transition rotate: \360deg, speed, \linear, !->
+	$logo-img.transition rotate: \360deg, (speed*4), \linear, !->
 		if not loading-animation then return
 		$logo-img.css rotate: \0deg
-		timer!
-timer!
+		loading-loop!
 
-preload !->
+preload-cb = !->
 	loading-animation := false
-	<-! $logo-img .stop! .transition rotate: \360deg, (speed * 4), \linear
-	<-! $card1-bg .stop! .transition opacity: 1, scale: 1, (speed * 4), \in-out
+	<-! $logo-img .stop! .transition rotate: \360deg, (speed*4), \linear
+	<-! $card1-bg .stop! .transition opacity: 1, scale: 1, (speed*4), \in-out
 	$logo .addClass \logo-move
-	set-timeout (!->
-		$body .addClass \loaded
-		$html .addClass \interface-ready
-	), (speed * 4)
+	set-timeout (!-> $body .addClass \loaded), (speed * 4)
+
+# preload logo
+
+require! '../lib/load_img' : LoadImg
+img-src = $logo-img.attr \src
+b.load-img img-src, (err, img) !->
+	if err
+		if err instanceof LoadImg.exceptions.Timeout
+			window.alert b.get-local-text \err, \preload-img-timeout, {
+				\#IMAGE_SRC# : img-src
+			}
+			return
+		window.alert b.get-local-text \err, \preload-img, {
+			\#ERROR_CODE# : err.to-string!
+			\#IMAGE_SRC# : img-src
+		}
+		return
+
+	loading-loop!
+	preload preload-cb

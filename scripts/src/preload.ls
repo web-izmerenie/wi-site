@@ -23,8 +23,6 @@ add-preload-to-dom = ($master, class-name) !->
 	$new-el = $ '<ins/>', class: class-name
 	$master.append $new-el
 
-img-timeout = (b.get-val \load-img-timeout) * 1000
-
 loaded-cb = (cb, loaded-list, matches) !->
 	matches = matches |> _p.unique
 	loaded-list = loaded-list |> _p.unique
