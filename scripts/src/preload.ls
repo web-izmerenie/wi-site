@@ -30,7 +30,7 @@ loaded-cb = (cb, loaded-list, matches) !->
 		set-timeout cb, 0
 
 success = (data, cb) !->
-	matches = data.match /(?!\.)(preload-[^\s]+)/g
+	matches = data.match /(?!\.)(preload-[^\s\{]+)/g
 	if not _p.is-type \Array
 		set-timeout cb, 0
 		return
