@@ -64,7 +64,6 @@ scroll-handler = !->
 	new-top = ws if new-top < ws
 
 	$nav.css \top new-top + \px
-	console.log top, new-top, st, last-scroll-top
 
 	last-scroll-top := st
 
