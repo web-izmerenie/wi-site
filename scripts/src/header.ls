@@ -40,7 +40,7 @@ $call-menu.click ->
 handler-bind-suffix = \.header-handler
 
 resize-handler = !->
-	if $nav.height! <= $w.height!
+	if $nav.innerHeight! <= $w.height!
 		$nav
 			.removeClass \scroll
 			.css \top ''
@@ -54,7 +54,7 @@ scroll-handler = !->
 
 	st = $w.scrollTop!
 	top = parse-int ($nav.css \top), 10
-	h = $nav.height!
+	h = $nav.innerHeight!
 	wh = $w.height!
 
 	new-top = (top - (st - last-scroll-top))
