@@ -34,22 +34,7 @@ loading-animation = true
 $card1-next .click ->
 	false
 
-loading-loop = !->
-	if not loading-animation then return
-	$logo-img.transition rotate: \360deg, (speed*4), \linear, !->
-		if not loading-animation then return
-		$logo-img.css rotate: \0deg
-		loading-loop!
-
-preload-cb = !->
-	loading-animation := false
-	<-! $logo-img .stop! .transition rotate: \360deg, (speed*4), \linear
-	<-! $card1-bg .stop! .transition opacity: 1, scale: 1, (speed*4), \in-out
-	$logo .addClass \logo-move
-	set-timeout (!-> $body .addClass \loaded), (speed*4)
-
-	# card-1 background parallax
-
+card1-parallax-init = !->
 	card1-bg-parallax-bind-suffix = '.card-1-bg-parallax'
 
 	$w.on \scroll + card1-bg-parallax-bind-suffix, !->
@@ -62,6 +47,21 @@ preload-cb = !->
 		$w.trigger \scroll + card1-bg-parallax-bind-suffix
 
 	$w.trigger \resize + card1-bg-parallax-bind-suffix
+
+loading-loop = !->
+	if not loading-animation then return
+	$logo-img.transition rotate: \360deg, (speed*4), \linear, !->
+		if not loading-animation then return
+		$logo-img.css rotate: \0deg
+		loading-loop!
+
+preload-cb = !->
+	card1-parallax-init!
+	loading-animation := false
+	<-! $logo-img .stop! .transition rotate: \360deg, (speed*4), \linear
+	<-! $card1-bg .stop! .transition opacity: 1, scale: 1, (speed*4), \in-out
+	$logo .addClass \logo-move
+	set-timeout (!-> $body .addClass \loaded), (speed*4)
 
 # preload logo
 
