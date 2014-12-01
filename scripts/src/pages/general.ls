@@ -12,6 +12,7 @@ require! {
 	'../basics' : b
 	'../preload'
 	'../link-handler'
+	'../has-el-by-hash'
 }
 
 require \jquery.transit
@@ -65,7 +66,12 @@ preload-cb = !->
 	<-! $logo-img .stop! .transition rotate: \360deg, (speed*4), \linear
 	<-! $card1-bg .stop! .transition opacity: 1, scale: 1, (speed*4), \in-out
 	$logo .addClass \logo-move
-	set-timeout (!-> $body .addClass \loaded), (speed*4)
+	set-timeout (!->
+		$body .addClass \loaded
+
+		go-to-anchor = $html.data \go-to-anchor
+		go-to-anchor! if _p.is-type \Function go-to-anchor
+	), (speed*4)
 
 # preload logo first (for use this logo as loading spinner)
 

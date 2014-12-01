@@ -27,16 +27,27 @@ if hash.length > 1
 b.init !-> # when dom and styles are ready
 	$html = $ \html
 
+	$header = $html.find \header
+	$helper = $ '<div>', class: \height-helper
+	$header.append $helper
+
 	# scroll to anchor if exists by hash
 	if has-el-by-hash hash
-		$ 'html,body' .scrollTop 0
 		require! './link-handler'
 
-		# fake link for use link-handler
-		$link = $ '<a/>', href: window.location.pathname + hash
-		$link
-			.click link-handler
-			.trigger \click
+		$ 'html,body' .scrollTop 0
+
+		go-to-anchor = !->
+			# fake link for use link-handler
+			$link = $ '<a/>', href: window.location.pathname + hash
+			$link
+				.click link-handler
+				.trigger \click
+
+		if $html.hasClass \general-page
+			$html.data \go-to-anchor, go-to-anchor
+		else
+			go-to-anchor!
 
 	require './header'
 

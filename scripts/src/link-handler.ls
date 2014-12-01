@@ -16,6 +16,7 @@ require! {
 
 $page = null
 $header = null
+$height-helper = null
 
 scrolling = false
 
@@ -26,6 +27,7 @@ module.exports = ->
 	if not $page then
 		$page := $ 'html,body'
 		$header := $ \header
+		$height-helper := $header.find \.height-helper
 
 	# parse link href
 	href = $ this .attr \href
@@ -47,7 +49,7 @@ module.exports = ->
 	# reset to hash plug
 	window.location.hash = '#/'
 
-	top = ($ hash .offset! .top) - $header.height!
+	top = ($ hash .offset! .top) - $height-helper.height!
 
 	# start scrolling
 	$page .stop! .animate { \scroll-top : top },
