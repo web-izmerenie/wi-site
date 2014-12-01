@@ -21,14 +21,25 @@
 	.title-block
 		padding-bottom (110px - 7px)
 
+		@media (max-width: ($responsive-2))
+			padding-bottom 60px - 4px
+
 		h2
 			custom-font('Proxima Nova Rg', bold, 62px, 64px)
 			text-transform uppercase
 			padding-top (158px - 52px)
 
+			@media (max-width: ($responsive-2))
+				font-metrics(41px, 43px)
+				padding-top (102px - 34px)
+
 		h3
 			custom-font('Proxima Nova Rg', normal, 22px, 24px)
 			padding-top (60px - 31px)
+
+			@media (max-width: ($responsive-2))
+				font-metrics(18px, 20px)
+				padding-top (47px - 25px)
 
 	& > ul
 		display block
@@ -44,6 +55,9 @@
 			opacity 0
 			transition transform ($animation-speed*3) $animation-curve,
 				opacity ($animation-speed*4) $animation-curve
+
+			@media (max-width: ($responsive-2))
+				height 209px
 
 			&.visible
 				transform matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
@@ -92,11 +106,20 @@
 					custom-font('Proxima Nova Rg', bold, 52px, 54px)
 					text-transform uppercase
 
+					@media (max-width: ($responsive-2))
+						font-metrics(33px, 35px)
+
 				h4
 					custom-font('Proxima Nova Rg', normal, 22px, 24px)
 
+					@media (max-width: ($responsive-2))
+						font-metrics(16px, 18px)
+
 				h3 + h4
 					padding-top (49px - 30px)
+
+					@media (max-width: ($responsive-2))
+						padding-top (31px - 21px)
 
 			&:hover .text
 				opacity 1
@@ -136,3 +159,12 @@
 
 			&:hover
 				color $dark-content-color-1
+
+			@media (max-width: ($responsive-2))
+				font-metrics(18px, 20px) // 53
+				padding-top ($size + (38px - 20px) - (53px - 26px))
+				margin-top (110px - (129px - 70px))
+				margin-bottom (110px - 46px - (94px - 70px))
+
+				&:before, &:after
+					transform translateX(50%) scale(0.65)
