@@ -11,7 +11,7 @@
 	text-decoration none
 	absolute(28px, 0)
 	size(($icons.show-menu.width), ($icons.show-menu.height))
-	z-index 4
+	z-index 50
 	opacity 0
 	margin-top 0
 	transition opacity $animation-speed $animation-curve,
@@ -55,7 +55,7 @@
 	display block
 	background $header-bg-color
 	size 100% 0
-	z-index 3
+	z-index 45
 	absolute(0, 0)
 	overflow hidden
 	transition width ($animation-speed*2) $animation-curve,
@@ -73,6 +73,7 @@
 			size 100% 0
 			fixed(0, 0)
 			transition height $animation-speed $animation-curve
+			z-index 30
 
 		.logo
 			display none
@@ -197,7 +198,7 @@ $smaller-screen-header-height = 70px
 	@media (max-width: ($responsive-1))
 		.logo
 			fixed(15px, auto, auto, 29px)
-			z-index 5
+			z-index 40
 			transition left $animation-speed $animation-curve,
 				top $animation-speed $animation-curve
 
