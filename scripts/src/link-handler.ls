@@ -17,6 +17,7 @@ require! {
 $page = null
 $header = null
 $height-helper = null
+$nav-links = null
 
 scrolling = false
 
@@ -28,11 +29,12 @@ module.exports = ->
 		$page := $ 'html,body'
 		$header := $ \header
 		$height-helper := $header.find \.height-helper
+		$nav-links := $header .find '.menu nav a'
 
 	# parse link href
-	href = $ this .attr \href
-	pathname = href |> _p.take-while (is not \#)
-	hash = href |> _p.drop-while (is not \#)
+	href = @href
+	pathname = @pathname
+	hash = @hash
 
 	pathname = window.location.pathname if _p.empty pathname
 
@@ -48,6 +50,14 @@ module.exports = ->
 
 	# reset to hash plug
 	window.location.hash = '#/'
+
+	$nav-links.each !->
+		@pathname = window.location.pathname if _p.empty @pathname
+		return if @pathname is not pathname
+		if @pathname + @hash is pathname + hash
+			$ @ .addClass \active
+		else
+			$ @ .removeClass \active
 
 	top = ($ hash .offset! .top) - $height-helper.height!
 

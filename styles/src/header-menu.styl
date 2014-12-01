@@ -95,7 +95,11 @@
 			color $menu-text-color
 			margin-left $menu-margin
 			padding-top (61px - 16px)
-			transition color $animation-speed $animation-curve
+			transition color $animation-speed $animation-curve,
+				background-color $animation-speed $animation-curve,
+				padding-left $animation-speed $animation-curve,
+				padding-right $animation-speed $animation-curve
+			background transparent
 
 			@media (max-width: ($responsive-2))
 				padding-top (54px - 13px)

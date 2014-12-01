@@ -39,10 +39,7 @@ $call-menu.click ->
 
 	false
 
-$nav-links.click ->
-	# TODO set active class
-
-	link-handler.call this
+$nav-links.click link-handler
 
 handler-bind-suffix = \.header-handler
 
