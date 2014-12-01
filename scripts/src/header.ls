@@ -22,7 +22,9 @@ $call-menu = $header.find \.call-menu
 $menu = $header.find \.menu
 $nav = $menu.find \nav
 $nav-links = $nav.find \a
+$height-helper = $header.find \.height-helper
 
+$cards = $ \.general-cards
 main-page = $html.hasClass \general-page
 
 $logo.click link-handler
@@ -41,38 +43,55 @@ $call-menu.click ->
 
 $nav-links.click link-handler
 
-handler-bind-suffix = \.header-handler
+do !-> # menu vertical scroll
+	bind-suffix = \.header-menu-vertical-scroll
 
-resize-handler = !->
-	if $nav.innerHeight! <= $w.height!
-		$nav
-			.removeClass \scroll
-			.css \top ''
-		return \no-scroll
+	resize-handler = !->
+		if $nav.innerHeight! <= $w.height!
+			$nav
+				.removeClass \scroll
+				.css \top ''
+			return \no-scroll
 
-	$nav.addClass \scroll
+		$nav.addClass \scroll
 
-last-scroll-top = $w.scrollTop! # store last scroll top value for calculate scroll for vertical menu
-scroll-handler = !-> # support vertical scroll for narrow screens vertical menu
-	return if resize-handler! is \no-scroll
+	last-scroll-top = $w.scrollTop! # store last scroll top value for calculate scroll for vertical menu
+	scroll-handler = !-> # support vertical scroll for narrow screens vertical menu
+		return if resize-handler! is \no-scroll
 
-	st = $w.scrollTop!
-	top = parse-int ($nav.css \top), 10
-	h = $nav.innerHeight!
-	wh = $w.height!
+		st = $w.scrollTop!
+		top = parse-int ($nav.css \top), 10
+		h = $nav.innerHeight!
+		wh = $w.height!
 
-	new-top = (top - (st - last-scroll-top))
+		new-top = (top - (st - last-scroll-top))
 
-	ws = -(h - wh)
-	new-top = 0 if new-top > 0
-	new-top = ws if new-top < ws
+		ws = -(h - wh)
+		new-top = 0 if new-top > 0
+		new-top = ws if new-top < ws
 
-	$nav.css \top new-top + \px
+		$nav.css \top new-top + \px
 
-	last-scroll-top := st
+		last-scroll-top := st
 
-$w
-	.on \scroll + handler-bind-suffix, scroll-handler
-	.on \resize + handler-bind-suffix, resize-handler
+	$w
+		.on \scroll + bind-suffix, scroll-handler
+		.on \resize + bind-suffix, resize-handler
 
-scroll-handler!
+	scroll-handler!
+
+do !->
+	# TODO check if not general page
+
+	bind-suffix = \.header-menu-show-after-cards
+
+	scroll-handler = !->
+		st = $w.scrollTop! + $height-helper.height!
+		if st >= $cards.height!
+			$header.addClass \scroll-menu-active
+		else
+			$header.removeClass \scroll-menu-active
+
+	$w
+		.on \scroll + bind-suffix, scroll-handler
+		.on \resize + bind-suffix, scroll-handler

@@ -13,8 +13,10 @@
 	size(($icons.show-menu.width), ($icons.show-menu.height))
 	z-index 4
 	opacity 0
+	margin-top 0
 	transition opacity $animation-speed $animation-curve,
-		right $animation-speed $animation-curve
+		right $animation-speed $animation-curve,
+		margin-top $animation-speed $animation-curve
 
 	@media (max-width: ($responsive-2))
 		transform scale(0.74)
@@ -157,6 +159,32 @@
 
 		@media (max-width: ($responsive-1))
 			size 100%
+
+&.scroll-menu-active
+	.call-menu
+		$h = ($icons.show-menu.height)
+		margin-top (-28px - $h)
+
+		@media (min-width: ($responsive-1))
+			&:before, &:after
+				opacity 0
+
+		@media (max-width: ($responsive-1))
+			margin-top 0
+
+	.menu
+		@media (min-width: ($responsive-2))
+			height $header-height-3
+
+		@media (max-width: ($responsive-2))
+			height $header-height-2
+
+		@media (max-width: ($responsive-1))
+			size 0 100%
+
+&.menu-active.scroll-menu-active .menu
+	@media (max-width: ($responsive-1))
+		size 100%
 
 // for get height of header by scripts (offset for scrolling to anchor)
 .height-helper
