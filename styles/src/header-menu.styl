@@ -6,6 +6,8 @@
  * @see {@link https://github.com/web-izmerenie/wi-site/blob/master/LICENSE-AGPLv3|License}
  */
 
+$smaller-screen-header-height = 70px
+
 .call-menu
 	display block
 	text-decoration none
@@ -44,6 +46,18 @@
 		@media (max-width: ($responsive-2))
 			right (29px - (36px - 29px))
 
+.fixed-header:before
+	pseudo-block()
+	background $header-bg-color
+	size 100% 0
+	fixed(0, 0)
+	transition height $animation-speed $animation-curve
+	z-index 30
+
+@media (max-width: ($responsive-1))
+	&.scroll-menu-active .fixed-header:before
+		height $smaller-screen-header-height
+
 .menu
 	$menu-text-color = #9daeb8
 	$menu-active-text-color = #f5ce08
@@ -66,14 +80,6 @@
 		size 0 100%
 		min-width 0
 		max-width 220px
-
-		&:before
-			pseudo-block()
-			background $header-bg-color
-			size 100% 0
-			fixed(0, 0)
-			transition height $animation-speed $animation-curve
-			z-index 30
 
 		.logo
 			display none
@@ -168,8 +174,6 @@
 		@media (max-width: ($responsive-1))
 			size 100%
 
-$smaller-screen-header-height = 70px
-
 &.scroll-menu-active
 	.call-menu
 		$h = ($icons.show-menu.height)
@@ -191,9 +195,6 @@ $smaller-screen-header-height = 70px
 
 		@media (max-width: ($responsive-1))
 			size 0 100%
-
-			&:before
-				height $smaller-screen-header-height
 
 	@media (max-width: ($responsive-1))
 		.logo
