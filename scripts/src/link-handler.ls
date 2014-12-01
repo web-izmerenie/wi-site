@@ -11,32 +11,35 @@ require! {
 	prelude : _p
 	jquery : $
 	'./basics' : b
+	'./has-el-by-hash'
 }
 
-$page = $ 'html,body'
-$header = $ \header
+$page = null
+$header = null
 
-speed = b.get-val \animation-speed
 scrolling = false
 
 module.exports = ->
 	return false if scrolling
 	scrolling := true
 
+	if not $page then
+		$page := $ 'html,body'
+		$header := $ \header
+
 	href = $ this .attr \href
-	pathname = _p.take-while (is not \#), href
-	hash = _p.drop-while (is not \#), href
+	pathname = href |> _p.take-while (is not \#)
+	hash = href |> _p.drop-while (is not \#)
 
 	if _p.empty pathname
 		pathname = window.location.pathname
 
 	if pathname is not window.location.pathname
-		console.log 111
 		window.location = href
 		scrolling := false
 		return false
 
-	if hash.length < 2 or $ hash .length <= 0
+	if not has-el-by-hash hash
 		window.alert b.get-local-text \err,
 			\detect-link-anchor, \#LINK_HREF# : href
 		scrolling := false
@@ -49,7 +52,7 @@ module.exports = ->
 	top -= $header.height!
 
 	$page .stop! .animate { \scroll-top : top },
-		(speed*4), !->
+		((b.get-val \animation-speed) * 4), !->
 			window.location.hash = hash
 			$page.scrollTop top
 			scrolling := false
