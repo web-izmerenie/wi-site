@@ -69,6 +69,9 @@ preload-cb = !->
 	set-timeout (!->
 		$body .addClass \loaded
 		$page .scrollTop 0
+
+		require './general/portfolio'
+
 		go-to-anchor = $html.data \go-to-anchor
 		go-to-anchor! if _p.is-type \Function go-to-anchor
 	), (speed*4)

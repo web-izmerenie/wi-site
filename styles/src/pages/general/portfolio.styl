@@ -7,6 +7,11 @@
  */
 
 .portfolio
+	width 100%
+	box-sizing border-box
+	overflow: hidden
+	relative()
+
 	.title-block, .more-block
 		background white
 		color $dark-content-color-1
@@ -27,14 +32,37 @@
 
 	& > ul
 		display block
+		background $dark-bg-color-1
+		width 100%
+		box-sizing border-box
+		overflow: hidden
+		relative()
 
 		& > li
 			display block
 			height 330px
 			background $round-button-color
+			overflow hidden
+			relative()
+			transform matrix3d(1, 0, 0, 0, 0, 0.2, 0, 0.001, 0, 0, 10, 0, 0, 27.2, 0, 1)
+			opacity 0
+			transition transform ($animation-speed*4) $animation-curve,
+				opacity ($animation-speed*4) $animation-curve
+
+			&.visible
+				transform matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+				opacity 1
 
 			&:nth-child(even)
 				background $round-button-hover-color
+
+			img.bg
+				display block
+				min-height 330px
+				min-width 100%
+				absolute(50%, 50%)
+				transform translate(50%, -50%)
+				z-index 0
 
 	.more-block
 		& > a
