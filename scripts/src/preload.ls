@@ -1,5 +1,6 @@
 /**
  * Images preloading module
+ * See icons.styl
  *
  * @author Viacheslav Lotsmanov
  * @license GNU/AGPLv3
@@ -12,6 +13,7 @@ require! {
 	'./basics' : b
 }
 
+# ajax error callback (handling errors)
 error = (xhr, status, err) !->
 	if err is \timeout
 		window.alert b.get-local-text \err, \styles, \load-timeout
@@ -19,22 +21,28 @@ error = (xhr, status, err) !->
 		window.alert b.get-local-text \err, \styles, \xhr-load,
 			\#ERROR_CODE# : err
 
+# create DOM element with preload unit class name for get image src and start preloading
 add-preload-to-dom = ($master, class-name) !->
 	$new-el = $ '<ins/>', class: class-name
 	$master.append $new-el
 
+# image loeaded callback, calls finish callback only when all images are preloaded
+# finish callback is "cb" from module.exports
 loaded-cb = (cb, loaded-list, matches) !->
 	matches = matches |> _p.unique
 	loaded-list = loaded-list |> _p.unique
 	if _p.difference matches, loaded-list |> _p.empty
 		set-timeout cb, 0
 
+# ajax success callback
 success = (data, cb) !->
+	# try to find preload classes in styles file
 	matches = data.match /(?!\.)(preload-[^\s\{]+)/g
 	if not _p.is-type \Array
 		set-timeout cb, 0
 		return
 
+	# create parent DOM element for preload children DOM elements
 	$master = $ '<div/>', class: \preloaders
 	for class-name in matches
 		$master.append ($ '<ins/>', class: class-name)
@@ -42,10 +50,11 @@ success = (data, cb) !->
 
 	loaded-list = []
 
+	# for get exceptions (need to refactoring this module in the future)
 	require! './lib/load_img' : LoadImg
 
 	for class-name in matches
-		src =
+		src = # get pure image path
 			$master.find \. + class-name .css \background-image
 				.trim!
 				.replace /^url\((.*?)\)$/i, \$1

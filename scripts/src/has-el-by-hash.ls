@@ -17,6 +17,7 @@ module.exports = (url) ->
 	hash-id = hash |> _p.drop 1
 	correct-hash = /^[a-zA-Z0-9-_]+$/.test hash-id
 
+	# safe jQuery selector
 	return false if not correct-hash
 
 	$ hash .length > 0

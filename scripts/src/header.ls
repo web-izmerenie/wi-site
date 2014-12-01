@@ -12,9 +12,9 @@ require! {
 	'./link-handler'
 }
 
+$w = $ window
 $html = $ \html
 
-$w = $ window
 $body = $html.find \body
 $header = $body.find \header
 $logo = $header.find '.logo'
@@ -27,6 +27,7 @@ main-page = $html.hasClass \general-page
 
 $logo.click link-handler
 
+# show/hide menu
 $call-menu.click ->
 	return false if main-page and not $body.hasClass \loaded
 
@@ -38,7 +39,10 @@ $call-menu.click ->
 
 	false
 
-$nav-links.click link-handler
+$nav-links.click ->
+	# TODO set active class
+
+	link-handler.call this
 
 handler-bind-suffix = \.header-handler
 
@@ -51,8 +55,8 @@ resize-handler = !->
 
 	$nav.addClass \scroll
 
-last-scroll-top = $w.scrollTop!
-scroll-handler = !->
+last-scroll-top = $w.scrollTop! # store last scroll top value for calculate scroll for vertical menu
+scroll-handler = !-> # support vertical scroll for narrow screens vertical menu
 	return if resize-handler! is \no-scroll
 
 	st = $w.scrollTop!

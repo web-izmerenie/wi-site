@@ -15,6 +15,7 @@ require! {
 
 hash = window.location.hash |> _p.drop-while (is not \#)
 
+# if we have hash, we need to reset it to plug and scroll handly later (smooth scroll)
 if hash.length > 1
 	window.location.hash = '#/'
 	$ !->
@@ -23,12 +24,15 @@ if hash.length > 1
 		else
 			window.location.hash = hash
 
-b.init !-> # when dom and styles is ready
+b.init !-> # when dom and styles are ready
 	$html = $ \html
 
+	# scroll to anchor if exists by hash
 	if has-el-by-hash hash
 		$ 'html,body' .scrollTop 0
 		require! './link-handler'
+
+		# fake link for use link-handler
 		$link = $ '<a/>', href: window.location.pathname + hash
 		$link
 			.click link-handler

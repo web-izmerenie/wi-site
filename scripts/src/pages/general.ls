@@ -50,6 +50,7 @@ card1-parallax-init = !->
 
 	$w.trigger \resize + card1-bg-parallax-bind-suffix
 
+# rotate Wi logo before finish loading
 loading-loop = !->
 	if not loading-animation then return
 	$logo-img.transition rotate: \360deg, (speed*4), \linear, !->
@@ -57,6 +58,7 @@ loading-loop = !->
 		$logo-img.css rotate: \0deg
 		loading-loop!
 
+# callback after all images is preloaded (see icons.styl)
 preload-cb = !->
 	card1-parallax-init!
 	loading-animation := false
@@ -65,9 +67,9 @@ preload-cb = !->
 	$logo .addClass \logo-move
 	set-timeout (!-> $body .addClass \loaded), (speed*4)
 
-# preload logo
+# preload logo first (for use this logo as loading spinner)
 
-require! '../lib/load_img' : LoadImg
+require! '../lib/load_img' : LoadImg # for get exceptions (need to refactoring this module in the future)
 img-src = $logo-img.attr \src
 b.load-img img-src, (err, img) !->
 	if err
