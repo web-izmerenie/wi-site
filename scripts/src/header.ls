@@ -80,8 +80,10 @@ do !-> # menu vertical scroll
 
 	scroll-handler!
 
-do !->
-	# TODO check if not general page
+do !-> # show fixed header block after scroll down
+	if not main-page # for other pages use fixed header always
+		$header.addClass \scroll-menu-active
+		return
 
 	bind-suffix = \.header-menu-show-after-cards
 
