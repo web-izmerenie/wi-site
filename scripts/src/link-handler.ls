@@ -15,6 +15,8 @@ require! {
 }
 
 $page = null
+$html = null
+$body = null
 $header = null
 $height-helper = null
 $nav-links = null
@@ -25,11 +27,15 @@ module.exports = ->
 	return false if scrolling
 	scrolling := true
 
-	if not $page then
+	if not $html then
 		$page := $ 'html,body'
-		$header := $ \header
+		$html := $ \html
+		$body := $html.find \body
+		$header := $body.find \header
 		$height-helper := $header.find \.height-helper
 		$nav-links := $header .find '.menu nav a'
+
+	$body.addClass \scrolling
 
 	# parse link href
 	href = @href
@@ -46,6 +52,7 @@ module.exports = ->
 		window.alert b.get-local-text \err,
 			\detect-link-anchor, \#LINK_HREF# : href
 		scrolling := false
+		$body.removeClass \scrolling
 		return false
 
 	# reset to hash plug
@@ -67,5 +74,6 @@ module.exports = ->
 			window.location.hash = hash
 			$page.scrollTop top # restore header offset, because we set window.location.hash and it scrolls to block
 			scrolling := false
+			$body.removeClass \scrolling
 
 	false
