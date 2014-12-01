@@ -11,6 +11,7 @@ require! {
 	jquery : $
 	'../basics' : b
 	'../preload'
+	'../link-handler'
 }
 
 require \jquery.transit
@@ -33,23 +34,7 @@ speed = b.get-val \animation-speed
 
 loading-animation = true
 
-$card1-next .click ->
-	href = $ this .attr \href
-	target = _p.Str.break-str (is \#), href
-
-	if not _p.empty target[0] and target[0] is not '/'
-		window.location = href
-		return false
-
-	if target[1].length < 2 or $ target[1] .length <= 0
-		window.alert b.get-local-text \err,
-			\detect-link-anchor, \#LINK_HREF# : href
-		return false
-
-	$page.animate { \scroll-top : $ target[1] .offset! .top }, (speed*4), !->
-		window.location.hash = target[1]
-
-	false
+$card1-next .click link-handler
 
 card1-parallax-init = !->
 	card1-bg-parallax-bind-suffix = '.card-1-bg-parallax'

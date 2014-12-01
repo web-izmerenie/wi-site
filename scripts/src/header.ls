@@ -9,6 +9,7 @@
 require! {
 	jquery : $
 	'./basics' : b
+	'./link-handler'
 }
 
 $html = $ \html
@@ -16,15 +17,15 @@ $html = $ \html
 $w = $ window
 $body = $html.find \body
 $header = $body.find \header
-$logo = $header.find '>.logo'
+$logo = $header.find '.logo'
 $call-menu = $header.find \.call-menu
 $menu = $header.find \.menu
 $nav = $menu.find \nav
+$nav-links = $nav.find \a
 
 main-page = $html.hasClass \general-page
 
-$logo.click ->
-	false
+$logo.click link-handler
 
 $call-menu.click ->
 	return false if main-page and not $body.hasClass \loaded
@@ -36,6 +37,8 @@ $call-menu.click ->
 		$header.addClass \menu-active
 
 	false
+
+$nav-links.click link-handler
 
 handler-bind-suffix = \.header-handler
 
