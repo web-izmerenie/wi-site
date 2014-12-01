@@ -15,6 +15,10 @@ $s = $ \.portfolio
 $header = $ \header
 $height-helper = $header.find \.height-helper
 $elems = $s.find 'ul>li'
+$more-block = $s.find \.more-block
+$more = $more-block.find '>a'
+
+$more.click -> false
 
 do !-> # show element by scroll
 	bind-suffix = \.general-page-portfolio-show-elements-by-scroll
