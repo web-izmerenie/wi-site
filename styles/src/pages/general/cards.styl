@@ -1,0 +1,109 @@
+/**
+ * General page cards styles
+ *
+ * @author Viacheslav Lotsmanov
+ * @license GNU/AGPLv3
+ * @see {@link https://github.com/web-izmerenie/wi-site/blob/master/LICENSE-AGPLv3|License}
+ */
+
+.general-cards
+	size 100%
+	z-index 0
+	relative()
+
+	.card-1
+		$bg-from-color = #315d9a
+		$bg-to-color = #2b75ba
+		$next-button-color = #10476e
+		$next-button-size = 100px
+		$speed = ($animation-speed * 4)
+
+		size 100%
+		min-height $min-height
+		background linear-gradient(top, $bg-from-color, $bg-to-color)
+		z-index 0
+		relative()
+		text-align center
+		overflow hidden
+
+		.bg
+			size 200%
+			absolute(-50%, auto, auto, -50%)
+			z-index 0
+			bg($general-page-card-1-bg, center center repeat)
+			background-attachment fixed
+			transform scale(0.7)
+			opacity 0
+
+		.content
+			display inline-block
+			z-index 1
+			color white
+			text-align center
+			relative(50%)
+			transform translateY(-50%)
+
+			h1
+				custom-font('Proxima Nova Rg', bold, 72px, 73px)
+				text-align center
+				margin-bottom (-73px - 26px)
+
+				@media (max-width: ($responsive-2))
+					font-metrics(51px, 50px)
+
+			h2
+				custom-font('Proxima Nova Lt', normal, 24px, 26px)
+				text-align center
+				padding-top (66px - 35px)
+				margin-bottom (-26px - $next-button-size)
+
+				@media (max-width: ($responsive-2))
+					font-metrics(16px, 18px)
+					padding-top (66px - 35px - 9px)
+
+			h1, h2, .next
+				opacity 0
+				transition opacity ($animation-speed*2) $animation-curve,
+					margin-bottom ($animation-speed*2) $animation-curve
+
+			.next
+				$size = $next-button-size
+
+				display inline-block
+				size $size
+				background $next-button-color
+				border-radius ($size / 2)
+				relative()
+				margin-top (68px - 6px)
+				transition background-color $animation-speed $animation-curve
+
+				&:hover
+					background $round-button-hover-color
+
+				&:before
+					$left = (($size - $icons.arrow.width) / 2)
+					$top = (($size - $icons.arrow.height) / 2)
+					$top += 3px
+
+					pseudo-block()
+					absolute($top, auto, auto, $left)
+					icon($icons.arrow)
+
+				@media (max-width: ($responsive-2))
+					$size = 69px
+					size $size
+					border-radius ($size / 2)
+					margin-top (68px - 6px - 20px)
+
+					&:before
+						$left = (($size - $icons.arrow.width) / 2)
+						$top = (($size - $icons.arrow.height) / 2)
+						$top += 2px
+
+						absolute($top, auto, auto, $left)
+						transform scale(0.69)
+
+			body.loaded &
+				h1, h2, .next
+					margin-bottom 0
+					opacity 1

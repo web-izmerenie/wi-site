@@ -11,6 +11,8 @@
 *.zip
 *.rar
 
+tmp
+
 node_modules
 
 styles/build

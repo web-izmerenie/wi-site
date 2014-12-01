@@ -1,0 +1,73 @@
+/**
+ * General page portfolio styles
+ *
+ * @author Viacheslav Lotsmanov
+ * @license GNU/AGPLv3
+ * @see {@link https://github.com/web-izmerenie/wi-site/blob/master/LICENSE-AGPLv3|License}
+ */
+
+.portfolio
+	.title-block, .more-block
+		background white
+		color $dark-content-color-1
+		text-align center
+		padding-x 50px
+
+	.title-block
+		padding-bottom (110px - 7px)
+
+		h2
+			custom-font('Proxima Nova Rg', bold, 62px, 64px)
+			text-transform uppercase
+			padding-top (158px - 52px)
+
+		h3
+			custom-font('Proxima Nova Rg', normal, 22px, 24px)
+			padding-top (60px - 31px)
+
+	& > ul
+		display block
+
+		& > li
+			display block
+			height 330px
+			background $round-button-color
+
+			&:nth-child(even)
+				background $round-button-hover-color
+
+	.more-block
+		& > a
+			$size = 108px
+
+			display inline-block
+			white-space nowrap
+			custom-font('Proxima Nova Rg', normal, 24px, 26px)
+			color white
+			relative()
+			text-decoration none
+			padding-top ($size + (38px - 20px))
+			transition color $animation-speed $animation-curve
+			margin-top 110px
+			margin-bottom (110px - 46px)
+
+			&:before
+				pseudo-block()
+				size $size
+				border-radius ($size / 2)
+				background $round-button-color
+				transition background-color $animation-speed $animation-curve
+				absolute(0, 50%)
+				transform translateX(50%)
+
+			&:after
+				pseudo-block()
+				icon($icons.plus)
+				absolute(31px, 50%)
+				transform translateX(50%)
+
+			&:hover:before
+				background $round-button-hover-color
+
+			&:hover
+				color $dark-content-color-1
