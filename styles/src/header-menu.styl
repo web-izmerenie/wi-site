@@ -67,14 +67,21 @@
 		min-width 0
 		max-width 220px
 
+		&:before
+			pseudo-block()
+			background $header-bg-color
+			size 100% 0
+			fixed(0, 0)
+			transition height $animation-speed $animation-curve
+
 		.logo
 			display none
 
 	.logo .logo-text
-		@media (min-width: ($responsive-2)) and (max-width 1110px)
+		@media (min-width: ($responsive-2 + 1px)) and (max-width 1110px)
 			display none
 
-		@media (min-width: ($responsive-1)) and (max-width 940px)
+		@media (min-width: ($responsive-1 + 1px)) and (max-width 940px)
 			display none
 
 	nav
@@ -160,20 +167,22 @@
 		@media (max-width: ($responsive-1))
 			size 100%
 
+$smaller-screen-header-height = 70px
+
 &.scroll-menu-active
 	.call-menu
 		$h = ($icons.show-menu.height)
 		margin-top (-28px - $h)
 
-		@media (min-width: ($responsive-1))
+		@media (min-width: ($responsive-1 + 1px))
 			&:before, &:after
 				opacity 0
 
 		@media (max-width: ($responsive-1))
-			margin-top 0
+			margin-top (-28px + 14px)
 
 	.menu
-		@media (min-width: ($responsive-2))
+		@media (min-width: ($responsive-2 + 1px))
 			height $header-height-3
 
 		@media (max-width: ($responsive-2))
@@ -181,6 +190,16 @@
 
 		@media (max-width: ($responsive-1))
 			size 0 100%
+
+			&:before
+				height $smaller-screen-header-height
+
+	@media (max-width: ($responsive-1))
+		.logo
+			fixed(15px, auto, auto, 29px)
+			z-index 5
+			transition left $animation-speed $animation-curve,
+				top $animation-speed $animation-curve
 
 &.menu-active.scroll-menu-active .menu
 	@media (max-width: ($responsive-1))
@@ -195,3 +214,6 @@
 
 	@media (max-width: ($responsive-2))
 		height $header-height-2
+
+	@media (max-width: ($responsive-1))
+		height $smaller-screen-header-height
