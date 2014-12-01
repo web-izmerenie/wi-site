@@ -68,7 +68,7 @@ preload-cb = !->
 	$logo .addClass \logo-move
 	set-timeout (!->
 		$body .addClass \loaded
-
+		$page .scrollTop 0
 		go-to-anchor = $html.data \go-to-anchor
 		go-to-anchor! if _p.is-type \Function go-to-anchor
 	), (speed*4)
