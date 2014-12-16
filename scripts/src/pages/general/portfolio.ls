@@ -30,6 +30,8 @@ do !-> # show element by scroll
 			$item = $ item
 			if scroll-val > $item .offset! .top
 				$item.addClass \visible
+			else
+				$item.removeClass \visible
 
 	$w
 		.on \scroll + bind-suffix, scroll-handler
