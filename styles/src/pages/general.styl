@@ -6,8 +6,23 @@
  * @see {@link https://github.com/web-izmerenie/wi-site/blob/master/LICENSE-AGPLv3|License}
  */
 
+general-header1()
+	custom-font('Proxima Nova Rg', bold, 72px, 73px)
+
+	@media (max-width: ($responsive-2))
+		font-metrics(51px, 50px)
+
+general-header2()
+	custom-font('Proxima Nova Lt', normal, 24px, 26px)
+	padding-top (66px - 35px)
+
+	@media (max-width: ($responsive-2))
+		font-metrics(16px, 18px)
+		padding-top (66px - 35px - 9px)
+
 @import 'general/cards';
 @import 'general/portfolio';
+@import 'general/team';
 
 .portfolio
 	display none
