@@ -1,53 +1,52 @@
 {
   "dependencies": {
-    "yargs": "^1.3.2",
-    "merge-stream": "~0.1.6",
-    "gulp": "^3.8.8",
-    "gulp-plumber": "~0.6.6",
-    "gulp-callback": "~0.0.3",
-    "del": "~0.1.3",
-    "gulp.spritesmith": "^1.4",
-    "gulp-task-listing": "~0.3",
-    "gulp-less": "^1.3.6",
-    "gulp-sourcemaps": "^1.2.8",
-    "gulp-stylus": "^1.3.4",
-    "nib": "^1.0.4",
-    "gulp-if": "^1.2.5",
-    "gulp-rename": "^1.2",
+    "front-end-gulp-pattern": "^1",
+
     "gulp-browserify": "~0.5",
     "gulp-uglify": "^1.0.1",
-    "gulp-jshint": "^1.8.5",
-    "jshint-stylish": "^1",
-    "liveify": "1.3.1",
     "LiveScript": "1.3.1",
+    "liveify-stable": "^1",
     "prelude-ls": "1.1.1",
 
-    "jquery": "2.1.1"
+    "gulp-stylus": "^1.3.4",
+    "nib": "^1.0.4",
+
+    "bower": "^1"
   },
   "scripts": {
-    "postinstall": "./node_modules/.bin/gulp --production"
+    "postinstall": "./deploy.sh"
   },
-
   "gulp": {
     "distclean": [
-      "./gulp",
-      "./node_modules"
+      "./front-end-gulp",
+      "./node_modules",
+      "./bower_components"
     ],
     "scripts": {
       "main": {
-        "type": "liveify",
+        "type": "browserify",
         "path": "./scripts/",
         "mainSrc": "main.ls",
         "buildFile": "build.js",
+        "transform": ["liveify-stable"],
+        "extensions": [".ls"],
         "jshintDisabled": true,
         "shim": {
+          "prelude": {
+            "path": "./node_modules/prelude-ls/",
+            "exports": ""
+          },
           "jquery": {
-            "path": "./node_modules/jquery",
+            "path": "./bower_components/jquery/dist/jquery.min.js",
             "exports": ""
           },
           "jquery.transit": {
-            "relativePath": "./lib/jquery.transit",
+            "path": "./bower_components/jquery.transit/jquery.transit.js",
             "exports": ""
+          },
+          "modernizr": {
+            "path": "./bower_components/modernizr/modernizr.js",
+            "exports": "Modernizr"
           }
         }
       }
@@ -57,7 +56,10 @@
         "type": "stylus",
         "path": "./styles/",
         "mainSrc": "main.styl",
-        "buildFile": "build.css"
+        "buildFile": "build.css",
+        "shim": [
+          "./stylus-shim/nib.js"
+        ]
       }
     }
   }

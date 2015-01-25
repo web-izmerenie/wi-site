@@ -13,7 +13,9 @@
 
 tmp
 
+front-end-gulp
 node_modules
+bower_components
 
 styles/build
 scripts/build
