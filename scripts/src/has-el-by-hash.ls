@@ -3,8 +3,6 @@
  * Checking if element exists with id by specific hash (safe for correct jQuery selector).
  *
  * @author Viacheslav Lotsmanov
- * @license GNU/AGPLv3
- * @see {@link https://github.com/web-izmerenie/wi-site/blob/master/LICENSE-AGPLv3|License}
  */
 
 require! {
