@@ -49,6 +49,6 @@ if has-el-by-hash hash
 	else
 		go-to-anchor!
 
-require './header'
+require './header/header'
 
 require './pages/general' if $html.hasClass \general-page
