@@ -23,31 +23,32 @@ if hash.length > 1
 		else
 			window.location.hash = hash
 
-b.init !-> # when dom and styles are ready
-	$html = $ \html
+<-! b.init # when dom and styles are ready
 
-	$header = $html.find \header
-	$helper = $ '<div>', class: \height-helper
-	$header.append $helper
+$html = $ \html
 
-	# scroll to anchor if exists by hash
-	if has-el-by-hash hash
-		require! './link-handler'
+$header = $html.find \header
+$helper = $ '<div>', class: \height-helper
+$header.append $helper
 
-		$ 'html,body' .scrollTop 0
+# scroll to anchor if exists by hash
+if has-el-by-hash hash
+	require! './link-handler'
 
-		go-to-anchor = !->
-			# fake link for use link-handler
-			$link = $ '<a/>', href: window.location.pathname + hash
-			$link
-				.click link-handler
-				.trigger \click
+	$ 'html,body' .scrollTop 0
 
-		if $html.hasClass \general-page
-			$html.data \go-to-anchor, go-to-anchor
-		else
-			go-to-anchor!
+	go-to-anchor = !->
+		# fake link for use link-handler
+		$link = $ '<a/>', href: window.location.pathname + hash
+		$link
+			.click link-handler
+			.trigger \click
 
-	require './header'
+	if $html.hasClass \general-page
+		$html.data \go-to-anchor, go-to-anchor
+	else
+		go-to-anchor!
 
-	if $html.hasClass \general-page then require './pages/general'
+require './header'
+
+require './pages/general' if $html.hasClass \general-page
