@@ -4,16 +4,14 @@
  * @author Viacheslav Lotsmanov
  */
 
-$smaller-screen-header-height = 70px
-
 .call-menu
 	display block
 	text-decoration none
-	absolute(28px, 0)
 	size(($icons.show-menu.width), ($icons.show-menu.height))
 	z-index 50
 	opacity 0
 	margin-top 0
+	absolute top 28px right 0
 	transition opacity $animation-speed $animation-curve,
 		right $animation-speed $animation-curve,
 		margin-top $animation-speed $animation-curve
@@ -24,7 +22,7 @@ $smaller-screen-header-height = 70px
 
 	&:before, &:after
 		pseudo-block()
-		absolute(0, auto, auto, 0)
+		absolute top 0 left 0
 		transition opacity $animation-speed $animation-curve,
 			transform $animation-speed $animation-curve
 		transform rotate(0deg)
@@ -44,17 +42,13 @@ $smaller-screen-header-height = 70px
 		@media (max-width: ($responsive-2))
 			right (29px - (36px - 29px))
 
-.fixed-header:before
-	pseudo-block()
+.fixed-header > .bg-helper
+	display block
 	background $header-bg-color
 	size 100% 0
-	fixed(0, 0)
-	transition height $animation-speed $animation-curve
+	fixed top 0 right 0
 	z-index 30
-
-@media (max-width: ($responsive-1))
-	&.scroll-menu-active .fixed-header:before
-		height $smaller-screen-header-height
+	transition height $animation-speed $animation-curve
 
 .menu
 	$menu-text-color = #9daeb8
@@ -68,30 +62,20 @@ $smaller-screen-header-height = 70px
 	background $header-bg-color
 	size 100% 0
 	z-index 45
-	absolute(0, 0)
+	absolute top 0 right 0
 	overflow hidden
-	transition width ($animation-speed*2) $animation-curve,
-		height $animation-speed $animation-curve
 	min-width $min-width
 
-	@media (max-width: ($responsive-1))
-		size 0 100%
-		min-width 0
-		max-width 220px
+	//@media (max-width: ($responsive-1))
+		//size 0 100%
+		//min-width 0
 
-		.logo
-			display none
-
-	.logo .logo-text
-		@media (min-width: ($responsive-2 + 1px)) and (max-width 1130px)
-			display none
-
-		@media (min-width: ($responsive-1 + 1px)) and (max-width 960px)
-			display none
+		//.logo
+			//display none
 
 	nav
 		size auto 100%
-		absolute(0, 113px)
+		absolute top 0 right 113px
 		white-space nowrap
 
 		@media (max-width: ($responsive-2))
@@ -135,7 +119,7 @@ $smaller-screen-header-height = 70px
 
 		@media (max-width: ($responsive-1))
 			size 220px auto
-			absolute(50%, 0)
+			absolute top 50% right 0
 			transform translateY(-50%)
 			padding-y 11px
 
@@ -154,66 +138,46 @@ $smaller-screen-header-height = 70px
 				top 0
 				transform translateY(0)
 
-&.menu-active
-	.call-menu
-		&:before, &:after
-			transform rotate(90deg)
-		&:before
-			opacity 0
-		&:after
-			opacity 1
+&.menu-active .call-menu
+	&:before, &:after
+		transform rotate(90deg)
+	&:before
+		opacity 0
+	&:after
+		opacity 1
 
-	.menu
-		height $header-height-3
+//&.scroll-menu-active
+	//.call-menu
+		//$h = ($icons.show-menu.height)
+		//margin-top (-28px - $h)
 
-		@media (max-width: ($responsive-2))
-			height $header-height-2
+		//@media (min-width: ($responsive-1 + 1px))
+			//&:before, &:after
+				//opacity 0
 
-		@media (max-width: ($responsive-1))
-			size 100%
+		//@media (max-width: ($responsive-1))
+			//margin-top (-28px + 14px)
 
-&.scroll-menu-active
-	.call-menu
-		$h = ($icons.show-menu.height)
-		margin-top (-28px - $h)
+	//.menu
+		//@media (min-width: ($responsive-2 + 1px))
+			//height $header-height-3
 
-		@media (min-width: ($responsive-1 + 1px))
-			&:before, &:after
-				opacity 0
+		//@media (max-width: ($responsive-2))
+			//height $header-height-2
 
-		@media (max-width: ($responsive-1))
-			margin-top (-28px + 14px)
+		//@media (max-width: ($responsive-1))
+			//size 0 100%
 
-	.menu
-		@media (min-width: ($responsive-2 + 1px))
-			height $header-height-3
-
-		@media (max-width: ($responsive-2))
-			height $header-height-2
-
-		@media (max-width: ($responsive-1))
-			size 0 100%
-
-	@media (max-width: ($responsive-1))
-		.logo
-			fixed(15px, auto, auto, 29px)
-			z-index 40
-			transition left $animation-speed $animation-curve,
-				top $animation-speed $animation-curve
-
-&.menu-active.scroll-menu-active .menu
-	@media (max-width: ($responsive-1))
-		size 100%
+	//@media (max-width: ($responsive-1))
+		//.logo
+			//fixed top 15px left 29px
+			//z-index 40
+			//transition left $animation-speed $animation-curve,
+				//top $animation-speed $animation-curve
 
 // for get height of header by scripts (offset for scrolling to anchor)
 .height-helper
 	display block
 	size 0 $header-height-3
-	fixed(0, 0)
+	fixed top 0 right 0
 	z-index -1
-
-	@media (max-width: ($responsive-2))
-		height $header-height-2
-
-	@media (max-width: ($responsive-1))
-		height $smaller-screen-header-height

@@ -19,7 +19,7 @@ bind-suffix = \.header-menu-vertical-scroll
 resize-handler = !->
 	if $nav.inner-height! <= $w.height!
 		$nav
-			.removeClass \scroll
+			.remove-class \scroll
 			.css \top ''
 		return \no-scroll
 

@@ -6,6 +6,7 @@
 
 require! {
 	jquery : $
+	'../basics' : b
 	'../link-handler'
 }
 
@@ -19,7 +20,9 @@ $menu = $header.find \.menu
 $nav = $menu.find \nav
 $nav-links = $nav.find \a
 
-main-page = $html.hasClass \general-page
+main-page = $html.has-class \general-page
+
+sizes = b.get-val \header
 
 $logo.click link-handler
 
@@ -33,6 +36,8 @@ $call-menu.click ->
 		$nav.css \top ''
 		$header.add-class \menu-active
 
+	$header.trigger \menu-state-changed
+
 	false
 
 $nav-links.click link-handler
@@ -40,3 +45,4 @@ $nav-links.click link-handler
 require './menu-vertical-scroll'
 require './fixed-header-block'
 require './anchor-detector'
+require './size-calculator'

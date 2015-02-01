@@ -11,6 +11,7 @@ require! {
 	'../preload'
 	'../link-handler'
 	'../has-el-by-hash'
+	'../header/size-calculator'
 }
 
 require \jquery.transit
@@ -30,6 +31,7 @@ $card1-bg = $card1 .find \.bg
 $card1-next = $card1 .find \.next
 
 speed = b.get-val \animation-speed
+logo-vals = size-calculator.get-logo-vals!
 
 loading-animation = true
 
@@ -61,34 +63,41 @@ loading-loop = !->
 preload-cb = !->
 	card1-parallax-init!
 	loading-animation := false
-	<-! $logo-img .stop! .transition rotate: \360deg, (speed*4), \linear
-	<-! $card1-bg .stop! .transition opacity: 1, scale: 1, (speed*4), \in-out
-	$logo .addClass \logo-move
-	set-timeout (!->
-		$body .addClass \loaded
-		$page .scrollTop 0
+	<-! $logo-img.stop!.transition rotate: \360deg, (speed*4), \linear
+	<-! $card1-bg.stop!.transition opacity: 1, scale: 1, (speed*4), \in-out
+	$logo.add-class \logo-move
+	vals =
+		left: logo-vals.left
+		top: logo-vals.top
+		translate: [\0%,\0%]
+	<-! $logo.stop!.transition vals, (speed*4), \in-out
 
-		require './general/portfolio'
+	$body .add-class \loaded
+	$page .scroll-top 0
 
-		go-to-anchor = $html.data \go-to-anchor
-		go-to-anchor! if _p.is-type \Function go-to-anchor
-	), (speed*4)
+	require './general/portfolio'
+	$w.trigger \resize.header-size-calc
+
+	go-to-anchor = $html.data \go-to-anchor
+	go-to-anchor! if go-to-anchor |> _p.is-type \Function
 
 # preload logo first (for use this logo as loading spinner)
 
-require! '../lib/load_img' : LoadImg # for get exceptions (need to refactoring this module in the future)
+$logo-img.css do
+	width: logo-vals.size
+	height: logo-vals.size
+
+require! '../lib/load_img': LoadImg # for get exceptions (need to refactoring this module in the future)
 img-src = $logo-img.attr \src
 b.load-img img-src, (err, img) !->
 	if err
 		if err instanceof LoadImg.exceptions.Timeout
-			window.alert b.get-local-text \err, \preload-img-timeout, {
+			window.alert b.get-local-text \err, \preload-img-timeout, do
 				\#IMAGE_SRC# : img-src
-			}
 			return
-		window.alert b.get-local-text \err, \preload-img, {
+		window.alert b.get-local-text \err, \preload-img, do
 			\#ERROR_CODE# : err.to-string!
 			\#IMAGE_SRC# : img-src
-		}
 		return
 
 	loading-loop!

@@ -8,7 +8,7 @@
 	size 100%
 	min-height $min-height
 	z-index 0
-	relative()
+	position relative
 
 	.card-1
 		$bg-from-color = #315d9a
@@ -21,13 +21,13 @@
 		min-height $min-height
 		background linear-gradient(top, $bg-from-color, $bg-to-color)
 		z-index 0
-		relative()
+		position relative
 		text-align center
 		overflow hidden
 
 		.bg
 			size 200%
-			absolute(-50%, auto, auto, -50%)
+			absolute top -50% left -50%
 			z-index 0
 			bg($general-page-card-1-bg, center center repeat)
 			background-attachment fixed
@@ -39,7 +39,7 @@
 			z-index 1
 			color white
 			text-align center
-			relative(50%)
+			relative top 50%
 			transform translateY(-50%)
 
 			h1
@@ -64,7 +64,7 @@
 				size $size
 				background $next-button-color
 				border-radius ($size / 2)
-				relative()
+				position relative
 				margin-top (68px - 6px)
 				transition background-color $animation-speed $animation-curve
 
@@ -77,7 +77,7 @@
 					$top += 3px
 
 					pseudo-block()
-					absolute($top, auto, auto, $left)
+					absolute top ($top) left ($left)
 					icon($icons.arrow)
 
 				@media (max-width: ($responsive-2))
@@ -91,7 +91,7 @@
 						$top = (($size - $icons.arrow.height) / 2)
 						$top += 2px
 
-						absolute($top, auto, auto, $left)
+						absolute top ($top) left ($left)
 						transform scale(0.69)
 
 			body.loaded &
