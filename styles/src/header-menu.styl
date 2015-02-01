@@ -11,14 +11,10 @@
 	z-index 50
 	opacity 0
 	margin-top 0
-	absolute top 28px right 0
+	position absolute
 	transition opacity $animation-speed $animation-curve,
 		right $animation-speed $animation-curve,
 		margin-top $animation-speed $animation-curve
-
-	@media (max-width: ($responsive-2))
-		transform scale(0.74)
-		top (28px - (35px - 28px))
 
 	&:before, &:after
 		pseudo-block()
@@ -36,11 +32,7 @@
 		opacity 0
 
 	body.loaded &
-		right 29px
 		opacity 1
-
-		@media (max-width: ($responsive-2))
-			right (29px - (36px - 29px))
 
 .fixed-header > .bg-helper
 	display block

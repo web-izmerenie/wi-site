@@ -9,7 +9,7 @@ module.exports.values =
 	\styles-load-timeout : 30sec
 	\load-img-timeout : 15sec
 
-	\workspace-ratio : [1920, 1100]
+	\workspace-ratio : [1920px, 1100px]
 	\responsive-widths :
 		small: 840px
 		middle: 1000px
@@ -28,6 +28,10 @@ module.exports.values =
 					margin-left: 14px
 					font-size: 16px
 					line-height: 18px
+			call-menu:
+				right: 22px
+				top: 21px
+				scale: 0.74
 		middle:
 			height: 96px
 			logo:
@@ -36,6 +40,10 @@ module.exports.values =
 					margin-left: 14px
 					font-size: 16px
 					line-height: 18px
+			call-menu:
+				right: 22px
+				top: 21px
+				scale: 0.74
 		big:
 			height: 112px
 			logo:
@@ -44,6 +52,10 @@ module.exports.values =
 					margin-left: 19px
 					font-size: 22px
 					line-height: 24px
+			call-menu:
+				right: 29px
+				top: 28px
+				scale: 1.0
 
 module.exports.required =
 	\lang

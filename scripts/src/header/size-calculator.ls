@@ -38,7 +38,7 @@ bind-suffix = '.header-size-calc'
 widths = b.get-val \responsive-widths
 ratio = b.get-val \workspace-ratio
 sizes = b.get-val \header
-speed = (b.get-val \animation-speed) * 2
+speed = b.get-val \animation-speed |> (* 2)
 
 get-rel-screen-size = ->
 	# get screen size
@@ -101,24 +101,21 @@ get-logo-vals = ->
 		max: top-max
 
 	text-val = (key)->
-		key |>= _p.camelize
-		do ->
-			| screen-w >= widths.middle =>
-				relnum ^^relnum-opts <<<<
-					min: sizes.middle.logo.text[key]
-					max: sizes.big.logo.text[key]
-			| screen-w >= widths.small =>
-				relnum ^^relnum-opts <<<<
-					rel-min: widths.small
-					rel-max: widths.middle
-					min: sizes.small.logo.text[key]
-					max: sizes.middle.logo.text[key]
-			| _ => sizes.small.logo.text[key]
+		| screen-w >= widths.middle =>
+			relnum ^^relnum-opts <<<<
+				min: sizes.middle.logo.text[key]
+				max: sizes.big.logo.text[key]
+		| screen-w >= widths.small =>
+			relnum ^^relnum-opts <<<<
+				rel-min: widths.small
+				rel-max: widths.middle
+				min: sizes.small.logo.text[key]
+				max: sizes.middle.logo.text[key]
+		| _ => sizes.small.logo.text[key]
 
-	text =
-		margin-left: text-val \margin-left
-		font-size: text-val \font-size
-		line-height: text-val \line-height
+	keys = <[ margin-left font-size line-height ]> |> _p.map (_p.camelize)
+	vals = keys |> _p.map (text-val)
+	text = _p.lists-to-obj keys, vals
 
 	{size, left, top, text}
 
@@ -128,6 +125,23 @@ get-call-menu-vals = ->
 		rel-val: screen-w
 		rel-min: widths.middle
 		rel-max: widths.big
+
+	val-calc = (key)->
+		| screen-w >= widths.middle =>
+			relnum ^^relnum-opts <<<<
+				min: sizes.middle.call-menu[key]
+				max: sizes.big.call-menu[key]
+		| screen-w >= widths.small =>
+			relnum ^^relnum-opts <<<<
+				rel-min: widths.small
+				rel-max: widths.middle
+				min: sizes.small.call-menu[key]
+				max: sizes.middle.call-menu[key]
+		| _ => sizes.small.call-menu[key]
+
+	keys = <[ right top scale ]> |> _p.map (_p.camelize)
+	vals = keys |> _p.map (val-calc)
+	_p.lists-to-obj keys, vals
 
 $header.on \menu-state-changed, !->
 	return unless $body.has-class \loaded
@@ -195,6 +209,7 @@ $w.on "resize#bind-suffix" !->
 	fixed-header = get-header-vals fixed-header: true
 	header-helper = get-header-vals helper: true
 	logo-vals = get-logo-vals!
+	call-menu-vals = get-call-menu-vals!
 
 	relnum-opts = rel-val: screen-w
 
@@ -215,6 +230,14 @@ $w.on "resize#bind-suffix" !->
 			min-width: 0
 		$logo.css display: \none
 
+	$height-helper.css height: header-helper.height
+	$fixed-header.css do
+		width: fixed-header.width
+		height: fixed-header.height
+	$header
+		.css height: \auto
+		.trigger \menu-state-changed
+
 	# logos
 	$logo.css do
 		left: logo-vals.left
@@ -227,13 +250,10 @@ $w.on "resize#bind-suffix" !->
 		font-size: logo-vals.text.font-size + \px
 		line-height: logo-vals.text.line-height + \px
 
-	$height-helper.css height: header-helper.height
-	$fixed-header.css do
-		width: fixed-header.width
-		height: fixed-header.height
-	$header
-		.css height: \auto
-		.trigger \menu-state-changed
+	$call-menu.css do
+		right: call-menu-vals.right + \px
+		top: call-menu-vals.top + \px
+		transform: "scale(#{call-menu-vals.scale})"
 
 	$w.trigger "scroll#bind-suffix"
 

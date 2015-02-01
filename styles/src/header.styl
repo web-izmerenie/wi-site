@@ -5,13 +5,7 @@
  */
 
 header
-	//$logo-size-2 = 41px
-	//$logo-size-3 = 55px
 	$speed = ($animation-speed * 4)
-
-	//$logo-left = 29px
-	//$logo-top-2 = (($header-height-2 - $logo-size-2) / 2)
-	//$logo-top-3 = (($header-height-3 - $logo-size-3) / 2)
 
 	size 100%
 	z-index 1
@@ -25,44 +19,24 @@ header
 		min-width $min-width
 		z-index 2
 
-	/*
-	body.loaded &
-		size 100% $header-height-3
-
-		@media (max-width: ($responsive-2))
-			height $header-height-2
-	*/
-
 	// logo in card-1 and in menu
 	.logo
 		display inline-block
 		text-decoration none
 		z-index 1
 		white-space nowrap
-		//absolute top ($logo-top-3) left ($logo-left)
 		position absolute
 		transition top $speed $animation-curve
-
-		/*
-		@media (max-width: ($responsive-2))
-			top $logo-top-2
-		*/
 
 		img.logo-image, .logo-text
 			display inline-block
 			vertical-align middle
 
 		img.logo-image
-			//size $logo-size-3
 			transform rotate(0deg)
 
-			/*
-			@media (max-width: ($responsive-2))
-				size $logo-size-2
-			*/
-
 		.logo-text
-			custom-font('SansRoundedLightC', normal)//, 22px, 24px)
+			custom-font('SansRoundedLightC', normal)
 			color white
 			text-transform uppercase
 			padding-top 3px
@@ -74,11 +48,6 @@ header
 				opacity $animation-speed $animation-curve,
 				margin-left $animation-speed $animation-curve
 
-			/*
-			@media (max-width: ($responsive-2))
-				font-metrics(16px, 18px)
-			*/
-
 		body.loaded &
 			.logo-text
 				width auto
@@ -88,15 +57,5 @@ header
 	> .logo
 		absolute top 50% left 50%
 		transform translate(-50%, -50%)
-
-		/*
-		&.logo-move
-			transform translate(0, 0)
-			left $logo-left
-			top $logo-top-3
-
-			@media (max-width: ($responsive-2))
-				top $logo-top-2
-		*/
 
 	@import 'header-menu'
