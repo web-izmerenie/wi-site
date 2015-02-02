@@ -37,7 +37,7 @@ module.exports.values =
 				scale: 0.74
 				margin-top: -14px
 			nav:
-				top: 50 #%
+				top: \50%
 				right: 0
 		middle:
 			height: 96px

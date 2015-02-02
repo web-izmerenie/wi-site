@@ -144,6 +144,32 @@ get-call-menu-vals = ->
 	vals = keys |> _p.map (val-calc)
 	_p.lists-to-obj keys, vals
 
+get-nav-vals = ->
+	{screen-w} = get-rel-screen-size!
+	relnum-opts =
+		rel-val: screen-w
+		rel-min: widths.middle
+		rel-max: widths.big
+	res = {}
+
+	val-calc = (key)->
+		| screen-w >= widths.middle =>
+			relnum ^^relnum-opts <<<<
+				min: sizes.middle.nav[key]
+				max: sizes.big.nav[key]
+		| screen-w >= widths.small => sizes.middle.nav[key]
+		| _ => sizes.small.nav[key]
+	keys = <[ right ]> |> _p.map (_p.camelize)
+	vals = keys |> _p.map (val-calc)
+	res <<<< _p.lists-to-obj keys, vals
+
+	top = do ->
+		| screen-w >= widths.middle => sizes.big.nav.top
+		| screen-w >= widths.small => sizes.middle.nav.top
+		| _ => sizes.small.nav.top
+
+	res <<<< {top}
+
 $header.on \menu-state-changed, !->
 	return unless $body.has-class \loaded
 
@@ -251,6 +277,7 @@ $w.on "resize#bind-suffix" !->
 	header-helper = get-header-vals helper: true
 	logo-vals = get-logo-vals!
 	call-menu-vals = get-call-menu-vals!
+	nav-vals = get-nav-vals!
 
 	relnum-opts = rel-val: screen-w
 
@@ -294,6 +321,11 @@ $w.on "resize#bind-suffix" !->
 		right: call-menu-vals.right + \px
 		top: call-menu-vals.top + \px
 		transform: "scale(#{call-menu-vals.scale})"
+
+	# nav
+	$nav.css do
+		right: "#{nav-vals.right}px"
+		top: nav-vals.top
 
 	$header
 		.css height: \auto
