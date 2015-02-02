@@ -11,7 +11,7 @@
 	z-index 50
 	opacity 0
 	margin-top 0
-	position absolute
+	absolute right 0
 	transition opacity $animation-speed $animation-curve,
 		right $animation-speed $animation-curve,
 		margin-top $animation-speed $animation-curve
@@ -58,20 +58,16 @@
 	overflow hidden
 	min-width $min-width
 
-	//@media (max-width: ($responsive-1))
-		//size 0 100%
-		//min-width 0
-
-		//.logo
-			//display none
-
 	nav
 		size auto 100%
-		absolute top 0 right 113px
+		//absolute top 0 right 113px
+		position absolute
 		white-space nowrap
 
+		/*
 		@media (max-width: ($responsive-2))
 			right 99px
+		*/
 
 		& > a, & > span
 			text-decoration none
@@ -91,9 +87,13 @@
 				padding-right $animation-speed $animation-curve
 			background transparent
 
-			@media (max-width: ($responsive-2))
+			//@media (max-width: ($responsive-2))
+			/*
+			body.middle-size &,
+			body.small-size &
 				padding-top (54px - 13px)
 				font-metrics($menu-text-fs-2, ($menu-text-fs-2 + 2px))
+			*/
 
 			&:first-child
 				margin-left 0
@@ -109,7 +109,9 @@
 		& > a:hover, & > a.active:hover
 			color white
 
-		@media (max-width: ($responsive-1))
+		//@media (max-width: ($responsive-1))
+		/*
+		body.small-size &
 			size 220px auto
 			absolute top 50% right 0
 			transform translateY(-50%)
@@ -129,6 +131,7 @@
 			&.scroll
 				top 0
 				transform translateY(0)
+		*/
 
 &.menu-active .call-menu
 	&:before, &:after
@@ -138,38 +141,17 @@
 	&:after
 		opacity 1
 
-//&.scroll-menu-active
-	//.call-menu
-		//$h = ($icons.show-menu.height)
-		//margin-top (-28px - $h)
+body.middle-size &,
+body.big-size &
+	&.scroll-menu-active .call-menu
+		margin-top -100px !important
 
-		//@media (min-width: ($responsive-1 + 1px))
-			//&:before, &:after
-				//opacity 0
-
-		//@media (max-width: ($responsive-1))
-			//margin-top (-28px + 14px)
-
-	//.menu
-		//@media (min-width: ($responsive-2 + 1px))
-			//height $header-height-3
-
-		//@media (max-width: ($responsive-2))
-			//height $header-height-2
-
-		//@media (max-width: ($responsive-1))
-			//size 0 100%
-
-	//@media (max-width: ($responsive-1))
-		//.logo
-			//fixed top 15px left 29px
-			//z-index 40
-			//transition left $animation-speed $animation-curve,
-				//top $animation-speed $animation-curve
+		&:before, &:after
+			opacity 0
 
 // for get height of header by scripts (offset for scrolling to anchor)
 .height-helper
 	display block
-	size 0 $header-height-3
+	size 0
 	fixed top 0 right 0
 	z-index -1

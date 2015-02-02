@@ -5,8 +5,6 @@
  */
 
 header
-	$speed = ($animation-speed * 4)
-
 	size 100%
 	z-index 1
 	absolute top 0 left 0
@@ -26,7 +24,7 @@ header
 		z-index 1
 		white-space nowrap
 		position absolute
-		transition top $speed $animation-curve
+		transition top $animation-speed $animation-curve
 
 		img.logo-image, .logo-text
 			display inline-block
@@ -57,5 +55,10 @@ header
 	> .logo
 		absolute top 50% left 50%
 		transform translate(-50%, -50%)
+
+	body.small-size &
+		&.scroll-menu-active > .logo
+			position fixed
+			z-index 40
 
 	@import 'header-menu'

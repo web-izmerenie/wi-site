@@ -28,10 +28,17 @@ module.exports.values =
 					margin-left: 14px
 					font-size: 16px
 					line-height: 18px
+				scroll:
+					left: 29px
+					top: 15px
 			call-menu:
 				right: 22px
 				top: 21px
 				scale: 0.74
+				margin-top: -14px
+			nav:
+				top: 50 #%
+				right: 0
 		middle:
 			height: 96px
 			logo:
@@ -44,6 +51,9 @@ module.exports.values =
 				right: 22px
 				top: 21px
 				scale: 0.74
+			nav:
+				top: 0
+				right: 99px
 		big:
 			height: 112px
 			logo:
@@ -56,6 +66,9 @@ module.exports.values =
 				right: 29px
 				top: 28px
 				scale: 1.0
+			nav:
+				top: 0
+				right: 113px
 
 module.exports.required =
 	\lang

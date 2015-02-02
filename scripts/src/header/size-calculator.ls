@@ -63,12 +63,13 @@ get-header-vals = ({helper=false, fixed-header=false})->
 			relnum ^^relnum-opts <<<<
 				min: sizes.middle.height
 				max: sizes.big.height
-		| screen-w > widths.small => sizes.middle.height
+		| screen-w >= widths.small => sizes.middle.height
 		| helper => sizes.small.helper-height
 		| fixed-header => \100%
 		| _ => sizes.small.height
 
 	width = if screen-w <= widths.small then sizes.small.width else \100%
+	width = \100% if fixed-header
 
 	{width, height}
 
@@ -147,44 +148,73 @@ $header.on \menu-state-changed, !->
 	return unless $body.has-class \loaded
 
 	{screen-w} = get-rel-screen-size!
+	last-class = $header.data \last-size-class
+	cur-class = $body.data \size-class
 
 	# horizontal
-	if screen-w > widths.small
-		reset =
+	if screen-w >= widths.small
+		menu-reset =
 			min-width: ''
 			max-width: ''
 			width: ''
+
 		if $header.has-class \menu-active
-			$menu.stop!.css reset
-				.transition height: $fixed-header.height!, speed
+			css = height: $height-helper.height!
 		else
-			$menu.stop!.css reset
-				.transition height: 0, speed
+			css = height: 0
+
+		if last-class isnt cur-class
+			$menu.stop!.css menu-reset .css css
+			$fixed-header.stop!.css css
+		else
+			$menu.stop!.css menu-reset .transition css, speed
+			$fixed-header.stop!.transition css, speed
 
 	# vertical
 	else
-		reset =
-			height: \100%,
-			min-width: 0,
+		menu-reset =
+			height: \100%
+			min-width: 0
 			max-width: sizes.small.width
+
+		$fixed-header.css width: ''
+
 		if $header.has-class \menu-active
-			$menu.stop!.css reset
-				.transition width: sizes.small.width, speed
+			css = width: sizes.small.width
 		else
-			$menu.stop!.css reset
-				.transition width: 0, speed
+			css = width: 0
+
+		if last-class isnt cur-class
+			$menu.stop!.css menu-reset .css css
+			$fixed-header.stop!.css css
+		else
+			$menu.stop!.css menu-reset .transition css, speed
+			$fixed-header.stop!.transition css
+
+	if last-class isnt cur-class
+		$header.data \last-size-class cur-class
 
 # scroll handler
 $w.on "scroll#bind-suffix" !->
 	return unless $body.has-class \loaded
 
+	logo-vals = get-logo-vals!
+	$card1-logo.css do
+		top: "#{logo-vals.top}px"
+		left: "#{logo-vals.left}px"
+	$call-menu.css margin-top: 0
+
 	if $header.has-class \scroll-menu-active
 		{screen-w} = get-rel-screen-size!
 
 		if screen-w >= widths.small
-			$bg-helper.css height: $fixed-header.height!
+			$bg-helper.css height: $height-helper.height!
 		else
 			$bg-helper.css height: sizes.small.helper-height
+			$card1-logo.css do
+				left: "#{sizes.small.logo.scroll.left}px"
+				top: "#{sizes.small.logo.scroll.top}px"
+			$call-menu.css margin-top: "#{sizes.small.call-menu.margin-top}px"
 	else
 		$bg-helper.css height: ''
 
@@ -196,13 +226,24 @@ normal-screen-reset = !->
 		min-width: ''
 	$logo.css display: ''
 
+update-size-class = (size-code)!->
+	sizes = <[ small middle big ]>
+	size-class-f = (+ \-size)
+
+	sizes |> _p.reject (is size-code)
+		|> _p.map size-class-f
+		|> _p.each $body.remove-class _
+
+	[size-code]
+		|> _p.map size-class-f
+		|> _p.each $body.add-class _
+		|> _p.each $body.data \size-class _
+
 # resize handler
 $w.on "resize#bind-suffix" !->
 	return unless $body.has-class \loaded
 
 	{screen-w, screen-h} = get-rel-screen-size!
-
-	header-w = \100%
 
 	normal-screen-reset! if screen-w >= widths.small
 
@@ -215,14 +256,15 @@ $w.on "resize#bind-suffix" !->
 
 	# between middle and big and more than big
 	if screen-w >= widths.middle
-		void
+		update-size-class \big
 
 	# between small and middle
 	else if screen-w >= widths.small
-		void
+		update-size-class \middle
 
 	# small screen and smaller
 	else
+		update-size-class \small
 		$fixed-header.css do
 			left: \auto
 			right: 0
@@ -234,9 +276,6 @@ $w.on "resize#bind-suffix" !->
 	$fixed-header.css do
 		width: fixed-header.width
 		height: fixed-header.height
-	$header
-		.css height: \auto
-		.trigger \menu-state-changed
 
 	# logos
 	$logo.css do
@@ -250,10 +289,15 @@ $w.on "resize#bind-suffix" !->
 		font-size: logo-vals.text.font-size + \px
 		line-height: logo-vals.text.line-height + \px
 
+	# call menu button
 	$call-menu.css do
 		right: call-menu-vals.right + \px
 		top: call-menu-vals.top + \px
 		transform: "scale(#{call-menu-vals.scale})"
+
+	$header
+		.css height: \auto
+		.trigger \menu-state-changed
 
 	$w.trigger "scroll#bind-suffix"
 
