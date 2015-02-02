@@ -30,7 +30,7 @@ $card1 = $cards .find \.card-1
 $card1-bg = $card1 .find \.bg
 $card1-next = $card1 .find \.next
 
-speed = b.get-val \animation-speed
+speed = b.get-val \animation-speed |> (* 4)
 logo-vals = size-calculator.get-logo-vals!
 
 loading-animation = true
@@ -54,7 +54,7 @@ card1-parallax-init = !->
 # rotate Wi logo before finish loading
 loading-loop = !->
 	if not loading-animation then return
-	$logo-img.transition rotate: \360deg, (speed*4), \linear, !->
+	$logo-img.transition rotate: \360deg, speed, \linear, !->
 		if not loading-animation then return
 		$logo-img.css rotate: \0deg
 		loading-loop!
@@ -63,14 +63,14 @@ loading-loop = !->
 preload-cb = !->
 	card1-parallax-init!
 	loading-animation := false
-	<-! $logo-img.stop!.transition rotate: \360deg, (speed*4), \linear
-	<-! $card1-bg.stop!.transition opacity: 1, scale: 1, (speed*4), \in-out
+	<-! $logo-img.stop!.transition rotate: \360deg, speed, \linear
+	<-! $card1-bg.stop!.transition opacity: 1, scale: 1, speed, \in-out
 	$logo.add-class \logo-move
 	vals =
 		left: logo-vals.left
 		top: logo-vals.top
 		translate: [\0%,\0%]
-	<-! $logo.stop!.transition vals, (speed*4), \in-out
+	<-! $logo.stop!.transition vals, speed, \in-out
 
 	$body .add-class \loaded
 	$page .scroll-top 0
