@@ -39,6 +39,9 @@ module.exports.values =
 			nav:
 				top: \50%
 				right: 0
+				item:
+					font-size: 15px
+					padding-top: 41px
 		middle:
 			height: 96px
 			logo:
@@ -54,6 +57,9 @@ module.exports.values =
 			nav:
 				top: 0
 				right: 99px
+				item:
+					font-size: 15px
+					padding-top: 41px
 		big:
 			height: 112px
 			logo:
@@ -69,6 +75,9 @@ module.exports.values =
 			nav:
 				top: 0
 				right: 113px
+				item:
+					font-size: 18px
+					padding-top: 45px
 
 module.exports.required =
 	\lang

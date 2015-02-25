@@ -5,7 +5,7 @@
  */
 
 require! {
-	prelude: _p
+	prelude: {map, camelize, lists-to-obj, reject, each}
 	jquery: $
 	'../basics': b
 	'../lib/relative_number.js': relnum
@@ -26,19 +26,21 @@ $logo = $all-logos .not $card1-logo
 
 $all-logos-text = $all-logos.find \.logo-text
 $all-logos-img = $all-logos.find \.logo-image
+$logo-text = $logo.find \.logo-text
 
 $call-menu = $header.find \.call-menu
 $menu = $header.find \.menu
 $nav = $menu.find \nav
 $nav-links = $nav.find \a
+$nav-items = $nav.find '>a, >span'
 
 bind-suffix = '.header-size-calc'
 
 # get values
-widths = b.get-val \responsive-widths
-ratio = b.get-val \workspace-ratio
-sizes = b.get-val \header
-speed = b.get-val \animation-speed |> (* 2)
+widths = \responsive-widths |> b.get-val
+ratio = \workspace-ratio |> b.get-val
+sizes = \header |> b.get-val
+speed = \animation-speed |> b.get-val |> (* 2)
 
 get-rel-screen-size = ->
 	# get screen size
@@ -95,8 +97,8 @@ get-logo-vals = ->
 
 	left = sizes.all.logo.left
 
-	top-min = (sizes.middle.height - sizes.middle.logo.size) / 2
-	top-max = (sizes.big.height - sizes.big.logo.size) / 2
+	top-min = sizes.middle.height |> (- sizes.middle.logo.size) |> (/ 2)
+	top-max = sizes.big.height |> (- sizes.big.logo.size) |> (/ 2)
 	top = relnum ^^relnum-opts <<<<
 		min: top-min
 		max: top-max
@@ -114,9 +116,8 @@ get-logo-vals = ->
 				max: sizes.middle.logo.text[key]
 		| _ => sizes.small.logo.text[key]
 
-	keys = <[ margin-left font-size line-height ]> |> _p.map (_p.camelize)
-	vals = keys |> _p.map (text-val)
-	text = _p.lists-to-obj keys, vals
+	keys = <[ margin-left font-size line-height ]> |> map camelize
+	text = keys |> map text-val |> lists-to-obj keys
 
 	{size, left, top, text}
 
@@ -140,9 +141,8 @@ get-call-menu-vals = ->
 				max: sizes.middle.call-menu[key]
 		| _ => sizes.small.call-menu[key]
 
-	keys = <[ right top scale ]> |> _p.map (_p.camelize)
-	vals = keys |> _p.map (val-calc)
-	_p.lists-to-obj keys, vals
+	keys = <[ right top scale ]> |> map camelize
+	keys |> map val-calc |> lists-to-obj keys
 
 get-nav-vals = ->
 	{screen-w} = get-rel-screen-size!
@@ -159,16 +159,26 @@ get-nav-vals = ->
 				max: sizes.big.nav[key]
 		| screen-w >= widths.small => sizes.middle.nav[key]
 		| _ => sizes.small.nav[key]
-	keys = <[ right ]> |> _p.map (_p.camelize)
-	vals = keys |> _p.map (val-calc)
-	res <<<< _p.lists-to-obj keys, vals
+	keys = <[ right ]> |> map camelize
+	res <<<< (keys |> map val-calc |> lists-to-obj keys)
 
 	top = do ->
 		| screen-w >= widths.middle => sizes.big.nav.top
 		| screen-w >= widths.small => sizes.middle.nav.top
 		| _ => sizes.small.nav.top
 
-	res <<<< {top}
+	item-calc = (key)->
+		| screen-w >= widths.middle =>
+			relnum ^^relnum-opts <<<<
+				min: sizes.middle.nav.item[key]
+				max: sizes.big.nav.item[key]
+		| screen-w >= widths.small => sizes.middle.nav.item[key]
+		| _ => sizes.small.nav.item[key]
+
+	keys = <[ font-size padding-top ]> |> map camelize
+	item = keys |> map item-calc |> lists-to-obj keys
+
+	res <<<< {top, item}
 
 $header.on \menu-state-changed, !->
 	return unless $body.has-class \loaded
@@ -256,14 +266,14 @@ update-size-class = (size-code)!->
 	sizes = <[ small middle big ]>
 	size-class-f = (+ \-size)
 
-	sizes |> _p.reject (is size-code)
-		|> _p.map size-class-f
-		|> _p.each $body.remove-class _
+	sizes |> reject (is size-code)
+		|> map size-class-f
+		|> each ($body.remove-class _)
 
 	[size-code]
-		|> _p.map size-class-f
-		|> _p.each $body.add-class _
-		|> _p.each $body.data \size-class _
+		|> map size-class-f
+		|> each ($body.add-class _)
+		|> each ($body.data \size-class _)
 
 # resize handler
 $w.on "resize#bind-suffix" !->
@@ -326,10 +336,25 @@ $w.on "resize#bind-suffix" !->
 	$nav.css do
 		right: "#{nav-vals.right}px"
 		top: nav-vals.top
+	$nav-items.css do
+		font-size: "#{nav-vals.item.font-size}px"
+		line-height: "#{nav-vals.item.font-size |> (+ 2)}px"
+		padding-top: "#{nav-vals.item.padding-top}px"
 
 	$header
 		.css height: \auto
 		.trigger \menu-state-changed
+
+	# hide logo text if not enough header width
+	switch
+	| screen-w >= widths.small =>
+		ls = $logo.width! + $logo.offset!.left
+		ms = $nav.width! + (($nav.css \right |> parse-int _, 10) or 0)
+		if $header.width! - ls - ms <= 15
+			$logo.add-class \no-text
+		else
+			$logo.remove-class \no-text
+	| _ => $logo.remove-class \no-text
 
 	$w.trigger "scroll#bind-suffix"
 

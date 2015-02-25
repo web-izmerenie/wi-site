@@ -46,8 +46,6 @@
 	$menu-text-color = #9daeb8
 	$menu-active-text-color = #f5ce08
 	$menu-active-bg-color = #122939
-	$menu-text-fs-2 = 15px
-	$menu-text-fs-3 = 18px
 	$menu-margin = 23px
 
 	display block
@@ -58,42 +56,29 @@
 	overflow hidden
 	min-width $min-width
 
+	.logo.no-text .logo-text
+		opacity 0
+
 	nav
 		size auto 100%
-		//absolute top 0 right 113px
 		position absolute
 		white-space nowrap
-
-		/*
-		@media (max-width: ($responsive-2))
-			right 99px
-		*/
+		z-index 2
 
 		& > a, & > span
 			text-decoration none
 			display inline-block
 			size auto, 100%
-			custom-font(
-				'Proxima Nova Rg', normal,
-				$menu-text-fs-3, ($menu-text-fs-3 + 2px))
+			custom-font('Proxima Nova Rg', normal)
 			box-sizing border-box
 			text-transform uppercase
 			color $menu-text-color
 			margin-left $menu-margin
-			padding-top (61px - 16px)
 			transition color $animation-speed $animation-curve,
 				background-color $animation-speed $animation-curve,
 				padding-left $animation-speed $animation-curve,
 				padding-right $animation-speed $animation-curve
 			background transparent
-
-			//@media (max-width: ($responsive-2))
-			/*
-			body.middle-size &,
-			body.small-size &
-				padding-top (54px - 13px)
-				font-metrics($menu-text-fs-2, ($menu-text-fs-2 + 2px))
-			*/
 
 			&:first-child
 				margin-left 0
@@ -101,9 +86,7 @@
 		& > a.active, & > span
 			background $menu-active-bg-color
 			color $menu-active-text-color
-			custom-font(
-				'Proxima Nova Rg', bold,
-				$menu-text-fs, ($menu-text-fs + 2px))
+			custom-font('Proxima Nova Rg', bold)
 			padding-x $menu-margin
 
 		& > a:hover, & > a.active:hover
