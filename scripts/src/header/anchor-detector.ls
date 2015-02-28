@@ -5,14 +5,16 @@
  */
 
 require! {
-	jquery : $
-	'../has-el-by-hash'
+	jquery: $
+	\jquery.timers
+	\../basics : {get-val}
+	\../has-el-by-hash
 }
 
 $w = $ window
 
 $html = $ \html
-$page = $ 'html,body'
+$page = $ 'html, body'
 $body = $html.find \body
 $header = $body.find \header
 $menu = $header.find \.menu
@@ -53,12 +55,15 @@ scroll-handler = !->
 			last-hash = hash
 			last-top = el-top
 
-	if last-hash? and last-hash is not window.location.hash
+	if last-hash? and last-hash isnt window.location.hash
 		$nav-links.remove-class \active
 		$nav-link = cur-page-hashes[last-hash].$nav-link
+		$nav.stop-time \header-size-calc
 		$nav-link.add-class \active if $nav-link?
 		window.location.hash = last-hash
 		$page.scroll-top st
+		$nav.one-time (\animation-speed |> get-val), \header-size-calc, !->
+			$w.trigger \scroll.header-size-calc
 
 $w
 	.on \scroll + bind-suffix, scroll-handler

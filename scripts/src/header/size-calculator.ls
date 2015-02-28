@@ -240,9 +240,9 @@ $w.on "scroll#bind-suffix" !->
 		left: "#{logo-vals.left}px"
 	$call-menu.css margin-top: 0
 
-	if $header.has-class \scroll-menu-active
-		{screen-w} = get-rel-screen-size!
+	{screen-w} = get-rel-screen-size!
 
+	if $header.has-class \scroll-menu-active
 		if screen-w >= widths.small
 			$bg-helper.css height: $height-helper.height!
 		else
@@ -253,6 +253,17 @@ $w.on "scroll#bind-suffix" !->
 			$call-menu.css margin-top: "#{sizes.small.call-menu.margin-top}px"
 	else
 		$bg-helper.css height: ''
+
+	# hide logo text if not enough header width
+	switch
+	| screen-w >= widths.small =>
+		ls = $logo.width! + $logo.offset!.left
+		ms = $nav.width! + (($nav.css \right |> parse-int _, 10) or 0)
+		if $header.width! - ls - ms <= 15
+			$logo.add-class \no-text
+		else
+			$logo.remove-class \no-text
+	| _ => $logo.remove-class \no-text
 
 normal-screen-reset = !->
 	$fixed-header.css do
@@ -344,17 +355,6 @@ $w.on "resize#bind-suffix" !->
 	$header
 		.css height: \auto
 		.trigger \menu-state-changed
-
-	# hide logo text if not enough header width
-	switch
-	| screen-w >= widths.small =>
-		ls = $logo.width! + $logo.offset!.left
-		ms = $nav.width! + (($nav.css \right |> parse-int _, 10) or 0)
-		if $header.width! - ls - ms <= 15
-			$logo.add-class \no-text
-		else
-			$logo.remove-class \no-text
-	| _ => $logo.remove-class \no-text
 
 	$w.trigger "scroll#bind-suffix"
 

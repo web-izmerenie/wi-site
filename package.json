@@ -47,6 +47,13 @@
           "modernizr": {
             "path": "./bower_components/modernizr/modernizr.js",
             "exports": "Modernizr"
+          },
+          "jquery.timers": {
+            "path": "./scripts/src/lib/jquery.timers.js",
+            "exports": "",
+            "depends": {
+              "jquery": "jQuery"
+            }
           }
         }
       }
