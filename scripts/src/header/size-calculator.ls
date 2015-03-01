@@ -168,6 +168,7 @@ get-nav-vals = ->
 		| _ => sizes.small.nav.top
 
 	item-calc = (key)->
+		| screen-w < widths.small and key is (\padding-top |> camelize) => ''
 		| screen-w >= widths.middle =>
 			relnum ^^relnum-opts <<<<
 				min: sizes.middle.nav.item[key]
@@ -352,7 +353,7 @@ $w.on "resize#bind-suffix" !->
 	$nav-items.css do
 		font-size: "#{nav-vals.item.font-size}px"
 		line-height: "#{nav-vals.item.font-size + 2}px"
-		padding-top: "#{nav-vals.item.padding-top}px"
+		padding-top: nav-vals.item.padding-top
 
 	$header
 		.css height: \auto
