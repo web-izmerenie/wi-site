@@ -6,14 +6,14 @@
  */
 
 require! {
-	prelude : _p
-	jquery : $
+	prelude: {drop-while, drop}
+	jquery: $
 }
 
 module.exports = (url) ->
-	hash = url |> _p.drop-while (isnt \#)
-	hash-id = hash |> _p.drop 1
-	correct-hash = /^[a-zA-Z0-9-_]+$/.test hash-id
+	hash = url |> drop-while (isnt \#)
+	hash-id = hash |> drop 1
+	correct-hash = hash-id is /^[a-zA-Z0-9-_]+$/
 
 	# safe jQuery selector
 	return false unless correct-hash

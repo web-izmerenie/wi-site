@@ -5,16 +5,16 @@
  */
 
 require! {
-	jquery : $
+	jquery: $
 }
 
 $w = $ window
 $s = $ \.portfolio
 $header = $ \header
 $height-helper = $header.find \.height-helper
-$elems = $s.find 'ul>li'
+$elems = $s.find \ul>li
 $more-block = $s.find \.more-block
-$more = $more-block.find '>a'
+$more = $more-block.find \>a
 
 $more.click -> false
 
@@ -22,17 +22,17 @@ do !-> # show element by scroll
 	bind-suffix = \.general-page-portfolio-show-elements-by-scroll
 
 	scroll-handler = !->
-		scroll-val = $w.scrollTop! + $w.height!
+		scroll-val = $w.scroll-top! + $w.height!
 
 		for item in $elems
 			$item = $ item
-			if scroll-val > $item .offset! .top
-				$item.addClass \visible
+			if scroll-val > $item.offset!.top
+				$item.add-class \visible
 			else
-				$item.removeClass \visible
+				$item.remove-class \visible
 
 	$w
-		.on \scroll + bind-suffix, scroll-handler
-		.on \resize + bind-suffix, scroll-handler
+		.on "scroll#bind-suffix", scroll-handler
+		.on "resize#bind-suffix", scroll-handler
 
 	scroll-handler!

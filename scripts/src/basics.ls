@@ -4,7 +4,7 @@
  * @author Viacheslav Lotsmanov
  */
 
-require! jquery : $
+require! jquery: $
 
 module.exports =
 	get-val: null
@@ -21,15 +21,15 @@ module.exports.init = (cb) !-> $ !->
 	required = lang: $html.attr \lang
 
 	require! {
-		'./lib/get_val' : GetVal
-		'./lib/get_local_text' : GetLocalText
-		'./lib/load_img' : LoadImg
-		'./values'
-		'./localization'
+		\./lib/get_val : GetVal
+		\./lib/get_local_text : GetLocalText
+		\./lib/load_img : LoadImg
+		\./values
+		\./localization
 	}
 
 	# create basics modules instances
-	b.get-val = new GetVal values , required
+	b.get-val = new GetVal values, required
 	b.get-local-text =
 		new GetLocalText localization, b.get-val \lang, true
 	b.load-img = new LoadImg b.get-val \load-img-timeout, true
@@ -44,14 +44,16 @@ module.exports.init = (cb) !-> $ !->
 
 	# load styles file
 	href = $cur-link.attr \href
-	$new-link = $ '<link/>', { type: 'text/css', rel: \stylesheet }
+	$new-link = $ \<link/>, do
+		type: \text/css
+		rel: \stylesheet
 	$new-link.load !->
 		clear-timeout timer-id
 		b.get-val.set \styles-href href
 		set-timeout cb, 0
 
 	# show error when loading timeout
-	timeout = (b.get-val \styles-load-timeout, true) * 1000
+	timeout = b.get-val \styles-load-timeout, true |> (* 1000)
 	fail-cb = !->
 		window.alert b.get-local-text \err, \styles, \load-timeout
 	timer-id = set-timeout fail-cb, timeout
