@@ -11,6 +11,7 @@ module.exports.values =
 
 	\workspace-ratio : [1920px, 1100px]
 	\responsive-widths :
+		extra-small: 460px
 		small: 840px
 		middle: 1000px
 		big: 1920px
@@ -78,6 +79,19 @@ module.exports.values =
 				item:
 					font-size: 18px
 					padding-top: 45px
+	\main-page :
+		all:
+			general-header-n1:
+				extra-small:
+					...
+				small:
+					...
+				middle:
+					...
+				big:
+					...
+			general-header-n2:
+				...
 
 module.exports.required =
 	\lang

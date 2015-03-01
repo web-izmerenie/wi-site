@@ -26,30 +26,30 @@ $logo = $header .find '>.logo'
 $logo-img = $logo .find \img
 
 $cards = $ \.general-cards
-$card1 = $cards .find \.card-1
-$card1-bg = $card1 .find \.bg
-$card1-next = $card1 .find \.next
+$card-n1 = $cards .find \.card-n1
+$card-n1-bg = $card-n1 .find \.bg
+$card-n1-next = $card-n1 .find \.next
 
 speed = b.get-val \animation-speed |> (* 4)
 logo-vals = size-calculator.get-logo-vals!
 
 loading-animation = true
 
-$card1-next .click link-handler
+$card-n1-next .click link-handler
 
-card1-parallax-init = !->
-	card1-bg-parallax-bind-suffix = '.card-1-bg-parallax'
+card-n1-parallax-init = !->
+	card-n1-bg-parallax-bind-suffix = '.card-n1-bg-parallax'
 
-	$w.on \scroll + card1-bg-parallax-bind-suffix, !->
+	$w.on \scroll + card-n1-bg-parallax-bind-suffix, !->
 		st = $w.scrollTop!
-		return if st > $card1.height!
+		return if st > $card-n1.height!
 		val = st / 2
-		$card1-bg.css \background-position, "center #{val}px"
+		$card-n1-bg.css \background-position, "center #{val}px"
 
-	$w.on \resize + card1-bg-parallax-bind-suffix, !->
-		$w.trigger \scroll + card1-bg-parallax-bind-suffix
+	$w.on \resize + card-n1-bg-parallax-bind-suffix, !->
+		$w.trigger \scroll + card-n1-bg-parallax-bind-suffix
 
-	$w.trigger \resize + card1-bg-parallax-bind-suffix
+	$w.trigger \resize + card-n1-bg-parallax-bind-suffix
 
 # rotate Wi logo before finish loading
 loading-loop = !->
@@ -61,10 +61,10 @@ loading-loop = !->
 
 # callback after all images is preloaded (see icons.styl)
 preload-cb = !->
-	card1-parallax-init!
+	card-n1-parallax-init!
 	loading-animation := false
 	<-! $logo-img.stop!.transition rotate: \360deg, speed, \linear
-	<-! $card1-bg.stop!.transition opacity: 1, scale: 1, speed, \in-out
+	<-! $card-n1-bg.stop!.transition opacity: 1, scale: 1, speed, \in-out
 	$logo.add-class \logo-move
 	vals =
 		left: logo-vals.left

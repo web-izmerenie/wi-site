@@ -21,8 +21,8 @@ $fixed-header = $header.find \.fixed-header
 $bg-helper = $fixed-header.find \.bg-helper
 
 $all-logos = $header.find \.logo
-$card1-logo = $header.find \>.logo
-$logo = $all-logos .not $card1-logo
+$card-n1-logo = $header.find \>.logo
+$logo = $all-logos .not $card-n1-logo
 
 $all-logos-text = $all-logos.find \.logo-text
 $all-logos-img = $all-logos.find \.logo-image
@@ -236,7 +236,7 @@ $w.on "scroll#bind-suffix" !->
 	return unless $body.has-class \loaded
 
 	logo-vals = get-logo-vals!
-	$card1-logo.css do
+	$card-n1-logo.css do
 		top: "#{logo-vals.top}px"
 		left: "#{logo-vals.left}px"
 	$call-menu.css margin-top: 0
@@ -248,7 +248,7 @@ $w.on "scroll#bind-suffix" !->
 			$bg-helper.css height: $height-helper.height!
 		else
 			$bg-helper.css height: sizes.small.helper-height
-			$card1-logo.css do
+			$card-n1-logo.css do
 				left: "#{sizes.small.logo.scroll.left}px"
 				top: "#{sizes.small.logo.scroll.top}px"
 			$call-menu.css margin-top: "#{sizes.small.call-menu.margin-top}px"
