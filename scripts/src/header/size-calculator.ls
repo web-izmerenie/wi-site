@@ -194,7 +194,7 @@ $header.on \menu-state-changed, !->
 			max-width: ''
 			width: ''
 
-		if $header.has-class \menu-active
+		if $header.has-class \menu-active or $header.has-class \scroll-menu-active
 			css = height: $height-helper.height!
 		else
 			css = height: 0
@@ -253,6 +253,8 @@ $w.on "scroll#bind-suffix" !->
 			$call-menu.css margin-top: "#{sizes.small.call-menu.margin-top}px"
 	else
 		$bg-helper.css height: ''
+
+	$header.trigger \menu-state-changed
 
 	# hide logo text if not enough header width
 	switch
@@ -330,17 +332,17 @@ $w.on "resize#bind-suffix" !->
 		left: logo-vals.left
 		top: logo-vals.top
 	$all-logos-img.css do
-		width: logo-vals.size + \px
-		height: logo-vals.size + \px
+		width: "#{logo-vals.size}px"
+		height: "#{logo-vals.size}px"
 	$all-logos-text.css do
-		margin-left: logo-vals.text.margin-left + \px
-		font-size: logo-vals.text.font-size + \px
-		line-height: logo-vals.text.line-height + \px
+		margin-left: "#{logo-vals.text.margin-left}px"
+		font-size: "#{logo-vals.text.font-size}px"
+		line-height: "#{logo-vals.text.line-height}px"
 
 	# call menu button
 	$call-menu.css do
-		right: call-menu-vals.right + \px
-		top: call-menu-vals.top + \px
+		right: "#{call-menu-vals.right}px"
+		top: "#{call-menu-vals.top}px"
 		transform: "scale(#{call-menu-vals.scale})"
 
 	# nav
@@ -349,7 +351,7 @@ $w.on "resize#bind-suffix" !->
 		top: nav-vals.top
 	$nav-items.css do
 		font-size: "#{nav-vals.item.font-size}px"
-		line-height: "#{nav-vals.item.font-size |> (+ 2)}px"
+		line-height: "#{nav-vals.item.font-size + 2}px"
 		padding-top: "#{nav-vals.item.padding-top}px"
 
 	$header
