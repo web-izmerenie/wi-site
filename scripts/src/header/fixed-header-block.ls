@@ -4,7 +4,7 @@
  * @author Viacheslav Lotsmanov
  */
 
-require! jquery : $
+require! jquery: $
 
 $w = $ window
 
@@ -14,7 +14,7 @@ $header = $body.find \header
 $height-helper = $header.find \.height-helper
 $cards = $ \.general-cards
 
-main-page = $html.hasClass \general-page
+main-page = $html.has-class \general-page
 
 # for other pages use fixed header always
 unless main-page
@@ -31,7 +31,7 @@ scroll-handler = !->
 		$header.remove-class \scroll-menu-active
 
 $w
-	.on \scroll + bind-suffix, scroll-handler
-	.on \resize + bind-suffix, scroll-handler
+	.on "scroll#{bind-suffix}", scroll-handler
+	.on "resize#{bind-suffix}", scroll-handler
 
 scroll-handler!

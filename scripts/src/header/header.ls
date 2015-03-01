@@ -5,16 +5,16 @@
  */
 
 require! {
-	jquery : $
-	'../basics' : b
-	'../link-handler'
+	jquery: $
+	\../basics : {get-val}
+	\../link-handler
 }
 
 $html = $ \html
 
 $body = $html.find \body
 $header = $body.find \header
-$logo = $header.find '.logo'
+$logo = $header.find \.logo
 $call-menu = $header.find \.call-menu
 $menu = $header.find \.menu
 $nav = $menu.find \nav
@@ -22,7 +22,7 @@ $nav-links = $nav.find \a
 
 main-page = $html.has-class \general-page
 
-sizes = b.get-val \header
+sizes = get-val \header
 
 $logo.click link-handler
 
@@ -33,7 +33,7 @@ $call-menu.click ->
 	if $header.has-class \menu-active
 		$header.remove-class \menu-active
 	else
-		$nav.css \top ''
+		$nav.css \top, ''
 		$header.add-class \menu-active
 
 	$header.trigger \menu-state-changed
@@ -42,7 +42,7 @@ $call-menu.click ->
 
 $nav-links.click link-handler
 
-require './menu-vertical-scroll'
-require './fixed-header-block'
-require './anchor-detector'
-require './size-calculator'
+require \./menu-vertical-scroll
+require \./fixed-header-block
+require \./anchor-detector
+require \./size-calculator

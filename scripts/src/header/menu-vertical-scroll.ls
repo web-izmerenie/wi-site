@@ -4,7 +4,10 @@
  * @author Viacheslav Lotsmanov
  */
 
-require! jquery : $
+require! {
+	jquery: $
+	prelude: {negate}
+}
 
 $w = $ window
 
@@ -20,7 +23,7 @@ resize-handler = !->
 	if $nav.inner-height! <= $w.height!
 		$nav
 			.remove-class \scroll
-			.css \top ''
+			.css \top, ''
 		return \no-scroll
 
 	$nav.add-class \scroll
@@ -33,22 +36,22 @@ scroll-handler = !->
 	return if resize-handler! is \no-scroll
 
 	st = $w.scroll-top!
-	top = parse-int ($nav.css \top), 10
+	top = $nav.css \top |> parse-int _, 10
 	h = $nav.inner-height!
 	wh = $w.height!
 
-	new-top = (top - (st - last-scroll-top))
+	new-top = top - (st - last-scroll-top)
 
-	ws = -(h - wh)
+	ws = h - wh |> negate
 	new-top = 0 if new-top > 0
 	new-top = ws if new-top < ws
 
-	$nav.css \top new-top + \px
+	$nav.css \top, "#{new-top}px"
 
 	last-scroll-top := st
 
 $w
-	.on \scroll + bind-suffix, scroll-handler
-	.on \resize + bind-suffix, resize-handler
+	.on "scroll#{bind-suffix}", scroll-handler
+	.on "resize#{bind-suffix}", resize-handler
 
 scroll-handler!

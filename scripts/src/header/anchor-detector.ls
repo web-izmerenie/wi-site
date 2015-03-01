@@ -22,7 +22,7 @@ $nav = $menu.find \nav
 $nav-links = $nav.find \a
 $height-helper = $header.find \.height-helper
 
-main-page = $html.hasClass \general-page
+main-page = $html.has-class \general-page
 
 bind-suffix = \.header-menu-auto-detect-current-anchor
 
@@ -50,7 +50,7 @@ scroll-handler = !->
 	last-top = null
 
 	for hash, val of cur-page-hashes
-		el-top = val.$section .offset! .top
+		el-top = val.$section.offset!.top
 		if stof >= el-top and (not last-top? or el-top > last-top)
 			last-hash = hash
 			last-top = el-top
@@ -66,7 +66,7 @@ scroll-handler = !->
 			$w.trigger \scroll.header-size-calc
 
 $w
-	.on \scroll + bind-suffix, scroll-handler
-	.on \resize + bind-suffix, scroll-handler
+	.on "scroll#{bind-suffix}", scroll-handler
+	.on "resize#{bind-suffix}", scroll-handler
 
 scroll-handler!

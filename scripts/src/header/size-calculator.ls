@@ -7,8 +7,8 @@
 require! {
 	prelude: {map, camelize, lists-to-obj, reject, each}
 	jquery: $
-	'../basics': b
-	'../lib/relative_number.js': relnum
+	\../basics : {get-val}
+	\../lib/relative_number.js : relnum
 }
 
 $w = $ window
@@ -34,13 +34,13 @@ $nav = $menu.find \nav
 $nav-links = $nav.find \a
 $nav-items = $nav.find '>a, >span'
 
-bind-suffix = '.header-size-calc'
+bind-suffix = \.header-size-calc
 
 # get values
-widths = \responsive-widths |> b.get-val
-ratio = \workspace-ratio |> b.get-val
-sizes = \header |> b.get-val
-speed = \animation-speed |> b.get-val |> (* 2)
+widths = \responsive-widths |> get-val
+ratio = \workspace-ratio |> get-val
+sizes = \header |> get-val
+speed = \animation-speed |> get-val |> (* 2)
 
 get-rel-screen-size = ->
 	# get screen size
