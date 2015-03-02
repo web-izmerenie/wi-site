@@ -19,6 +19,7 @@ module.exports.values =
 		all:
 			logo:
 				left: 29px
+		extra-small: {}
 		small:
 			width: 220px
 			height: 96px
@@ -79,19 +80,35 @@ module.exports.values =
 				item:
 					font-size: 18px
 					padding-top: 45px
-	\main-page :
-		all:
-			general-header-n1:
-				extra-small:
-					...
-				small:
-					...
-				middle:
-					...
-				big:
-					...
-			general-header-n2:
-				...
+	\general-page :
+		extra-small: {}
+		small: {}
+		middle:
+			header-n1:
+				font-size: 51px
+				line-height: 50px
+			header-n2:
+				font-size: 16px
+				line-height: 18px
+				padding-top: 22px
+			next:
+				size: 69px
+				margin-top: 42px
+				scale: 0.69
+				icon-top: 2px
+		big:
+			header-n1:
+				font-size: 72px
+				line-height: 73px
+			header-n2:
+				font-size: 24px
+				line-height: 26px
+				padding-top: 31px
+			next:
+				size: 100px
+				margin-top: 62px
+				scale: 1.0
+				icon-top: 3px
 
 module.exports.required =
 	\lang

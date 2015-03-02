@@ -9,6 +9,7 @@ require! {
 	jquery: $
 	\../basics : {get-val}
 	\../lib/relative_number.js : relnum
+	\../get-rel-screen-size
 }
 
 $w = $ window
@@ -38,20 +39,8 @@ bind-suffix = \.header-size-calc
 
 # get values
 widths = \responsive-widths |> get-val
-ratio = \workspace-ratio |> get-val
 sizes = \header |> get-val
 speed = \animation-speed |> get-val |> (* 2)
-
-get-rel-screen-size = ->
-	# get screen size
-	screen-w = $w.width!
-	screen-h = $w.height!
-
-	# dependence on a ratio
-	#test-h = screen-w * ratio.1 / ratio.0
-	#screen-w = screen-h * ratio.0 / ratio.1 if test-h > screen-h
-
-	{screen-w, screen-h}
 
 get-header-vals = ({helper=false, fixed-header=false})->
 	{screen-w} = get-rel-screen-size!

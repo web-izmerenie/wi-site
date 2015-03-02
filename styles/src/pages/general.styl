@@ -4,23 +4,15 @@
  * @author Viacheslav Lotsmanov
  */
 
-general-header1()
-	custom-font('Proxima Nova Rg', bold, 72px, 73px)
+general-header-n1()
+	custom-font('Proxima Nova Rg', bold)
 
-	@media (max-width: ($responsive-2))
-		font-metrics(51px, 50px)
+general-header-n2()
+	custom-font('Proxima Nova Lt', normal)
 
-general-header2()
-	custom-font('Proxima Nova Lt', normal, 24px, 26px)
-	padding-top 31px
-
-	@media (max-width: ($responsive-2))
-		font-metrics(16px, 18px)
-		padding-top 22px
-
-@import 'general/cards';
-@import 'general/portfolio';
-@import 'general/team';
+@import 'general/cards'
+@import 'general/portfolio'
+@import 'general/team'
 
 .portfolio
 	display none

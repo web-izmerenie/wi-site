@@ -14,7 +14,6 @@
 		$bg-from-color = #315d9a
 		$bg-to-color = #2b75ba
 		$next-button-color = #10476e
-		$next-button-size = 100px
 		$speed = ($animation-speed * 4)
 
 		size 100%
@@ -43,14 +42,14 @@
 			transform translateY(-50%)
 
 			h1
-				general-header1()
+				general-header-n1()
 				text-align center
 				margin-bottom -99px
 
 			h2
-				general-header2()
+				general-header-n2()
 				text-align center
-				margin-bottom (-26px - $next-button-size)
+				margin-bottom -126px
 
 			h1, h2, .next
 				opacity 0
@@ -58,41 +57,41 @@
 					margin-bottom ($animation-speed*2) $animation-curve
 
 			.next
-				$size = $next-button-size
-
 				display inline-block
-				size $size
-				background $next-button-color
-				border-radius ($size / 2)
 				position relative
-				margin-top (68px - 6px)
+				background $next-button-color
 				transition background-color $animation-speed $animation-curve
 
 				&:hover
 					background $round-button-hover-color
 
-				&:before
-					$left = (($size - $icons.arrow.width) / 2)
-					$top = (($size - $icons.arrow.height) / 2)
-					$top += 3px
-
+				> span
 					pseudo-block()
-					absolute top ($top) left ($left)
-					icon($icons.arrow)
+					absolute top 50% left 50%
+					margin-top 3px
+					transform scale(1)
 
+					&:before
+						pseudo-block()
+						icon($icons.arrow)
+						absolute top 0 left 0
+						transform translate(-50%, -50%)
+
+				/*
 				@media (max-width: ($responsive-2))
 					$size = 69px
 					size $size
 					border-radius ($size / 2)
-					margin-top (68px - 6px - 20px)
+					margin-top 42px
 
-					&:before
+					> span
 						$left = (($size - $icons.arrow.width) / 2)
 						$top = (($size - $icons.arrow.height) / 2)
 						$top += 2px
 
 						absolute top ($top) left ($left)
 						transform scale(0.69)
+				*/
 
 			body.loaded &
 				h1, h2, .next
