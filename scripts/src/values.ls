@@ -83,7 +83,9 @@ module.exports.values =
 	\general-page :
 		extra-small: {}
 		small: {}
+
 		middle:
+			# top card
 			header-n1:
 				font-size: 51px
 				line-height: 50px
@@ -96,7 +98,39 @@ module.exports.values =
 				margin-top: 42px
 				scale: 0.69
 				icon-top: 2px
+
+			# portfolio
+			portfolio-title-block:
+				padding-bottom: 56px
+			portfolio-title-block-h2:
+				font-size: 41px
+				line-height: 43px
+				padding-top: 68px
+			portfolio-title-block-h3:
+				font-size: 18px
+				line-height: 20px
+				padding-top: 22px
+			portfolio-ul-li:
+				height: 209px
+			portfolio-ul-li-text-h3:
+				font-size: 33px
+				line-height: 35px
+			portfolio-ul-li-text-h4:
+				font-size: 16px
+				line-height: 18px
+			portfolio-ul-li-text-h3-h4:
+				padding-top: 10px
+			portfolio-more-block-a:
+				font-size: 18px
+				line-height: 20px
+				padding-top: 99px
+				margin-top: 51px
+				margin-bottom: 40px
+			portfolio-more-block-a-icon:
+				scale: 0.65
+
 		big:
+			# top card
 			header-n1:
 				font-size: 72px
 				line-height: 73px
@@ -109,6 +143,36 @@ module.exports.values =
 				margin-top: 62px
 				scale: 1.0
 				icon-top: 3px
+
+			# portfolio
+			portfolio-title-block:
+				padding-bottom: 103px
+			portfolio-title-block-h2:
+				font-size: 62px
+				line-height: 64px
+				padding-top: 106px
+			portfolio-title-block-h3:
+				font-size: 22px
+				line-height: 24px
+				padding-top: 29px
+			portfolio-ul-li:
+				height: 330px
+			portfolio-ul-li-text-h3:
+				font-size: 52px
+				line-height: 54px
+			portfolio-ul-li-text-h4:
+				font-size: 22px
+				line-height: 24px
+			portfolio-ul-li-text-h3-h4:
+				padding-top: 19px
+			portfolio-more-block-a:
+				font-size:24px
+				line-height:26px
+				padding-top:126px
+				margin-top:110px
+				margin-bottom:64px
+			portfolio-more-block-a-icon:
+				scale: 1.0
 
 module.exports.required =
 	\lang

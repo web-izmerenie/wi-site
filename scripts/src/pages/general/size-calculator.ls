@@ -6,7 +6,7 @@
 
 require! {
 	jquery: $
-	prelude: {map, each, camelize, lists-to-obj, filter, Obj}
+	prelude: {map, each, camelize, lists-to-obj, filter, Obj, obj-to-pairs}
 	\../../basics : {get-val}
 	\../../lib/relative_number.js : relnum
 	\../../get-rel-screen-size
@@ -25,6 +25,18 @@ $card-n1-next = $card-n1.find \.next
 $card-n1-next-icon = $card-n1-next.find \>span
 headers-n1.push <| $card-n1.find \h1
 headers-n2.push <| $card-n1.find \h2
+
+$portfolio = $ \.portfolio
+$portfolio-title-block = $portfolio.find \.title-block
+$portfolio-title-block-h2 = $portfolio-title-block.find \h2
+$portfolio-title-block-h3 = $portfolio-title-block.find \h3
+$portfolio-ul-li = $portfolio.find \>ul>li
+$portfolio-ul-li-text = $portfolio-ul-li.find \.text
+$portfolio-ul-li-text-h3 = $portfolio-ul-li-text.find \h3
+$portfolio-ul-li-text-h4 = $portfolio-ul-li-text.find \h4
+$portfolio-ul-li-text-h3-h4 = $portfolio-ul-li-text.find \h3+h4
+$portfolio-more-block-a = $portfolio.find \.more-block>a
+$portfolio-more-block-a-icon = $portfolio-more-block-a.find 'i.a, i.b'
 
 $team = $ \.team
 headers-n1.push <| $team.find \h1
@@ -58,6 +70,20 @@ get-rel-vals = (el-key, keys) -->
 		|> map (-> get-mb-relval min[it], max[it])
 		|> lists-to-obj (keys |> map camelize)
 
+set-typical-sizes = (el-key, $el) !->
+	general-page-vals.big[el-key |> camelize]
+		|> Obj.keys
+		|> get-rel-vals el-key
+		|> Obj.map (+ \px)
+		|> $el.css
+
+set-typical-sizes-to-array = (el-key, arr) !->
+	css = general-page-vals.big[el-key |> camelize]
+		|> Obj.keys
+		|> get-rel-vals el-key
+		|> Obj.map (+ \px)
+	arr |> each (-> $ it .css css)
+
 $w.on "resize#bind-suffix", !->
 	let el-key = \next
 		let vals = <[ icon-top scale ]>
@@ -73,16 +99,28 @@ $w.on "resize#bind-suffix", !->
 				border-radius: "#{vals.size / 2}px"
 				margin-top: "#{vals.margin-top}px"
 
-	let el-key = \header-n1
-		css = <[ font-size line-height ]>
-			|> get-rel-vals el-key
-			|> Obj.map (+ \px)
-		headers-n1 |> each (-> $ it .css css)
+	do
+		\header-n1 : headers-n1
+		\header-n2 : headers-n2
+	|> obj-to-pairs
+	|> each (!-> set-typical-sizes-to-array it.0, it.1)
 
-	let el-key = \header-n2
-		css = <[ font-size line-height padding-top ]>
-			|> get-rel-vals el-key
-			|> Obj.map (+ \px)
-		headers-n2 |> each (-> $ it .css css)
+	# portfolio
+	do
+		\portfolio-title-block : $portfolio-title-block
+		\portfolio-title-block-h2 : $portfolio-title-block-h2
+		\portfolio-title-block-h3 : $portfolio-title-block-h3
+		\portfolio-ul-li : $portfolio-ul-li
+		\portfolio-ul-li-text-h3 : $portfolio-ul-li-text-h3
+		\portfolio-ul-li-text-h4 : $portfolio-ul-li-text-h4
+		\portfolio-ul-li-text-h3-h4 : $portfolio-ul-li-text-h3-h4
+		\portfolio-more-block-a : $portfolio-more-block-a
+	|> obj-to-pairs
+	|> each (!-> set-typical-sizes it.0, it.1)
+	let el-key = \portfolio-more-block-a-icon
+		let vals = <[ scale ]>
+			vals |>= get-rel-vals el-key
+			$portfolio-more-block-a-icon.css do
+				transform: "translateX(50%) scale(#{vals.scale})"
 
 $w.trigger "resize#bind-suffix"
