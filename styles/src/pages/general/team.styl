@@ -5,11 +5,13 @@
  */
 
 .team
+	$team-bg = #1573b5
+
 	size 100%
 	min-height $min-height
 	z-index 0
 	position relative
-	background #1573b5
+	background $team-bg
 
 	.title-block
 		size 100% auto
@@ -19,9 +21,48 @@
 		h1
 			general-header-n1()
 			text-transform uppercase
+			color white
 
 		h2
 			general-header-n2()
+			color #cae2e9
 
-		h1, h2
-			color white
+	ul.people
+		display block
+		size 100% auto
+		absolute bottom 0
+		list-style none
+		overflow auto
+		white-space nowrap
+
+		>li
+			$bq-s = 239px
+
+			display inline-block
+			vertical-align bottom
+			size auto
+			position relative
+			z-index 10
+			padding-top ($bq-s + 15px)
+
+			blockqoute
+				$bg = #ffd60a
+
+				display block
+				position absolute
+				absolute bottom 100% left 50%
+				transform translateY(100%)
+				white-space normal
+				background $bg
+				size $bq-s
+				border-radius ($bq-s / 2)
+
+				&:before
+					pseudo-block()
+					size 54px 36px
+					bg('baloon-corner.svg', center center no-repeat)
+					absolute left 26px bottom -5px
+
+			img
+				display inline-block
+				vertical-align bottom
