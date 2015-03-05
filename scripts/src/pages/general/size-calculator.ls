@@ -6,7 +6,7 @@
 
 require! {
 	jquery: $
-	prelude: {map, each, camelize, lists-to-obj, filter, Obj, obj-to-pairs}
+	prelude: {map, each, camelize, lists-to-obj, filter, Obj, obj-to-pairs, pairs-to-obj}
 	\../../basics : {get-val}
 	\../../lib/relative_number.js : relnum
 	\../../get-rel-screen-size
@@ -69,6 +69,9 @@ get-rel-vals = (el-key, keys) -->
 		|> map camelize
 		|> map (-> get-mb-relval min[it], max[it])
 		|> lists-to-obj (keys |> map camelize)
+		|> obj-to-pairs
+		|> map (-> it.1 = Math.round it.1 unless it.0 is \scale; it)
+		|> pairs-to-obj
 
 set-typical-sizes = (el-key, $el) !->
 	general-page-vals.big[el-key |> camelize]

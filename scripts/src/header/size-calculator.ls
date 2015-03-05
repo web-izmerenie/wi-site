@@ -5,7 +5,7 @@
  */
 
 require! {
-	prelude: {map, camelize, lists-to-obj, reject, each}
+	prelude: {map, camelize, lists-to-obj, reject, each, Obj, obj-to-pairs, pairs-to-obj}
 	jquery: $
 	\../basics : {get-val}
 	\../lib/relative_number.js : relnum
@@ -51,7 +51,7 @@ get-header-vals = ({helper=false, fixed-header=false})->
 
 	height = do ->
 		| screen-w >= widths.middle =>
-			relnum ^^relnum-opts <<<<
+			Math.round relnum ^^relnum-opts <<<<
 				min: sizes.middle.height
 				max: sizes.big.height
 		| screen-w >= widths.small => sizes.middle.height
@@ -73,11 +73,11 @@ get-logo-vals = ->
 
 	size = do ->
 		| screen-w >= widths.middle =>
-			relnum ^^relnum-opts <<<<
+			Math.round relnum ^^relnum-opts <<<<
 				min: sizes.middle.logo.size
 				max: sizes.big.logo.size
 		| screen-w >= widths.small =>
-			relnum ^^relnum-opts <<<<
+			Math.round relnum ^^relnum-opts <<<<
 				rel-min: widths.small
 				rel-max: widths.middle
 				min: sizes.small.logo.size
@@ -88,17 +88,17 @@ get-logo-vals = ->
 
 	top-min = sizes.middle.height |> (- sizes.middle.logo.size) |> (/ 2)
 	top-max = sizes.big.height |> (- sizes.big.logo.size) |> (/ 2)
-	top = relnum ^^relnum-opts <<<<
+	top = Math.round relnum ^^relnum-opts <<<<
 		min: top-min
 		max: top-max
 
 	text-val = (key)->
 		| screen-w >= widths.middle =>
-			relnum ^^relnum-opts <<<<
+			Math.round relnum ^^relnum-opts <<<<
 				min: sizes.middle.logo.text[key]
 				max: sizes.big.logo.text[key]
 		| screen-w >= widths.small =>
-			relnum ^^relnum-opts <<<<
+			Math.round relnum ^^relnum-opts <<<<
 				rel-min: widths.small
 				rel-max: widths.middle
 				min: sizes.small.logo.text[key]
@@ -131,7 +131,12 @@ get-call-menu-vals = ->
 		| _ => sizes.small.call-menu[key]
 
 	keys = <[ right top scale ]> |> map camelize
-	keys |> map val-calc |> lists-to-obj keys
+	keys
+		|> map val-calc
+		|> lists-to-obj keys
+		|> obj-to-pairs
+		|> map (-> it.1 = Math.round it.1 unless it.0 is \scale; it)
+		|> pairs-to-obj
 
 get-nav-vals = ->
 	{screen-w} = get-rel-screen-size!
@@ -143,7 +148,7 @@ get-nav-vals = ->
 
 	val-calc = (key)->
 		| screen-w >= widths.middle =>
-			relnum ^^relnum-opts <<<<
+			Math.round relnum ^^relnum-opts <<<<
 				min: sizes.middle.nav[key]
 				max: sizes.big.nav[key]
 		| screen-w >= widths.small => sizes.middle.nav[key]
@@ -159,7 +164,7 @@ get-nav-vals = ->
 	item-calc = (key)->
 		| screen-w < widths.small and key is (\padding-top |> camelize) => ''
 		| screen-w >= widths.middle =>
-			relnum ^^relnum-opts <<<<
+			Math.round relnum ^^relnum-opts <<<<
 				min: sizes.middle.nav.item[key]
 				max: sizes.big.nav.item[key]
 		| screen-w >= widths.small => sizes.middle.nav.item[key]
