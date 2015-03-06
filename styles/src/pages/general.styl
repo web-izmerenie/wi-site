@@ -14,11 +14,12 @@ general-header-n2()
 @import 'general/portfolio'
 @import 'general/team'
 
+general-page-section()
+	&
+		display none
+	body.loaded &
+		display block
+
 .portfolio,
 .team
-	display none
-
-body.loaded
-	.portfolio,
-	.team
-		display block
+	general-page-section()

@@ -56,6 +56,8 @@
 				background $bg
 				size $bq-s
 				border-radius ($bq-s / 2)
+				opacity 0
+				transition opacity $animation-speed $animation-curve
 
 				&:before
 					pseudo-block()
@@ -63,6 +65,31 @@
 					bg('baloon-corner.svg', center center no-repeat)
 					absolute left 26px bottom -5px
 
+			&:nth-child(6) blockqoute
+				left -80%
+
+				&:before
+					transform scale(-1, 1)
+					absolute left 160px
+
+			&:nth-child(4) blockqoute
+				left 40%
+				bottom 98%
+
+			&:hover blockqoute
+				opacity 1
+
 			img
 				display inline-block
 				vertical-align bottom
+
+			&:nth-child(2)
+				margin-left 39px
+			&:nth-child(3)
+				margin-left 68px
+			&:nth-child(4)
+				margin-left 62px
+			&:nth-child(5)
+				margin-left 12px
+			&:nth-child(6)
+				margin-left 44px
