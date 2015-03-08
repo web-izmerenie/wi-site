@@ -51,4 +51,4 @@ if has-el-by-hash hash
 
 require \./header/header
 
-require \./pages/general if $html.hasClass \general-page
+require \./pages/general if $html.has-class \general-page

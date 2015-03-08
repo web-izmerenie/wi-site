@@ -42,6 +42,9 @@ $team = $ \.team
 headers-n1.push <| $team.find \h1
 headers-n2.push <| $team.find \h2
 
+$header = $body.find \header
+$height-helper = $header.find \.height-helper
+
 bind-suffix = \.general-page-size-calculator
 
 widths = \responsive-widths |> get-val
@@ -88,6 +91,9 @@ set-typical-sizes-to-array = (el-key, arr) !->
 	arr |> each (-> $ it .css css)
 
 $w.on "resize#bind-suffix", !->
+	header-offset = $height-helper.height!
+	w-h = $w.height!
+
 	let el-key = \next
 		let vals = <[ icon-top scale ]>
 			vals |>= get-rel-vals el-key
@@ -125,5 +131,8 @@ $w.on "resize#bind-suffix", !->
 			vals |>= get-rel-vals el-key
 			$portfolio-more-block-a-icon.css do
 				transform: "translateX(50%) scale(#{vals.scale})"
+
+	# team
+	$team.css height: w-h - header-offset
 
 $w.trigger "resize#bind-suffix"
