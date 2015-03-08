@@ -77,7 +77,9 @@ preload-cb = !->
 
 	require \./general/size-calculator
 	require \./general/portfolio
-	$w.trigger \resize.header-size-calc
+	$w
+		.trigger \resize.header-size-calc
+		.trigger \resize
 
 	go-to-anchor = $html.data \go-to-anchor
 	go-to-anchor! if go-to-anchor |> is-type \Function

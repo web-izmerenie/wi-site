@@ -43,7 +43,7 @@
 			size auto
 			position relative
 			z-index 10
-			padding-top ($bq-s + 15px)
+			padding-top ($bq-s + 50px)
 
 			blockqoute
 				$bg = #ffd60a
@@ -58,6 +58,23 @@
 				border-radius ($bq-s / 2)
 				opacity 0
 				transition opacity $animation-speed $animation-curve
+				color black
+				margin-bottom -35px
+
+				.content-wrap
+					display block
+					relative top 50%
+					transform translateY(-50%)
+
+				h3
+					custom-font('Proxima Nova Rg', bold, 21px, 23px)
+					text-transform uppercase
+
+				p
+					custom-font('Proxima Nova Rg', normal, 19px, 21px)
+
+				h3 + p
+					margin-top 10px
 
 				&:before
 					pseudo-block()
@@ -65,16 +82,23 @@
 					bg('baloon-corner.svg', center center no-repeat)
 					absolute left 26px bottom -5px
 
-			&:nth-child(6) blockqoute
-				left -80%
-
-				&:before
-					transform scale(-1, 1)
-					absolute left 160px
+			&:nth-child(3) blockqoute
+				bottom 99%
 
 			&:nth-child(4) blockqoute
 				left 40%
 				bottom 98%
+
+			&:nth-child(5) blockqoute
+				bottom 102%
+
+			&:nth-child(6) blockqoute
+				left -80%
+				bottom 102%
+
+				&:before
+					transform scale(-1, 1)
+					absolute left 160px
 
 			&:hover blockqoute
 				opacity 1

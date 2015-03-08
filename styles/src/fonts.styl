@@ -33,9 +33,8 @@ declare-font(
 declare-font('RotondaC', 400, normal, 'rotondac', 'RotondaC')
 declare-font('RotondaC', 700, normal, 'rotondac-bold', 'RotondaC-Bold')
 
-custom-font($name, $weight=normal, $font-size=inherit, $line-height=inherit)
+just-set-font($name, $weight=normal)
 	font-family $name, serif
-	font-metrics $font-size, $line-height
 
 	if $name is 'SansRoundedLightC'
 		font-weight 300
@@ -49,3 +48,7 @@ custom-font($name, $weight=normal, $font-size=inherit, $line-height=inherit)
 		font-weight 400
 	else if $name is 'RotondaC' and $weight is bold
 		font-weight 700
+
+custom-font($name, $weight=normal, $font-size=inherit, $line-height=inherit)
+	just-set-font($name, $weight)
+	font-metrics $font-size, $line-height
