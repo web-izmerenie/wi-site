@@ -77,6 +77,7 @@ preload-cb = !->
 
 	require \./general/size-calculator
 	require \./general/portfolio
+	require \./general/team
 	$w
 		.trigger \resize.header-size-calc
 		.trigger \resize
