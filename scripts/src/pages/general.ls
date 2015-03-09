@@ -12,6 +12,7 @@ require! {
 	\../link-handler
 	\../has-el-by-hash
 	\../header/size-calculator
+	\./general/scroll-restore : {bind-before, bind-after}
 }
 
 require \jquery.transit
@@ -22,7 +23,7 @@ $page = $ 'html, body'
 
 $body = $html.find \body
 $header = $body.find \header
-$logo = $header.find '>.logo'
+$logo = $header.find \>.logo
 $logo-img = $logo.find \img
 
 $cards = $ \.general-cards
@@ -34,6 +35,8 @@ speed = get-val \animation-speed |> (* 4)
 logo-vals = size-calculator.get-logo-vals!
 
 loading-animation = true
+
+bind-before!
 
 $card-n1-next.click link-handler
 
@@ -81,6 +84,7 @@ preload-cb = !->
 	$w
 		.trigger \resize.header-size-calc
 		.trigger \resize
+	bind-after!
 
 	go-to-anchor = $html.data \go-to-anchor
 	go-to-anchor! if go-to-anchor |> is-type \Function
