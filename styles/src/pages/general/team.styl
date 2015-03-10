@@ -105,6 +105,19 @@
 			a:active + blockquote
 				opacity 1
 
+			a
+				display inline-block
+				overflow hidden
+				position relative
+
+				img
+					relative bottom 0
+					transition $animation-speed $animation-curve
+
+			&:hover a, a:focus, a:active
+				img
+					bottom 0 !important
+
 			img
 				display inline-block
 				vertical-align bottom
