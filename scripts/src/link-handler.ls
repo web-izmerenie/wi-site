@@ -19,59 +19,59 @@ $header = null
 $height-helper = null
 $nav-links = null
 
+speed = \animation-speed |> get-val |> (* 4)
+
 scrolling = false
 
-module.exports = ->
-	return false if scrolling
-	scrolling := true
+<- (!-> module.exports = it)
 
-	unless $html
-		$page := $ 'html, body'
-		$html := $ \html
-		$body := $html.find \body
-		$header := $body.find \header
-		$height-helper := $header.find \.height-helper
-		$nav-links := $header .find '.menu nav a'
+return false if scrolling
+scrolling := true
 
-	$body.add-class \scrolling
+unless $html
+	$page := $ 'html, body'
+	$html := $ \html
+	$body := $html.find \body
+	$header := $body.find \header
+	$height-helper := $header.find \.height-helper
+	$nav-links := $header .find '.menu nav a'
 
-	# parse link href
-	href = @href
-	pathname = @pathname
-	hash = @hash
+$body.add-class \scrolling
 
-	pathname = window.location.pathname if empty pathname
+# parse link href
+href = @href
+pathname = @pathname
+hash = @hash
 
-	# ignore handler and go to link
-	return true if pathname is not window.location.pathname
+pathname = window.location.pathname if empty pathname
 
-	# DOM element with id equals to hash must be exists (or link is broken)
-	unless has-el-by-hash hash
-		window.alert get-local-text \err,
-			\detect-link-anchor, \#LINK_HREF# : href
-		scrolling := false
-		$body.remove-class \scrolling
-		return false
+# ignore handler and go to link
+return true unless pathname is window.location.pathname
 
-	# reset to hash plug
-	window.location.hash = \#/
+# DOM element with id equals to hash must be exists (or link is broken)
+unless has-el-by-hash hash
+	window.alert get-local-text \err,
+		\detect-link-anchor, \#LINK_HREF# : href
+	scrolling := false
+	$body.remove-class \scrolling
+	return false
 
-	$nav-links.each !->
-		@pathname = window.location.pathname if empty @pathname
-		return if @pathname is not pathname
-		if @pathname + @hash is pathname + hash
-			$ @ .add-class \active
-		else
-			$ @ .remove-class \active
+$nav-links.each !->
+	@pathname = window.location.pathname if empty @pathname
+	return if @pathname is not pathname
+	if @pathname + @hash is pathname + hash
+		$ @ .add-class \active
+	else
+		$ @ .remove-class \active
 
-	top = $ hash .offset!.top |> (- $height-helper.height!)
+top = $ hash .offset!.top |> (- $height-helper.height!) |> (+ 1)
 
-	# start scrolling
-	$page.stop!.animate \scroll-top : top,
-		get-val \animation-speed |> (* 4), !->
-			window.location.hash = hash
-			$page.scroll-top top # restore header offset, because we set window.location.hash and it scrolls to block
-			scrolling := false
-			$body.removeClass \scrolling
+hash |> window.history.push-state null, null, _
 
-	false
+# start scrolling
+$page.stop!.animate scroll-top: top, speed, !->
+	<-! (!-> set-timeout it, 100)
+	scrolling := false
+	$body.remove-class \scrolling
+
+false

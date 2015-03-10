@@ -46,22 +46,22 @@ scroll-handler = !->
 
 	st = $w.scroll-top!
 	stof = st + $height-helper.height!
-	last-hash = null
+	new-hash = null
 	last-top = null
 
 	for hash, val of cur-page-hashes
 		el-top = val.$section.offset!.top
 		if stof >= el-top and (not last-top? or el-top > last-top)
-			last-hash = hash
+			new-hash = hash
 			last-top = el-top
 
-	if last-hash? and last-hash isnt window.location.hash
+	if new-hash? and new-hash isnt window.location.hash
 		$nav-links.remove-class \active
-		$nav-link = cur-page-hashes[last-hash].$nav-link
+		$nav-link = cur-page-hashes[new-hash].$nav-link
 		$nav.stop-time \header-size-calc
 		$nav-link.add-class \active if $nav-link?
-		window.location.hash = last-hash
-		$page.scroll-top st
+		new-hash |> window.history.replace-state null, null, _
+
 		$nav.one-time (\animation-speed |> get-val), \header-size-calc, !->
 			$w.trigger \scroll.header-size-calc
 
