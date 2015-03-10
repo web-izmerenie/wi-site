@@ -46,7 +46,7 @@ get-rel-vals = (vals, el-key, keys) -->
 		|> pairs-to-obj
 
 # to DOM or jQuery element(s)
-set-typical-sizes = (vals, el-key, $el) !-->
+set-typical-sizes = (vals, el-key, el) !-->
 	vals.0
 		|> Obj.values
 		|> at 0
@@ -54,7 +54,7 @@ set-typical-sizes = (vals, el-key, $el) !-->
 		|> Obj.keys
 		|> get-rel-vals vals, el-key
 		|> Obj.map (+ \px)
-		|> $el.css
+		|> (-> $ el .css it)
 
 # to array of DOM or jQuery objects
 set-typical-sizes-to-array = (vals, el-key, arr) !-->
