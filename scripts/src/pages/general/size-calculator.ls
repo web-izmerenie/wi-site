@@ -6,20 +6,23 @@
 
 require! {
 	jquery: $
-	prelude: {map, each, camelize, lists-to-obj, filter, Obj, obj-to-pairs, pairs-to-obj}
+	prelude: {map, each, obj-to-pairs, lists-to-obj}
 	\../../basics : {get-val}
 	\../../lib/relative_number.js : relnum
 	\../../get-rel-screen-size
+	\../../size-calc-helpers
 }
 
 $w = $ window
 $html = $ \html
 $body = $html.find \body
+$top-part = $body.find \>.top-part
 
 headers-n1 = []
 headers-n2 = []
 
 $cards = $ \.general-cards
+$cards-list = $cards.children!
 $card-n1 = $cards.find \.card-n1
 $card-n1-next = $card-n1.find \.next
 $card-n1-next-icon = $card-n1-next.find \>span
@@ -48,47 +51,12 @@ $height-helper = $header.find \.height-helper
 bind-suffix = \.general-page-size-calculator
 
 widths = \responsive-widths |> get-val
-general-page-vals = \general-page |> get-val
+vals-src = \general-page |> get-val
+vals = <[middle big]> |> map (-> [vals-src[it]] |> lists-to-obj [it])
 
-get-mb-relval = (min, max) ->
-	{screen-w} = get-rel-screen-size!
-
-	relnum do
-		rel-val: screen-w
-		rel-min: widths.middle
-		rel-max: widths.big
-		min: min
-		max: max
-
-get-rel-vals = (el-key, keys) -->
-	{middle, big} = general-page-vals
-
-	get-el-vals = -> it[el-key |> camelize]
-
-	min = middle |> get-el-vals
-	max = big |> get-el-vals
-
-	keys
-		|> map camelize
-		|> map (-> get-mb-relval min[it], max[it])
-		|> lists-to-obj (keys |> map camelize)
-		|> obj-to-pairs
-		|> map (-> it.1 = Math.round it.1 unless it.0 is \scale; it)
-		|> pairs-to-obj
-
-set-typical-sizes = (el-key, $el) !->
-	general-page-vals.big[el-key |> camelize]
-		|> Obj.keys
-		|> get-rel-vals el-key
-		|> Obj.map (+ \px)
-		|> $el.css
-
-set-typical-sizes-to-array = (el-key, arr) !->
-	css = general-page-vals.big[el-key |> camelize]
-		|> Obj.keys
-		|> get-rel-vals el-key
-		|> Obj.map (+ \px)
-	arr |> each (-> $ it .css css)
+get-rel-vals = size-calc-helpers.get-rel-vals vals
+set-typical-sizes = size-calc-helpers.set-typical-sizes vals
+set-typical-sizes-to-array = size-calc-helpers.set-typical-sizes-to-array vals
 
 $w.on "resize#bind-suffix", !->
 	header-offset = $height-helper.height!
@@ -133,6 +101,8 @@ $w.on "resize#bind-suffix", !->
 				transform: "translateX(50%) scale(#{vals.scale})"
 
 	# team
+	$cards-list.css height: w-h
 	$team.css height: w-h - header-offset
+	$top-part.css height: \auto
 
 $w.trigger "resize#bind-suffix"

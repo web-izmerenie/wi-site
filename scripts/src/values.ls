@@ -80,6 +80,19 @@ module.exports.values =
 				item:
 					font-size: 18px
 					padding-top: 45px
+	\footer :
+		extra-small: {}
+		small: {}
+		middle:
+			footer:
+				height: 161px
+			links:
+				top: 45px
+		big:
+			footer:
+				height: 191px
+			links:
+				top: 55px
 	\general-page :
 		extra-small: {}
 		small: {}

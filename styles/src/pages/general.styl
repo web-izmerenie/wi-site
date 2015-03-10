@@ -15,11 +15,12 @@ general-header-n2()
 @import 'general/team'
 
 general-page-section()
-	&
+	html.general-page &
 		display none
-	body.loaded &
+	html.general-page body.loaded &
 		display block
 
+footer,
 .portfolio,
 .team
 	general-page-section()

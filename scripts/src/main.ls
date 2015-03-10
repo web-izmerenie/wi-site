@@ -50,5 +50,6 @@ if has-el-by-hash hash
 		go-to-anchor!
 
 require \./header/header
+require \./footer/footer
 
 require \./pages/general if $html.has-class \general-page

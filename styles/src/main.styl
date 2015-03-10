@@ -18,13 +18,28 @@ reset-html5()
 html, body
 	reset-box-model()
 	font-metrics 0 0
-	size 100%
+	height 100%
 
 body
 	background white
 	color black
 	min-width $min-width
 
+.top-part
+	position relative
+	min-height 100%
+	height 100%
+
+	.prop
+		display block
+		overflow hidden
+		size 100% 0
+		position relative
+		clear both
+
 @require 'header'
 
 @require 'pages/general'
+
+footer
+	@import 'footer'
