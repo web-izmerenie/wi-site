@@ -9,3 +9,65 @@
 	position relative
 	height 0
 	overflow hidden
+
+nav.footer-links
+	absolute left 50%
+
+	ul
+		reset-box-model()
+
+		>li
+			reset-box-model()
+			display inline-block
+
+			& + li
+				margin-left 19px
+
+			>a
+				$s = 51px
+
+				display block
+				size $s
+				box-sizing border-box
+				border 2px solid $dark-content-color-2-3
+				border-radius ($s / 2)
+				position relative
+				transition border-color $animation-speed $animation-curve
+
+				&:hover
+					border-color white
+
+				>span
+					display none
+
+				img, svg
+					display block
+					absolute left 50% top 50%
+					transform translate(-50%, -50%)
+					transition opacity $animation-speed $animation-curve
+
+					&.inactive
+						opacity 1
+					&.active
+						opacity 0
+
+				&:hover img, &:hover svg
+					&.inactive
+						opacity 0
+					&.active
+						opacity 1
+
+				>ins
+					display none
+
+					&.inactive
+						color $dark-content-color-2-2
+					&.active
+						color white
+
+			&.facebook >a svg
+				transform translate(-45%, -50%)
+			&.vkontakte >a svg
+				transform translate(-45%, -55%)
+			&.rss >a svg
+				transform translate(-40%, -60%)

@@ -87,12 +87,12 @@ module.exports.values =
 			footer:
 				height: 161px
 			links:
-				top: 45px
+				margin-top: 45px
 		big:
 			footer:
 				height: 191px
 			links:
-				top: 55px
+				margin-top: 55px
 	\general-page :
 		extra-small: {}
 		small: {}

@@ -4,4 +4,7 @@
  * @author Viacheslav Lotsmanov
  */
 
-require \./size-calculator
+require! {
+	\./size-calculator : {}
+	\./icons-generator : {}
+}

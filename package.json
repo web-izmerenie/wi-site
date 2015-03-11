@@ -54,6 +54,10 @@
             "depends": {
               "jquery": "jQuery"
             }
+          },
+          "Snap.svg": {
+            "path": "./bower_components/Snap.svg/dist/snap.svg-min.js",
+            "exports": "Snap"
           }
         }
       }
