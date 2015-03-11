@@ -13,7 +13,7 @@ require! {
 $footer = $ \footer
 $links-block = $footer.find \.footer-links
 
-(i) <-! $links-block.find \ul>li .each
+<-! $links-block.find \ul>li .each
 $li = $ @
 $a = $li.find \a
 
@@ -33,9 +33,9 @@ both = [inactive, active]
 
 fill = (color, el) -->
 	el
-		|> (.select \.icon)
-		|> (-> [it, it.select-all \*])
-		|> each (!-> it.attr fill: color if it?)
+	|> (.select \.icon)
+	|> (-> [it, it.select-all \*])
+	|> each (!-> it.attr fill: color if it?)
 
 colors = <[inactive active]>
 	|> each (!-> $a.append "<ins class='#{it}' />")
