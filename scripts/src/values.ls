@@ -82,17 +82,32 @@ module.exports.values =
 					padding-top: 45px
 	\footer :
 		extra-small: {}
-		small: {}
+		small:
+			copyright-text-block:
+				margin-top: 64px
+				padding-left: 40px
 		middle:
 			footer:
 				height: 161px
 			links:
 				margin-top: 45px
+			copyright-text-block:
+				margin-top: 64px
+				padding-left: 60px
+			copyright-text-p:
+				font-size: 14px
+				line-height: 16px
 		big:
 			footer:
 				height: 191px
 			links:
 				margin-top: 55px
+			copyright-text-block:
+				margin-top: 74px
+				padding-left: 60px
+			copyright-text-p:
+				font-size: 16px
+				line-height: 18px
 	\general-page :
 		extra-small: {}
 		small: {}

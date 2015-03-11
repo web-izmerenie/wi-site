@@ -5,7 +5,9 @@
  */
 
 require! {
-	prelude: {map, each, lists-to-obj, obj-to-pairs}
+	prelude: {
+		map, each, lists-to-obj, obj-to-pairs, pairs-to-obj, Str, Obj, camelize
+	}
 	jquery: $
 	\../basics : {get-val}
 	\../lib/relative_number.js : relnum
@@ -17,6 +19,7 @@ $w = $ window
 $body = $ \body
 $footer = $ \footer
 $text = $footer.find \.text
+$text-p = $text.find \>p
 $links-block = $footer.find \.footer-links
 $prop = $body.find \>.top-part>.prop
 
@@ -24,14 +27,23 @@ bind-suffix = \.footer-size-calc
 
 widths = \responsive-widths |> get-val
 vals-src = \footer |> get-val
-vals = <[middle big]> |> map (-> [vals-src[it]] |> lists-to-obj [it])
 
-get-rel-vals = size-calc-helpers.get-rel-vals vals
-set-typical-sizes = size-calc-helpers.set-typical-sizes vals
+vals = [<[small middle]> <[middle big]>]
+	|> map -> [(it |> map Str.take 1 |> Str.unchars), it]
+	|> pairs-to-obj
+	|> Obj.map map (-> [vals-src[it]] |> lists-to-obj [it])
+
+calc = <[get-rel-vals set-typical-sizes]>
+	|> map camelize
+	|> map (-> [it, size-calc-helpers[it]])
+	|> pairs-to-obj
+	|> Obj.map (-> vals |> Obj.map it)
 
 $w.on "resize#bind-suffix", !->
-	if $body.has-class \loaded then let el-key = \footer, vals = <[ height ]>
-		vals |>= get-rel-vals el-key
+	{screen-w} = get-rel-screen-size!
+
+	if $body.has-class \loaded then let el-key = \footer, vals = <[height]>
+		vals |>= calc.get-rel-vals.mb el-key
 		$footer.css do
 			height: vals.height
 			margin-top: -vals.height
@@ -39,7 +51,17 @@ $w.on "resize#bind-suffix", !->
 
 	do
 		\links : $links-block
+		\copyright-text-p : $text-p
 	|> obj-to-pairs
-	|> each (!-> set-typical-sizes it.0, it.1)
+	|> each (!-> calc.set-typical-sizes.mb it.0, it.1)
+
+	range-key = do ->
+		| screen-w >= widths.middle => \mb
+		| _ => \sm
+
+	do
+		\copyright-text-block : $text
+	|> obj-to-pairs
+	|> each (!-> calc.set-typical-sizes[range-key] it.0, it.1)
 
 $w.trigger "resize#bind-suffix"
