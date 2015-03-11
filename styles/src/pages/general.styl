@@ -10,9 +10,14 @@ general-header-n1()
 general-header-n2()
 	custom-font('Proxima Nova Lt', normal)
 
-@import 'general/cards'
-@import 'general/portfolio'
-@import 'general/team'
+.general-cards
+	@import 'general/cards'
+
+.portfolio
+	@import 'general/portfolio'
+
+.team
+	@import 'general/team'
 
 general-page-section()
 	html.general-page &

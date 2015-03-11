@@ -4,7 +4,7 @@
  * @author Viacheslav Lotsmanov
  */
 
-.team
+&
 	$team-bg = #1573b5
 
 	size 100%
@@ -13,130 +13,131 @@
 	position relative
 	background $team-bg
 
-	.title-block
-		size 100% auto
-		text-align center
-		padding-top 133px
 
-		h1
-			general-header-n1()
-			text-transform uppercase
-			color white
+.title-block
+	size 100% auto
+	text-align center
+	padding-top 133px
 
-		h2
-			general-header-n2()
-			color #cae2e9
-			box-sizing border-box
-			padding-x 40px
+	h1
+		general-header-n1()
+		text-transform uppercase
+		color white
 
-			>span
+	h2
+		general-header-n2()
+		color #cae2e9
+		box-sizing border-box
+		padding-x 40px
+
+		>span
+			display block
+
+			@media (max-width: 560px)
+				display inline
+
+ul.people
+	display block
+	size 100% auto
+	absolute bottom 0
+	list-style none
+	overflow auto
+	white-space nowrap
+
+	>li
+		$bq-s = 239px
+
+		display inline-block
+		vertical-align bottom
+		size auto
+		position relative
+		z-index 10
+		padding-top ($bq-s + 50px)
+
+		blockquote
+			$bg = #ffd60a
+
+			display block
+			position absolute
+			absolute bottom 100% left 50%
+			transform translateY(100%)
+			white-space normal
+			background $bg
+			size $bq-s
+			border-radius ($bq-s / 2)
+			opacity 0
+			transition opacity $animation-speed $animation-curve
+			color black
+			margin-bottom -35px
+
+			.content-wrap
 				display block
+				relative top 50%
+				transform translateY(-50%)
 
-				@media (max-width: 560px)
-					display inline
+			h3
+				custom-font('Proxima Nova Rg', bold, 21px, 23px)
+				text-transform uppercase
 
-	ul.people
-		display block
-		size 100% auto
-		absolute bottom 0
-		list-style none
-		overflow auto
-		white-space nowrap
+			p
+				custom-font('Proxima Nova Rg', normal, 19px, 21px)
 
-		>li
-			$bq-s = 239px
+			h3 + p
+				margin-top 10px
 
+			&:before
+				pseudo-block()
+				size 54px 36px
+				bg('baloon-corner.svg', center center no-repeat)
+				absolute left 26px bottom -5px
+
+		&:nth-child(3) blockquote
+			bottom 99%
+
+		&:nth-child(4) blockquote
+			left 40%
+			bottom 98%
+
+		&:nth-child(5) blockquote
+			bottom 102%
+
+		&:nth-child(6) blockquote
+			left -80%
+			bottom 102%
+
+			&:before
+				transform scale(-1, 1)
+				absolute left 160px
+
+		&:hover blockquote,
+		a:focus + blockquote,
+		a:active + blockquote
+			opacity 1
+
+		a
 			display inline-block
-			vertical-align bottom
-			size auto
+			overflow hidden
 			position relative
-			z-index 10
-			padding-top ($bq-s + 50px)
-
-			blockquote
-				$bg = #ffd60a
-
-				display block
-				position absolute
-				absolute bottom 100% left 50%
-				transform translateY(100%)
-				white-space normal
-				background $bg
-				size $bq-s
-				border-radius ($bq-s / 2)
-				opacity 0
-				transition opacity $animation-speed $animation-curve
-				color black
-				margin-bottom -35px
-
-				.content-wrap
-					display block
-					relative top 50%
-					transform translateY(-50%)
-
-				h3
-					custom-font('Proxima Nova Rg', bold, 21px, 23px)
-					text-transform uppercase
-
-				p
-					custom-font('Proxima Nova Rg', normal, 19px, 21px)
-
-				h3 + p
-					margin-top 10px
-
-				&:before
-					pseudo-block()
-					size 54px 36px
-					bg('baloon-corner.svg', center center no-repeat)
-					absolute left 26px bottom -5px
-
-			&:nth-child(3) blockquote
-				bottom 99%
-
-			&:nth-child(4) blockquote
-				left 40%
-				bottom 98%
-
-			&:nth-child(5) blockquote
-				bottom 102%
-
-			&:nth-child(6) blockquote
-				left -80%
-				bottom 102%
-
-				&:before
-					transform scale(-1, 1)
-					absolute left 160px
-
-			&:hover blockquote,
-			a:focus + blockquote,
-			a:active + blockquote
-				opacity 1
-
-			a
-				display inline-block
-				overflow hidden
-				position relative
-
-				img
-					relative bottom 0
-					transition $animation-speed $animation-curve
-
-			&:hover a, a:focus, a:active
-				img
-					bottom 0 !important
 
 			img
-				display inline-block
-				vertical-align bottom
+				relative bottom 0
+				transition $animation-speed $animation-curve
 
-			&:nth-child(2)
-				margin-left 39px
-			&:nth-child(3)
-				margin-left 68px
-			&:nth-child(4)
-				margin-left 62px
-			&:nth-child(5)
-				margin-left 12px
-			&:nth-child(6)
-				margin-left 44px
+		&:hover a, a:focus, a:active
+			img
+				bottom 0 !important
+
+		img
+			display inline-block
+			vertical-align bottom
+
+		&:nth-child(2)
+			margin-left 39px
+		&:nth-child(3)
+			margin-left 68px
+		&:nth-child(4)
+			margin-left 62px
+		&:nth-child(5)
+			margin-left 12px
+		&:nth-child(6)
+			margin-left 44px

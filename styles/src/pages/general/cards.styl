@@ -4,85 +4,85 @@
  * @author Viacheslav Lotsmanov
  */
 
-.general-cards
+&
 	size 100%
 	min-height $min-height
 	z-index 0
 	position relative
 
-	.card-n1
-		$bg-from-color = #315d9a
-		$bg-to-color = #2b75ba
-		$next-button-color = #10476e
-		$speed = ($animation-speed * 4)
+.card-n1
+	$bg-from-color = #315d9a
+	$bg-to-color = #2b75ba
+	$next-button-color = #10476e
+	$speed = ($animation-speed * 4)
 
-		size 100%
-		min-height $min-height
-		background linear-gradient(top, $bg-from-color, $bg-to-color)
+	size 100%
+	min-height $min-height
+	background linear-gradient(top, $bg-from-color, $bg-to-color)
+	z-index 0
+	position relative
+	text-align center
+	overflow hidden
+
+	.bg
+		size 200%
+		absolute top -50% left -50%
 		z-index 0
-		position relative
+		bg($general-page-card-n1-bg, center center repeat)
+		background-attachment fixed
+		transform scale(0.7)
+		opacity 0
+
+	.content
+		display block
+		z-index 1
+		color white
 		text-align center
-		overflow hidden
+		relative top 50%
+		transform translateY(-50%)
 
-		.bg
-			size 200%
-			absolute top -50% left -50%
-			z-index 0
-			bg($general-page-card-n1-bg, center center repeat)
-			background-attachment fixed
-			transform scale(0.7)
-			opacity 0
-
-		.content
-			display block
-			z-index 1
-			color white
+		h1
+			general-header-n1()
 			text-align center
-			relative top 50%
-			transform translateY(-50%)
+			margin-bottom -99px
+			box-sizing border-box
+			padding-x 40px
 
-			h1
-				general-header-n1()
-				text-align center
-				margin-bottom -99px
-				box-sizing border-box
-				padding-x 40px
+			>span
+				display block
 
-				>span
-					display block
+		h2
+			general-header-n2()
+			text-align center
+			margin-bottom -126px
 
-			h2
-				general-header-n2()
-				text-align center
-				margin-bottom -126px
+		h1, h2, .next
+			opacity 0
+			transition opacity ($animation-speed*2) $animation-curve,
+				margin-bottom ($animation-speed*2) $animation-curve
 
-			h1, h2, .next
-				opacity 0
-				transition opacity ($animation-speed*2) $animation-curve,
-					margin-bottom ($animation-speed*2) $animation-curve
+		.next
+			display inline-block
+			position relative
+			background $next-button-color
+			transition background-color $animation-speed $animation-curve
 
-			.next
-				display inline-block
-				position relative
-				background $next-button-color
-				transition background-color $animation-speed $animation-curve
+			&:hover
+				background $round-button-hover-color
 
-				&:hover
-					background $round-button-hover-color
+			> span
+				pseudo-block()
+				absolute top 50% left 50%
+				margin-top 3px
+				transform scale(1)
 
-				> span
+				&:before
 					pseudo-block()
-					absolute top 50% left 50%
-					margin-top 3px
-					transform scale(1)
+					icon($icons.arrow)
+					absolute top 0 left 0
+					transform translate(-50%, -50%)
 
-					&:before
-						pseudo-block()
-						icon($icons.arrow)
-						absolute top 0 left 0
-						transform translate(-50%, -50%)
-
-			body.loaded &
-				h1, h2, .next
-					margin-bottom 0
-					opacity 1
+		body.loaded &
+			h1, h2, .next
+				margin-bottom 0
+				opacity 1
