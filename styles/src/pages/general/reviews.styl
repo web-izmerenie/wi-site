@@ -1,0 +1,125 @@
+/**
+ * reviews section styles
+ *
+ * @author Viacheslav Lotsmanov
+ */
+
+&
+	background white
+	padding-top (150px - 22px)
+
+h2
+	custom-font('Proxima Nova Lt', normal, 24px, 29px)
+	color black
+	text-align center
+	max-width 720px
+	margin 0 auto
+	padding-x 40px
+
+ul.reviews-list
+	$bq-w = 360px
+	$bq-h = 350px
+	$el-size = 180px
+	$margin = 70px
+
+	reset-box-model()
+	display block
+	size 100% auto
+	min-height $el-size
+	overflow auto
+	white-space nowrap
+	text-align center
+	padding-top 121px
+	padding-bottom 248px
+
+	>li
+		reset-box-model()
+		display inline-block
+		size $el-size
+		vertical-align top
+		position relative
+
+		$p = 100px
+
+		& + li
+			margin-left $margin
+		&:first-child
+			margin-left $p
+		&:last-child
+			margin-right $p
+
+		img
+			display block
+			absolute left 50% top 50%
+			transform translate(-50%, -50%)
+
+		blockquote
+			display block
+			size $bq-w $bq-h
+			background $light-bg-color-1
+			absolute left 50% top 50%
+			transform translate(-50%, -45%)
+			opacity 0
+			transition opacity $animation-speed $animation-curve
+			z-index 10
+			padding-x 40px
+			padding-top 39px
+			box-sizing border-box
+
+			&:before
+				pseudo-block()
+				size 40px 3px
+				absolute left 50% top 36px
+				transform translateX(-50%)
+				background white
+				z-index 15
+
+			hr
+				display none
+
+			>.inside
+				display table
+				size 100% 265px
+				margin 0 auto
+
+				>.text, >.signature
+					display table-row
+
+					>p
+						display table-cell
+						vertical-align middle
+						just-set-font('Proxima Nova Rg')
+						white-space normal
+
+				>.text >p
+					font-metrics(14px, 20px)
+					color $light-content-color-1
+
+				>.signature >p
+					font-metrics(12px, 18px)
+					color black
+					height 1%
+
+					strong, b
+						custom-font('Proxima Nova Rg', bold, 13px, 19px)
+						text-transform uppercase
+						display block
+						position relative
+						$pt = 32px
+						padding-top $pt
+
+						&:before
+							pseudo-block()
+							size 40px 3px
+							background white
+							z-index 15
+							absolute left 50% top 0
+							transform translateX(-50%)
+
+					em, i
+						font-style normal
+
+		&:hover blockquote,
+		a:focus + blockquote,
+		a:active + blockquote
+			opacity 1

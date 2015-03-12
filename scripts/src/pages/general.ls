@@ -78,9 +78,11 @@ preload-cb = !->
 	$body .add-class \loaded
 	$page .scroll-top 0
 
-	require \./general/size-calculator
-	require \./general/portfolio
-	require \./general/team
+	require! {
+		\./general/size-calculator : {}
+		\./general/portfolio : {}
+		\./general/team : {}
+	}
 	$w
 		.trigger \resize.header-size-calc
 		.trigger \resize
