@@ -28,19 +28,20 @@
 & > ul
 	display block
 	background $dark-bg-color-1
+	perspective 700px
 
 	& > li
 		display block
 		background $round-button-color
 		overflow hidden
 		position relative
-		transform matrix3d(1, 0, 0, 0, 0, 0.2, 0, 0.001, 0, 0, 10, 0, 0, 27.2, 0, 1)
+		transform rotateX(-90deg)
 		opacity 0
 		transition transform ($animation-speed*3) $animation-curve,
 			opacity ($animation-speed*4) $animation-curve
 
 		&.visible
-			transform matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+			transform rotateX(0deg)
 			opacity 1
 
 		&:nth-child(even)
