@@ -92,7 +92,7 @@ ul.people
 				absolute left 26px bottom -5px
 
 		&:nth-child(3) blockquote
-			bottom 99%
+			left -90%
 
 		&:nth-child(4) blockquote
 			left 40%
@@ -100,17 +100,21 @@ ul.people
 
 		&:nth-child(5) blockquote
 			bottom 102%
+			left -55%
 
 		&:nth-child(6) blockquote
-			left -80%
+			left -90%
 			bottom 102%
 
+		&:nth-child(3) blockquote
+		&:nth-child(5) blockquote
+		&:nth-child(6) blockquote
 			&:before
 				transform scale(-1, 1)
 				absolute left 160px
 
-		&:hover blockquote,
-		a:focus + blockquote,
+		&:hover blockquote
+		a:focus + blockquote
 		a:active + blockquote
 			opacity 1
 
