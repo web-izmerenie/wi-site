@@ -9,7 +9,7 @@ require! {
 	prelude: {
 		map, each, camelize, lists-to-obj, Obj, obj-to-pairs, pairs-to-obj, at
 	}
-	\./lib/relative_number.js : relnum
+	\relative-number : relnum
 	\./get-rel-screen-size
 	\./basics : {get-val}
 }

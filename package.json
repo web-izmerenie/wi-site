@@ -49,7 +49,7 @@
             "exports": "Modernizr"
           },
           "jquery.timers": {
-            "path": "./scripts/src/lib/jquery.timers.js",
+            "path": "./scripts/lib/jquery.timers.js",
             "exports": "",
             "depends": {
               "jquery": "jQuery"
@@ -58,6 +58,26 @@
           "Snap.svg": {
             "path": "./bower_components/Snap.svg/dist/snap.svg-min.js",
             "exports": "Snap"
+          },
+          "get-val": {
+            "path": "./js-useful-umd-modules/get_val/get_val-min.js",
+            "exports": ""
+          },
+          "get-local-text": {
+            "path": "./js-useful-umd-modules/get_local_text/get_local_text.js",
+            "exports": ""
+          },
+          "load-img": {
+            "path": "./js-useful-umd-modules/load_img/load_img.js",
+            "exports": ""
+          },
+          "dynamic-api": {
+            "path": "./js-useful-umd-modules/dynamic_api/dynamic_api.js",
+            "exports": ""
+          },
+          "relative-number": {
+            "path": "./js-useful-umd-modules/relative_number/relative_number.js",
+            "exports": ""
           }
         }
       }

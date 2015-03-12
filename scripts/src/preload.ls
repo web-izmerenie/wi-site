@@ -49,7 +49,7 @@ success = (data, cb) !->
 	loaded-list = []
 
 	# for get exceptions (need to refactoring this module in the future)
-	require! \./lib/load_img : LoadImg
+	require! \load-img : LoadImg
 
 	for class-name in matches
 		src = # get pure image path

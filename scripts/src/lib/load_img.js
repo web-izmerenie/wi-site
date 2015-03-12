@@ -1,1 +1,0 @@
-../../../js-useful-umd-modules/load_img/load_img.js

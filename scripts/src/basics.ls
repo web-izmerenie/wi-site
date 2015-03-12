@@ -10,6 +10,7 @@ module.exports =
 	get-val: null
 	get-local-text: null
 	load-img: null
+	dynamic-api: null
 	init: null
 
 # short alias
@@ -21,9 +22,10 @@ module.exports.init = (cb) !-> $ !->
 	required = lang: $html.attr \lang
 
 	require! {
-		\./lib/get_val : GetVal
-		\./lib/get_local_text : GetLocalText
-		\./lib/load_img : LoadImg
+		\get-val : GetVal
+		\get-local-text : GetLocalText
+		\load-img : LoadImg
+		\dynamic-api : DynamicApi
 		\./values
 		\./localization
 	}
@@ -33,6 +35,7 @@ module.exports.init = (cb) !-> $ !->
 	b.get-local-text =
 		new GetLocalText localization, b.get-val \lang, true
 	b.load-img = new LoadImg b.get-val \load-img-timeout, true
+	b.dynamic-api = new DynamicApi b.get-val \dynamic-api-interval, true
 
 	# check for exists <link> with "main-styles" class
 	$head = $html.find \head

@@ -8,7 +8,7 @@ require! {
 	prelude: {map, camelize, lists-to-obj, reject, each, Obj, obj-to-pairs, pairs-to-obj}
 	jquery: $
 	\../basics : {get-val}
-	\../lib/relative_number.js : relnum
+	\relative-number : relnum
 	\../get-rel-screen-size
 }
 

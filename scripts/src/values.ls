@@ -8,6 +8,7 @@ module.exports.values =
 	\animation-speed : 200ms
 	\styles-load-timeout : 30sec
 	\load-img-timeout : 15sec
+	\dynamic-api-interval : 500ms
 
 	\workspace-ratio : [1920px, 1100px]
 	\responsive-widths :

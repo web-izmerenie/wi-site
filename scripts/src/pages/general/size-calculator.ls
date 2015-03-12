@@ -8,7 +8,6 @@ require! {
 	jquery: $
 	prelude: {map, each, obj-to-pairs, lists-to-obj}
 	\../../basics : {get-val}
-	\../../lib/relative_number.js : relnum
 	\../../get-rel-screen-size
 	\../../size-calc-helpers
 }

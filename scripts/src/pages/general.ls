@@ -98,7 +98,7 @@ $logo-img.css do
 	width: logo-vals.size
 	height: logo-vals.size
 
-require! \../lib/load_img : LoadImg # for get exceptions (need to refactoring this module in the future)
+require! \load-img : LoadImg # for get exceptions (need to refactoring this module in the future)
 img-src = $logo-img.attr \src
 (err, img) <-! load-img img-src
 
