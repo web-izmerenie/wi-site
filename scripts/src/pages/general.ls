@@ -82,6 +82,7 @@ preload-cb = !->
 		\./general/size-calculator : {}
 		\./general/portfolio : {}
 		\./general/team : {}
+		\./general/reviews : {}
 	}
 	$w
 		.trigger \resize.header-size-calc
