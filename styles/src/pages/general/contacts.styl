@@ -6,25 +6,31 @@
 
 &
 	size 100% auto
-	background $dark-bg-color-1
 	z-index 0
 	position relative
 	min-width $min-width
 	overflow hidden
+	background white
 
-h2
-	z-index 10
-	color white
-	absolute left 50%
-	transform translateX(-50%)
-
-.map
-	size 100%
-	z-index 5
-	absolute left 0 top 0
+.head
+	size 100% auto
+	position relative
 	overflow hidden
+	background $dark-bg-color-1
 
-	.marker
-		z-index -999
-		display block
-		absolute left -400px top -400px
+	h2
+		z-index 10
+		color white
+		absolute left 50%
+		transform translateX(-50%)
+
+	.map
+		size 100%
+		z-index 5
+		absolute left 0 top 0
+		overflow hidden
+
+		.marker
+			z-index -999
+			display block
+			absolute left -400px top -400px

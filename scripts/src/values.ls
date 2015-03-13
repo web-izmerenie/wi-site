@@ -162,7 +162,7 @@ module.exports.values =
 				scale: 0.65
 
 			# contacts
-			contacts-section:
+			contacts-head:
 				height: 380px
 			contacts-h2:
 				top: 79px
@@ -215,7 +215,7 @@ module.exports.values =
 				scale: 1.0
 
 			# contacts
-			contacts-section:
+			contacts-head:
 				height: 485px
 			contacts-h2:
 				top: 133px

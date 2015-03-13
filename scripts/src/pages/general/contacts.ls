@@ -19,9 +19,10 @@ get-api-url = module.exports.get-yandex-maps-api-url = ->
 (i) <-! $ \.contacts .each
 $s = $ @
 
-$map = $s.find \.map
+$head = $s.find \.head
+$map = $head.find \.map
 $marker = $map.find \img.marker
-$address = $map.find \address
+$address = $head.find \address
 
 bind-suffix = \.check
 
