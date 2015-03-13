@@ -59,12 +59,21 @@ $contacts-col-n2 = $contacts-cols.last!
 $contacts-col-n1-phone = $contacts-col-n1.find \.phone
 $contacts-col-n1-email = $contacts-col-n1.find \.email
 $contacts-col-n1-address = $contacts-col-n1.find \address
+$contacts-col-n2-form = $contacts-col-n2.find \form
+$contacts-col-n2-label-submit = $contacts-col-n2-form.find \label.submit
+$contacts-col-n2-labels = $contacts-col-n2-form.find 'label:not(.submit)'
+Array::shift.call $contacts-col-n2-labels # drop first
+$contacts-col-n2-labels-text = $contacts-col-n2-form.find \label.text
+$contacts-col-n2-inputs = $contacts-col-n2-form.find 'label.text input, label.textarea textarea'
+$contacts-col-n2-textarea = $contacts-col-n2-form.find 'label.textarea textarea'
+$contacts-col-n2-labels-span = $contacts-col-n2-form.find 'label.text span, label.textarea span'
 contacts-font-n1 =
 	$contacts-col-n1-phone
 	$contacts-col-n1-email
 contacts-font-n2 =
 	$contacts-col-n1-address
-	...
+	$contacts-col-n2-inputs
+	$contacts-col-n2-labels-span
 contacts-col-n1-items =
 	$contacts-col-n1-phone
 	$contacts-col-n1-email
@@ -150,6 +159,11 @@ $w.on "resize#bind-suffix", !->
 		\contacts-second-font-n2 : contacts-font-n2
 		\contacts-col-n1 : $contacts-col-n1
 		\contacts-col-n2 : $contacts-col-n2
+		\contacts-col-n2-label-submit : $contacts-col-n2-label-submit
+		\contacts-col-n2-label : $contacts-col-n2-labels
+		\contacts-col-n2-label-text : $contacts-col-n2-labels-text
+		\contacts-col-n2-textarea : $contacts-col-n2-textarea
+		\contacts-col-n2-span : $contacts-col-n2-labels-span
 	|> obj-to-pairs
 	|> each (!-> calc.set-typical-sizes-to-array[range-key] it.0, it.1)
 

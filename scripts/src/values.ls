@@ -128,6 +128,20 @@ module.exports.values =
 				padding-left: 38px
 			contacts-col-n2:
 				padding-right: 40px
+				padding-top: 40px
+				padding-bottom: 50px
+			contacts-col-n2-label-submit:
+				margin-top: 20px
+			contacts-col-n2-label:
+				margin-top: 10px
+			contacts-col-n2-label-text:
+				height: 45px
+			contacts-col-n2-textarea:
+				min-height: 125px
+				padding-top: 11px
+				padding-bottom: 11px
+			contacts-col-n2-span:
+				line-height: 45px
 
 		middle:
 			# top card
@@ -195,6 +209,20 @@ module.exports.values =
 				padding-left: 38px
 			contacts-col-n2:
 				padding-right: 40px
+				padding-top: 40px
+				padding-bottom: 60px
+			contacts-col-n2-label-submit:
+				margin-top: 20px
+			contacts-col-n2-label:
+				margin-top: 10px
+			contacts-col-n2-label-text:
+				height: 50px
+			contacts-col-n2-textarea:
+				min-height: 130px
+				padding-top: 12px
+				padding-bottom: 12px
+			contacts-col-n2-span:
+				line-height: 50px
 
 		big:
 			# top card
@@ -262,6 +290,20 @@ module.exports.values =
 				padding-left: 58px
 			contacts-col-n2:
 				padding-right: 60px
+				padding-top: 50px
+				padding-bottom: 90px
+			contacts-col-n2-label-submit:
+				margin-top: 30px
+			contacts-col-n2-label:
+				margin-top: 20px
+			contacts-col-n2-label-text:
+				height: 50px
+			contacts-col-n2-textarea:
+				min-height: 130px
+				padding-top: 12px
+				padding-bottom: 12px
+			contacts-col-n2-span:
+				line-height: 50px
 
 module.exports.required =
 	\lang

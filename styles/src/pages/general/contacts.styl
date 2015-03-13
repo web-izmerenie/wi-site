@@ -41,6 +41,10 @@
 	max-width $mw
 	margin 0 auto
 
+	&:after
+		pseudo-block()
+		clear both
+
 	.col
 		display block
 		width 50%
@@ -99,5 +103,90 @@
 		span
 			display block
 
+@require '../../mixins/orange-button'
+
 .second .col:last-child
 	float right
+
+	form
+		text-align right
+
+		label
+			display block
+			position relative
+
+			&.text, &.textarea
+				display block
+				background $light-bg-color-2
+
+				span, input, textarea
+					reset-box-model()
+					padding-x 13px
+					box-sizing border-box
+
+				span
+					display block
+					color $light-content-color-3
+					text-align left
+					absolute left 0 top 0
+					cursor text
+					z-index 1
+					size 100%
+					transition color $animation-speed $animation-curve
+
+					&:before
+						pseudo-block()
+						absolute left 0 top 0
+						size 100%
+						background white
+						box-sizing border-box
+						z-index -1
+						border 2px solid $light-content-color-2-3
+						opacity 0
+						transition opacity $animation-speed $animation-curve
+
+				input, textarea
+					display block
+					just-set-font('Proxima Nova Lt')
+					z-index 5
+
+					background alpha(white, 0%)
+					color black
+
+				input:focus + span, textarea:focus + span
+				input.has-value + span, textarea.has-value + span
+					color alpha(white, 0%)
+
+					&:before
+						opacity 1
+
+			&.text
+				span
+					top 50%
+					transform translateY(-50%)
+
+				input
+					absolute top 50% left 0
+					transform translateY(-50%)
+					width 100%
+
+			&.textarea
+				textarea
+					size 100% auto
+					resize vertical
+					position relative
+
+			&.submit
+				display inline-block
+				cursor pointer
+
+				span
+					orange-button()
+					z-index 1
+					position relative
+
+				input
+					absolute left 50% top 50%
+					transform translate(-50%, -50%)
+					z-index -1
+					opacity 0

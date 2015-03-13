@@ -23,6 +23,16 @@ $head = $s.find \.head
 $map = $head.find \.map
 $marker = $map.find \img.marker
 $address = $s.find \address
+$second = $s.find \.second
+$form = $second.find \form
+$inputs = $form.find 'label.text input, label.textarea textarea'
+
+!->
+	if !!($ @ .val!)
+		$ @ .add-class \has-value
+	else
+		$ @ .remove-class \has-value
+|> (-> $inputs.on \change, it .on \focus, it .on \blur, it .trigger \change)
 
 (err, ymaps) <-! dynamic-api get-api-url!, \ymaps
 return if err?
