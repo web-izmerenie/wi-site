@@ -149,6 +149,7 @@ $w.on "resize#bind-suffix", !->
 		\contacts-second-font-n1 : contacts-font-n1
 		\contacts-second-font-n2 : contacts-font-n2
 		\contacts-col-n1 : $contacts-col-n1
+		\contacts-col-n2 : $contacts-col-n2
 	|> obj-to-pairs
 	|> each (!-> calc.set-typical-sizes-to-array[range-key] it.0, it.1)
 

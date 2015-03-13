@@ -125,6 +125,9 @@ module.exports.values =
 			contacts-col-n1:
 				padding-top: 48px
 				padding-bottom: 50px
+				padding-left: 38px
+			contacts-col-n2:
+				padding-right: 40px
 
 		middle:
 			# top card
@@ -189,6 +192,9 @@ module.exports.values =
 			contacts-col-n1:
 				padding-top: 48px
 				padding-bottom: 60px
+				padding-left: 38px
+			contacts-col-n2:
+				padding-right: 40px
 
 		big:
 			# top card
@@ -253,6 +259,9 @@ module.exports.values =
 			contacts-col-n1:
 				padding-top: 48px
 				padding-bottom: 90px
+				padding-left: 58px
+			contacts-col-n2:
+				padding-right: 60px
 
 module.exports.required =
 	\lang
