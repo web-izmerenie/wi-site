@@ -19,6 +19,7 @@ $top-part = $body.find \>.top-part
 
 headers-n1 = []
 headers-n2 = []
+maps = []
 
 $cards = $ \.general-cards
 $cards-list = $cards.children!
@@ -43,6 +44,10 @@ $portfolio-more-block-a-icon = $portfolio-more-block-a.find 'i.a, i.b'
 $team = $ \.team
 headers-n1.push <| $team.find \h1
 headers-n2.push <| $team.find \h2
+
+$contacts = $ \.contacts
+$contacts-h2 = $contacts.find \h2
+maps.push <| $contacts.find \.map
 
 $header = $body.find \header
 $height-helper = $header.find \.height-helper
@@ -91,6 +96,8 @@ $w.on "resize#bind-suffix", !->
 		\portfolio-ul-li-text-h4 : $portfolio-ul-li-text-h4
 		\portfolio-ul-li-text-h3-h4 : $portfolio-ul-li-text-h3-h4
 		\portfolio-more-block-a : $portfolio-more-block-a
+		\contacts-section : $contacts
+		\contacts-h2 : $contacts-h2
 	|> obj-to-pairs
 	|> each (!-> set-typical-sizes it.0, it.1)
 	let el-key = \portfolio-more-block-a-icon
@@ -103,5 +110,7 @@ $w.on "resize#bind-suffix", !->
 	$cards-list.css height: w-h
 	$team.css height: w-h - header-offset
 	$top-part.css height: \auto
+
+	maps |> each (!-> it.trigger \resize-map)
 
 $w.trigger "resize#bind-suffix"

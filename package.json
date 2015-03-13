@@ -60,7 +60,7 @@
             "exports": "Snap"
           },
           "get-val": {
-            "path": "./js-useful-umd-modules/get_val/get_val-min.js",
+            "path": "./js-useful-umd-modules/get-val/get-val.min.js",
             "exports": ""
           },
           "get-local-text": {
@@ -72,7 +72,7 @@
             "exports": ""
           },
           "dynamic-api": {
-            "path": "./js-useful-umd-modules/dynamic_api/dynamic_api.js",
+            "path": "./js-useful-umd-modules/dynamic-api/dynamic-api.min.js",
             "exports": ""
           },
           "relative-number": {

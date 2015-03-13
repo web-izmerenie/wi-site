@@ -9,6 +9,9 @@ module.exports.values =
 	\styles-load-timeout : 30sec
 	\load-img-timeout : 15sec
 	\dynamic-api-interval : 500ms
+	\yandex-maps-api-lang :
+		ru: \ru_RU
+		en: \en_US
 
 	\workspace-ratio : [1920px, 1100px]
 	\responsive-widths :
@@ -158,6 +161,14 @@ module.exports.values =
 			portfolio-more-block-a-icon:
 				scale: 0.65
 
+			# contacts
+			contacts-section:
+				height: 380px
+			contacts-h2:
+				font-size: 71px
+				line-height: 73px
+				top: 80px
+
 		big:
 			# top card
 			header-n1:
@@ -202,6 +213,14 @@ module.exports.values =
 				margin-bottom:64px
 			portfolio-more-block-a-icon:
 				scale: 1.0
+
+			# contacts
+			contacts-section:
+				height: 485px
+			contacts-h2:
+				font-size: 90px
+				line-height: 92px
+				top: 125px
 
 module.exports.required =
 	\lang

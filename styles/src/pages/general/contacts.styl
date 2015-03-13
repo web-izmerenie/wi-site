@@ -1,0 +1,31 @@
+/**
+ * General page "contacts" styles
+ *
+ * @author Viacheslav Lotsmanov
+ */
+
+&
+	size 100% auto
+	background $dark-bg-color-1
+	z-index 0
+	position relative
+
+h2
+	just-set-font('Proxima Nova Rg', bold)
+	z-index 10
+	text-align center
+	text-transform uppercase
+	color white
+	absolute left 50%
+	transform translateX(-50%)
+
+.map
+	size 100%
+	z-index 5
+	absolute left 0 top 0
+	overflow hidden
+
+	.marker
+		z-index -999
+		display block
+		absolute left -400px top -400px

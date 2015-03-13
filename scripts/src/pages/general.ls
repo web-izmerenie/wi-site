@@ -7,12 +7,13 @@
 require! {
 	prelude: {is-type}
 	jquery: $
-	\../basics : {get-val, get-local-text, load-img}
+	\../basics : {get-val, get-local-text, load-img, dynamic-api}
 	\../preload
 	\../link-handler
 	\../has-el-by-hash
 	\../header/size-calculator
 	\./general/scroll-restore : {bind-before, bind-after}
+	\./general/contacts : {get-yandex-maps-api-url}
 }
 
 require \jquery.transit
@@ -83,7 +84,9 @@ preload-cb = !->
 		\./general/portfolio : {}
 		\./general/team : {}
 		\./general/reviews : {}
+		\./general/contacts : {init: contacts-init}
 	}
+	contacts-init!
 	$w
 		.trigger \resize.header-size-calc
 		.trigger \resize
@@ -113,4 +116,8 @@ if err
 	return
 
 loading-loop!
+
+(err, ymaps) <-! dynamic-api get-yandex-maps-api-url!, \ymaps
+window.alert get-local-text \err, \yandex-map-load-api, \#ERROR_CODE# : err if err?
+
 preload preload-cb
