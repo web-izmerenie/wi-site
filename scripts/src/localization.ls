@@ -64,3 +64,7 @@ module.exports =
 			\yandex-map-not-enough-data : '''
 				Недостаточно данных для построения карты.
 			'''
+
+			\not-implemented-yet : '''
+				Ещё не реализовано.
+			'''
