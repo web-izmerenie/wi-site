@@ -165,9 +165,9 @@ module.exports.values =
 			contacts-section:
 				height: 380px
 			contacts-h2:
-				font-size: 71px
-				line-height: 73px
-				top: 80px
+				top: 79px
+			contacts-h2-img:
+				scale: 0.767
 
 		big:
 			# top card
@@ -218,9 +218,9 @@ module.exports.values =
 			contacts-section:
 				height: 485px
 			contacts-h2:
-				font-size: 90px
-				line-height: 92px
-				top: 125px
+				top: 133px
+			contacts-h2-img:
+				scale: 1.0
 
 module.exports.required =
 	\lang

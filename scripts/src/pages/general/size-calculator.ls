@@ -47,6 +47,7 @@ headers-n2.push <| $team.find \h2
 
 $contacts = $ \.contacts
 $contacts-h2 = $contacts.find \h2
+$contacts-h2-img = $contacts-h2.find \img
 maps.push <| $contacts.find \.map
 
 $header = $body.find \header
@@ -67,12 +68,12 @@ $w.on "resize#bind-suffix", !->
 	w-h = $w.height!
 
 	let el-key = \next
-		let vals = <[ icon-top scale ]>
+		let vals = <[icon-top scale]>
 			vals |>= get-rel-vals el-key
 			$card-n1-next-icon.css do
 				margin-top: "#{vals.icon-top}px"
 				transform: "scale(#{vals.scale})"
-		let vals = <[ size margin-top ]>
+		let vals = <[size margin-top]>
 			vals |>= get-rel-vals el-key
 			$card-n1-next.css do
 				width: "#{vals.size}px"
@@ -86,7 +87,6 @@ $w.on "resize#bind-suffix", !->
 	|> obj-to-pairs
 	|> each (!-> set-typical-sizes-to-array it.0, it.1)
 
-	# portfolio
 	do
 		\portfolio-title-block : $portfolio-title-block
 		\portfolio-title-block-h2 : $portfolio-title-block-h2
@@ -100,11 +100,14 @@ $w.on "resize#bind-suffix", !->
 		\contacts-h2 : $contacts-h2
 	|> obj-to-pairs
 	|> each (!-> set-typical-sizes it.0, it.1)
-	let el-key = \portfolio-more-block-a-icon
-		let vals = <[ scale ]>
-			vals |>= get-rel-vals el-key
-			$portfolio-more-block-a-icon.css do
-				transform: "translateX(50%) scale(#{vals.scale})"
+	let el-key = \portfolio-more-block-a-icon, vals = <[scale]>
+		vals |>= get-rel-vals el-key
+		$portfolio-more-block-a-icon.css do
+			transform: "translateX(50%) scale(#{vals.scale})"
+
+	let el-key = \contacts-h2-img, vals = <[scale]>
+		vals |>= get-rel-vals el-key
+		$contacts-h2-img.css transform: "scale(#{vals.scale})"
 
 	# team
 	$cards-list.css height: w-h
