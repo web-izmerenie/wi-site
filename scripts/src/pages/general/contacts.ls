@@ -17,14 +17,12 @@ get-api-url = module.exports.get-yandex-maps-api-url = ->
 <-! (!-> module.exports.init = it)
 
 (i) <-! $ \.contacts .each
-$s = $ @
 
+$s = $ @
 $head = $s.find \.head
 $map = $head.find \.map
 $marker = $map.find \img.marker
-$address = $head.find \address
-
-bind-suffix = \.check
+$address = $s.find \address
 
 (err, ymaps) <-! dynamic-api get-api-url!, \ymaps
 return if err?

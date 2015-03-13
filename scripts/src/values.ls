@@ -114,7 +114,17 @@ module.exports.values =
 				line-height: 18px
 	\general-page :
 		extra-small: {}
-		small: {}
+		small:
+			# contacts
+			contacts-second-font-n1:
+				font-size: 24px
+				line-height: 26px
+			contacts-second-font-n2:
+				font-size: 16px
+				line-height: 24px
+			contacts-col-n1:
+				padding-top: 48px
+				padding-bottom: 50px
 
 		middle:
 			# top card
@@ -168,6 +178,17 @@ module.exports.values =
 				top: 79px
 			contacts-h2-img:
 				scale: 0.767
+			contacts-second-font-n1:
+				font-size: 30px
+				line-height: 32px
+			contacts-second-font-n2:
+				font-size: 17px
+				line-height: 24px
+			contacts-col-n1-items:
+				padding-left: 45px
+			contacts-col-n1:
+				padding-top: 48px
+				padding-bottom: 60px
 
 		big:
 			# top card
@@ -206,11 +227,11 @@ module.exports.values =
 			portfolio-ul-li-text-h3-h4:
 				padding-top: 19px
 			portfolio-more-block-a:
-				font-size:24px
-				line-height:26px
-				padding-top:126px
-				margin-top:110px
-				margin-bottom:64px
+				font-size: 24px
+				line-height: 26px
+				padding-top: 126px
+				margin-top: 110px
+				margin-bottom: 64px
 			portfolio-more-block-a-icon:
 				scale: 1.0
 
@@ -221,6 +242,17 @@ module.exports.values =
 				top: 133px
 			contacts-h2-img:
 				scale: 1.0
+			contacts-second-font-n1:
+				font-size: 33px
+				line-height: 35px
+			contacts-second-font-n2:
+				font-size: 21px
+				line-height: 26px
+			contacts-col-n1-items:
+				padding-left: 60px
+			contacts-col-n1:
+				padding-top: 48px
+				padding-bottom: 90px
 
 module.exports.required =
 	\lang

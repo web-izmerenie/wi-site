@@ -6,7 +6,9 @@
 
 require! {
 	jquery: $
-	prelude: {map, each, obj-to-pairs, lists-to-obj}
+	prelude: {
+		map, each, obj-to-pairs, lists-to-obj, Str, pairs-to-obj, Obj, camelize,
+	}
 	\../../basics : {get-val}
 	\../../get-rel-screen-size
 	\../../size-calc-helpers
@@ -50,6 +52,23 @@ $contacts-head = $contacts.find \.head
 $contacts-h2 = $contacts-head.find \h2
 $contacts-h2-img = $contacts-h2.find \img
 maps.push <| $contacts.find \.map
+$contacts-second = $contacts.find \.second
+$contacts-cols = $contacts-second.find \.col
+$contacts-col-n1 = $contacts-cols.first!
+$contacts-col-n2 = $contacts-cols.last!
+$contacts-col-n1-phone = $contacts-col-n1.find \.phone
+$contacts-col-n1-email = $contacts-col-n1.find \.email
+$contacts-col-n1-address = $contacts-col-n1.find \address
+contacts-font-n1 =
+	$contacts-col-n1-phone
+	$contacts-col-n1-email
+contacts-font-n2 =
+	$contacts-col-n1-address
+	...
+contacts-col-n1-items =
+	$contacts-col-n1-phone
+	$contacts-col-n1-email
+	$contacts-col-n1-address
 
 $header = $body.find \header
 $height-helper = $header.find \.height-helper
@@ -58,24 +77,35 @@ bind-suffix = \.general-page-size-calculator
 
 widths = \responsive-widths |> get-val
 vals-src = \general-page |> get-val
-vals = <[middle big]> |> map (-> [vals-src[it]] |> lists-to-obj [it])
 
-get-rel-vals = size-calc-helpers.get-rel-vals vals
-set-typical-sizes = size-calc-helpers.set-typical-sizes vals
-set-typical-sizes-to-array = size-calc-helpers.set-typical-sizes-to-array vals
+vals = [<[small middle]> <[middle big]>]
+	|> map -> [(it |> map Str.take 1 |> Str.unchars), it]
+	|> pairs-to-obj
+	|> Obj.map map (-> [vals-src[it]] |> lists-to-obj [it])
+
+calc = <[get-rel-vals set-typical-sizes set-typical-sizes-to-array]>
+	|> map camelize
+	|> map (-> [it, size-calc-helpers[it]])
+	|> pairs-to-obj
+	|> Obj.map (-> vals |> Obj.map it)
 
 $w.on "resize#bind-suffix", !->
+	{screen-w} = get-rel-screen-size!
 	header-offset = $height-helper.height!
 	w-h = $w.height!
 
+	range-key = do ->
+		| screen-w >= widths.middle => \mb
+		| _ => \sm
+
 	let el-key = \next
 		let vals = <[icon-top scale]>
-			vals |>= get-rel-vals el-key
+			vals |>= calc.get-rel-vals.mb el-key
 			$card-n1-next-icon.css do
 				margin-top: "#{vals.icon-top}px"
 				transform: "scale(#{vals.scale})"
 		let vals = <[size margin-top]>
-			vals |>= get-rel-vals el-key
+			vals |>= calc.get-rel-vals.mb el-key
 			$card-n1-next.css do
 				width: "#{vals.size}px"
 				height: "#{vals.size}px"
@@ -86,7 +116,7 @@ $w.on "resize#bind-suffix", !->
 		\header-n1 : headers-n1
 		\header-n2 : headers-n2
 	|> obj-to-pairs
-	|> each (!-> set-typical-sizes-to-array it.0, it.1)
+	|> each (!-> calc.set-typical-sizes-to-array.mb it.0, it.1)
 
 	do
 		\portfolio-title-block : $portfolio-title-block
@@ -100,15 +130,27 @@ $w.on "resize#bind-suffix", !->
 		\contacts-head : $contacts-head
 		\contacts-h2 : $contacts-h2
 	|> obj-to-pairs
-	|> each (!-> set-typical-sizes it.0, it.1)
+	|> each (!-> calc.set-typical-sizes.mb it.0, it.1)
 	let el-key = \portfolio-more-block-a-icon, vals = <[scale]>
-		vals |>= get-rel-vals el-key
+		vals |>= calc.get-rel-vals.mb el-key
 		$portfolio-more-block-a-icon.css do
 			transform: "translateX(50%) scale(#{vals.scale})"
 
 	let el-key = \contacts-h2-img, vals = <[scale]>
-		vals |>= get-rel-vals el-key
+		vals |>= calc.get-rel-vals.mb el-key
 		$contacts-h2-img.css transform: "scale(#{vals.scale})"
+
+	do
+		\contacts-col-n1-items : contacts-col-n1-items
+	|> obj-to-pairs
+	|> each (!-> calc.set-typical-sizes-to-array.mb it.0, it.1)
+
+	do
+		\contacts-second-font-n1 : contacts-font-n1
+		\contacts-second-font-n2 : contacts-font-n2
+		\contacts-col-n1 : $contacts-col-n1
+	|> obj-to-pairs
+	|> each (!-> calc.set-typical-sizes-to-array[range-key] it.0, it.1)
 
 	# team
 	$cards-list.css height: w-h

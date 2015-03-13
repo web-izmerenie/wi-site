@@ -34,3 +34,69 @@
 			z-index -999
 			display block
 			absolute left -400px top -400px
+
+.second
+	$mw = 1675px
+
+	max-width $mw
+	margin 0 auto
+
+	.col
+		display block
+		width 50%
+		just-set-font('Proxima Nova Lt')
+		color black
+
+.second .col:first-child
+	float left
+
+	.phone, .email, address
+		position relative
+
+		&:before
+			pseudo-block()
+			absolute left 0 top 0
+
+	.phone
+		&:before
+			icon($icons.phone)
+			top 50%
+			transform translateY(-50%)
+
+		a, a:hover
+			color black
+			border 0
+			text-decoration none
+
+	.email
+		margin-top 29px
+
+		&:before
+			icon($icons.mail)
+			top 50%
+			transform translateY(-50%)
+
+		a
+			color $light-content-color-2
+			border-bottom 1px solid $light-content-color-2-2
+			text-decoration none
+			transition color $animation-speed $animation-curve,
+				border-bottom-color $animation-speed $animation-curve
+			display inline
+
+			&:hover
+				color alpha($light-content-color-2, 50%)
+				border-bottom-color alpha($light-content-color-2-2, 50%)
+
+	address
+		margin-top 40px
+
+		&:before
+			icon($icons.small-map-marker)
+			top -5px
+
+		span
+			display block
+
+.second .col:last-child
+	float right
