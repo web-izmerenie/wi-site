@@ -20,6 +20,10 @@ $body = $ \body
 $s = $ \.blog
 $top-line = $s.find \.top-line
 $search-form = $top-line.find \form.search-form
+$content-zone = $s.find \.content-zone
+$cols = $content-zone.find \>.col
+$col-left = $content-zone.find \>.col-left
+$col-right = $content-zone.find \>.col-right
 
 bind-suffix = \.blog-page-sizes-calc
 
@@ -49,11 +53,18 @@ do # small-middle
 |> obj-to-pairs
 |> each (!-> calc.set-typical-sizes.sm it.0, it.1)
 
-do # middle-big
-	\top-line : $top-line
-	\col-right : $search-form
-|> obj-to-pairs
-|> each (!-> calc.set-typical-sizes.mb it.0, it.1)
+# middle-big
+let f = (!-> calc.set-typical-sizes.mb it.0, it.1)
+	do
+		\top-line : $top-line
+		\col-right : $search-form
+	|> obj-to-pairs
+	|> each f
+	do # cols
+		\col-left : $col-left
+		\col-right : $col-right
+	|> obj-to-pairs
+	|> each f
 
 /*
 do # small-middle and middle-big

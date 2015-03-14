@@ -1,0 +1,19 @@
+/**
+ * ".content-zone" block styles of blog page
+ *
+ * @author Viacheslav Lotsmanov
+ */
+
+&
+	display block
+	position relative
+
+	&:after
+		pseudo-block()
+		clear both
+
+.col
+	&.col-left
+		@import 'col-left'
+	&.col-right
+		@import 'col-right'

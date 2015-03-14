@@ -314,11 +314,15 @@ module.exports.values =
 				padding-right: 43px
 			top-line:
 				height: 79px
+			col-left:
+				width: 570px
 			col-right:
 				width: 287px
 		big:
 			top-line:
 				height: 85px
+			col-left:
+				width: 1040px
 			col-right:
 				width: 317px
 
