@@ -142,7 +142,6 @@ module.exports.values =
 				padding-bottom: 11px
 			contacts-col-n2-span:
 				line-height: 45px
-
 		middle:
 			# top card
 			header-n1:
@@ -223,7 +222,6 @@ module.exports.values =
 				padding-bottom: 12px
 			contacts-col-n2-span:
 				line-height: 50px
-
 		big:
 			# top card
 			header-n1:
@@ -304,6 +302,25 @@ module.exports.values =
 				padding-bottom: 12px
 			contacts-col-n2-span:
 				line-height: 50px
+	\blog-page :
+		extra-small: {}
+		small:
+			blog:
+				padding-left: 38px
+				padding-right: 38px
+		middle:
+			blog:
+				padding-left: 43px
+				padding-right: 43px
+			top-line:
+				height: 79px
+			col-right:
+				width: 287px
+		big:
+			top-line:
+				height: 85px
+			col-right:
+				width: 317px
 
 module.exports.required =
 	\lang

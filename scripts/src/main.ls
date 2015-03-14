@@ -59,3 +59,4 @@ if $html.has-class \sub-page
 	$ window .trigger \resize
 
 require \./pages/general if $html.has-class \general-page
+require \./pages/blog if $html.has-class \blog-page
