@@ -4,12 +4,6 @@
  * @author Viacheslav Lotsmanov
  */
 
-general-header-n1()
-	custom-font('Proxima Nova Rg', bold)
-
-general-header-n2()
-	custom-font('Proxima Nova Lt', normal)
-
 .general-cards
 	@import 'general/cards'
 .portfolio
@@ -21,15 +15,22 @@ general-header-n2()
 .contacts
 	@import 'general/contacts'
 
-general-page-section()
-	html.general-page &
-		display none
-	html.general-page body.loaded &
-		display block
-
-footer,
-.portfolio,
-.team,
+footer
+.portfolio
+.team
 .reviews
 .contacts
-	general-page-section()
+	display none
+
+body.loaded
+	footer
+	.portfolio
+	.team
+	.reviews
+	.contacts
+		display block
+
+	.general-cards .card-n1 .content
+		h1, h2, .next
+			margin-bottom 0
+			opacity 1

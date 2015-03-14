@@ -10,6 +10,8 @@
 	z-index 0
 	position relative
 
+@import 'header-mixins'
+
 .card-n1
 	$bg-from-color = #315d9a
 	$bg-to-color = #2b75ba
@@ -82,7 +84,4 @@
 					absolute top 0 left 0
 					transform translate(-50%, -50%)
 
-		body.loaded &
-			h1, h2, .next
-				margin-bottom 0
-				opacity 1
+		// see for some `body.loaded` selector styles in `general.styl`
