@@ -4,61 +4,61 @@
  * @author Viacheslav Lotsmanov
  */
 
-header
+&
 	size 100%
 	//z-index 1 // chrome bugs with transitions
 	absolute top 0 left 0
 	transition height $animation-speed $animation-curve
 	min-width $min-width
 
-	.fixed-header
-		fixed top 0 left 0
-		size 100% 0
-		min-width $min-width
-		z-index 2
+.fixed-header
+	fixed top 0 left 0
+	size 100% 0
+	min-width $min-width
+	z-index 2
 
-	// logo in card-n1 and in menu
-	.logo
+// logo in card-n1 and in menu
+.logo
+	display inline-block
+	text-decoration none
+	z-index 1
+	white-space nowrap
+	position absolute
+	transition top $animation-speed $animation-curve
+
+	img.logo-image, .logo-text
 		display inline-block
-		text-decoration none
-		z-index 1
-		white-space nowrap
-		position absolute
-		transition top $animation-speed $animation-curve
+		vertical-align middle
 
-		img.logo-image, .logo-text
-			display inline-block
-			vertical-align middle
+	img.logo-image
+		transform rotate(0deg)
 
-		img.logo-image
-			transform rotate(0deg)
+	.logo-text
+		custom-font('SansRoundedLightC', normal)
+		color white
+		text-transform uppercase
+		padding-top 3px
+		opacity 0
+		width 0
+		margin-left 0
+		overflow hidden
+		transition width $animation-speed $animation-curve,
+			opacity $animation-speed $animation-curve,
+			margin-left $animation-speed $animation-curve
 
+	body.loaded &
 		.logo-text
-			custom-font('SansRoundedLightC', normal)
-			color white
-			text-transform uppercase
-			padding-top 3px
-			opacity 0
-			width 0
-			margin-left 0
-			overflow hidden
-			transition width $animation-speed $animation-curve,
-				opacity $animation-speed $animation-curve,
-				margin-left $animation-speed $animation-curve
+			width auto
+			opacity 1
 
-		body.loaded &
-			.logo-text
-				width auto
-				opacity 1
+// specific styles for logo on card-n1
+> .logo
+	absolute top 50% left 50%
+	transform translate(-50%, -50%)
 
-	// specific styles for logo on card-n1
-	> .logo
-		absolute top 50% left 50%
-		transform translate(-50%, -50%)
+body.small-size &
+	&.scroll-menu-active > .logo
+		position fixed
+		z-index 40
 
-	body.small-size &
-		&.scroll-menu-active > .logo
-			position fixed
-			z-index 40
-
-	@import 'header-menu'
+@import 'header-menu'
