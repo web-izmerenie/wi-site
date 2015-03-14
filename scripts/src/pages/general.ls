@@ -14,9 +14,8 @@ require! {
 	\../header/size-calculator
 	\./general/scroll-restore : {bind-before, bind-after}
 	\./general/contacts : {get-yandex-maps-api-url}
+	\jquery.transit : {}
 }
-
-require \jquery.transit
 
 $w = $ window
 $html = $ \html

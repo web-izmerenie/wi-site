@@ -11,6 +11,7 @@
 	transition height $animation-speed $animation-curve
 	min-width $min-width
 
+html.sub-page &
 .fixed-header
 	fixed top 0 left 0
 	size 100% 0
@@ -47,14 +48,18 @@
 			margin-left $animation-speed $animation-curve
 
 	body.loaded &
+	html.sub-page &
 		.logo-text
 			width auto
 			opacity 1
 
 // specific styles for logo on card-n1
-> .logo
+html.general-page & > .logo
 	absolute top 50% left 50%
 	transform translate(-50%, -50%)
+
+html.sub-page & > .logo
+	top -200px
 
 body.small-size &
 	&.scroll-menu-active > .logo

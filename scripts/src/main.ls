@@ -26,8 +26,8 @@ if hash.length > 1
 <-! init # when dom and styles are ready
 
 $html = $ \html
-
-$header = $html.find \header
+$body = $html.find \body
+$header = $body.find \header
 $helper = $ \<div>, class: \height-helper
 $header.append $helper
 
@@ -49,7 +49,13 @@ if has-el-by-hash hash
 	else
 		go-to-anchor!
 
-require \./header/header
-require \./footer/footer
+require! {
+	\./header/header : {}
+	\./footer/footer : {}
+}
+
+if $html.has-class \sub-page
+	$body.add-class \loaded
+	$ window .trigger \resize
 
 require \./pages/general if $html.has-class \general-page

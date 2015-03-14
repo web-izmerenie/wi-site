@@ -10,6 +10,7 @@ require! {
 	\../basics : {get-val}
 	\relative-number : relnum
 	\../get-rel-screen-size
+	\jquery.transit : {}
 }
 
 $w = $ window
@@ -20,6 +21,7 @@ $header = $body.find \header
 $height-helper = $header.find \.height-helper
 $fixed-header = $header.find \.fixed-header
 $bg-helper = $fixed-header.find \.bg-helper
+$top-part = $body.find \.top-part
 
 $all-logos = $header.find \.logo
 $card-n1-logo = $header.find \>.logo
@@ -36,6 +38,7 @@ $nav-links = $nav.find \a
 $nav-items = $nav.find '>a, >span'
 
 bind-suffix = \.header-size-calc
+sub-page = $html.has-class \sub-page
 
 # get values
 widths = \responsive-widths |> get-val
@@ -321,6 +324,8 @@ $w.on "resize#bind-suffix" !->
 	$fixed-header.css do
 		width: fixed-header.width
 		height: fixed-header.height
+
+	$top-part.css padding-top: header-helper.height if sub-page
 
 	# logos
 	$logo.css do
