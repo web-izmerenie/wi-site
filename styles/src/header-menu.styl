@@ -65,7 +65,14 @@
 		white-space nowrap
 		z-index 2
 
-		& > a, & > span
+		& > .wrap
+			size auto 100%
+
+		// that created by script
+		& > .centering-helper
+			display none
+
+		& > .wrap > a, & > .wrap > span
 			text-decoration none
 			display inline-block
 			size auto, 100%
@@ -83,22 +90,33 @@
 			&:first-child
 				margin-left 0
 
-		& > a.active, & > span
+		& > .wrap > a.active, & > .wrap > span
 			background $menu-active-bg-color
 			color $menu-active-text-color
 			custom-font('Proxima Nova Rg', bold)
 			padding-x $menu-margin
 
-		& > a:hover, & > a.active:hover
+		& > .wrap > a:hover, & > .wrap > a.active:hover
 			color white
 
 		body.small-size &
-			size 220px auto
-			absolute top 50% right 0
-			transform translateY(-50%)
-			padding-y 11px
+			size 220px 100%
+			absolute top 0 right 0
+			overflow auto
+			box-sizing border-box
 
-			& > a, & > span
+			& > .wrap
+			& > .centering-helper
+				display inline-block
+				vertical-align middle
+
+			& > .wrap
+				size 100% auto
+
+			& > .centering-helper
+				size 0 100%
+
+			& > .wrap > a, & > .wrap > span
 				display block
 				size 100% 58px
 				padding-top 21px
@@ -106,12 +124,8 @@
 				margin-left 0
 				padding-left 26px
 
-			& > a.active, & > span
+			& > .wrap > a.active, & > .wrap > span
 				padding-right 0
-
-			&.scroll
-				top 0
-				transform translateY(0)
 
 &.menu-active .call-menu
 	&:before, &:after

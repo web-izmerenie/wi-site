@@ -26,6 +26,9 @@ sizes = get-val \header
 
 $logo.click link-handler
 
+$helper = $ \<div/>, class: \centering-helper
+$nav.append $helper
+
 # show/hide menu
 $call-menu.click ->
 	return false if main-page and not $body.has-class \loaded
@@ -42,7 +45,8 @@ $call-menu.click ->
 
 $nav-links.click link-handler
 
-require \./menu-vertical-scroll
-require \./fixed-header-block
-require \./anchor-detector
-require \./size-calculator
+require! {
+	\./fixed-header-block : {}
+	\./anchor-detector : {}
+	\./size-calculator : {}
+}

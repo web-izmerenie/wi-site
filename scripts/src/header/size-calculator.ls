@@ -34,8 +34,7 @@ $logo-text = $logo.find \.logo-text
 $call-menu = $header.find \.call-menu
 $menu = $header.find \.menu
 $nav = $menu.find \nav
-$nav-links = $nav.find \a
-$nav-items = $nav.find '>a, >span'
+$nav-items = $nav.find '>.wrap>a, >.wrap>span'
 
 bind-suffix = \.header-size-calc
 sub-page = $html.has-class \sub-page
