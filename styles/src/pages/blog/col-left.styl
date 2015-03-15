@@ -19,6 +19,8 @@ ul.posts
 		pseudo-block()
 		clear both
 
+@import 'tag-mixin'
+
 ul.posts >li
 	display inline-block
 	vertical-align top
@@ -92,6 +94,9 @@ ul.posts >li
 		p+p
 			display block
 
+	.tags
+		display none
+
 	img
 		margin-bottom 17px
 	time + h3
@@ -113,6 +118,28 @@ ul.posts >li
 			margin-top 13px
 		.text
 			margin-top 17px
+
+		.tags
+			display block
+			padding-top 11px
+
+			h4
+				display inline
+				vertical-align top
+				custom-font('Proxima Nova Rg', bold, 14px, 16px)
+				color black
+				relative top 17px
+				padding-right 12px
+
+			ul
+				display inline
+				vertical-align top
+				relative left -2px
+				margin-left 0
+				vertical-align top
+
+				>li
+					blog-tag-item()
 
 	&:nth-child(2)
 		@media (max-width: ($sizes.middle))

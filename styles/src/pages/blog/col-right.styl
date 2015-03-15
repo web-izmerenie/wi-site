@@ -13,6 +13,8 @@
 		padding-bottom 8px
 		text-align left
 
+@import 'tag-mixin'
+
 .tags
 	h3
 		just-set-font('Proxima Nova Rg', bold)
@@ -24,7 +26,7 @@
 			padding-top 0 !important
 			padding-bottom 0 !important
 			vertical-align top
-			relative top 11px
+			relative top 12px
 			padding-right 21px
 
 	ul
@@ -39,61 +41,7 @@
 			vertical-align top
 
 		>li
-			$h = 27px
-			$sprite = 'tag-sprite.svg'
-			$sprite-w = 738px
-			$lw = 11px
-			$rw = 20px
-			$r-sprite-shift = ($sprite-w - $rw)
-			$sprite-inactive-top = 29px
-			$sprite-active-top = 1px
-
-			reset-box-model()
-			display inline-block
-			margin-top 10px
-			margin-right 6px
-
-			a
-				display inline-block
-				vertical-align top
-				white-space nowrap
-				height $h
-				bg($sprite, (-($lw - 1px)) (-($sprite-inactive-top)) no-repeat)
-				custom-font('Proxima Nova Lt', normal, 14px, ($h - 2px))
-				padding-top 2px
-				color black
-				text-decoration none
-				transition opacity $animation-speed $animation-curve
-				margin-left $lw
-				margin-right $rw
-				box-sizing border-box
-
-				&:hover
-					opacity 0.5
-
-				&:before, &:after
-					pseudo('', inline-block)
-					margin-top -2px
-					vertical-align top
-					overflow hidden
-
-				&:before
-					size $lw $h
-					bg($sprite, 0 (-($sprite-inactive-top)) no-repeat)
-					margin-left (-($lw))
-
-				&:after
-					size $rw $h
-					bg($sprite, (-($r-sprite-shift)) (-($sprite-inactive-top)) no-repeat)
-					margin-right (-($rw))
-
-			&.special a
-				background-position (-($lw - 1px)) (-($sprite-active-top))
-
-				&:before
-					background-position 0 (-($sprite-active-top))
-				&:after
-					background-position (-($r-sprite-shift)) (-($sprite-active-top))
+			blog-tag-item()
 
 .fb-widget
 	size 100% auto
