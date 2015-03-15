@@ -6,4 +6,115 @@
 
 &
 	float left
-	display none
+	box-sizing border-box
+
+	@media (max-width: ($sizes.small))
+		padding-right 0 !important
+
+ul.posts
+	reset-box-model()
+	display block
+
+	&:after
+		pseudo-block()
+		clear both
+
+ul.posts >li
+	display inline-block
+	vertical-align top
+
+	img
+		display block
+		size 100% auto
+
+	time, .text
+		just-set-font('Proxima Nova Lt', normal)
+
+		@media (max-width: ($sizes.small))
+			font-size 16px !important
+			line-height 22px !important
+
+	time
+		display block
+		color $light-content-color-3
+
+	h3
+		just-set-font('Proxima Nova Rg', bold)
+		color black
+
+		@media (max-width: ($sizes.small))
+			font-size 24px !important
+			line-height 26px !important
+
+		a
+			display inline
+			text-decoration none
+			color black
+			border-bottom 1px solid #7f7f7f
+			transition color $animation-speed $animation-curve,
+				border-bottom-color $animation-speed $animation-curve,
+				opacity $animation-speed $animation-curve
+
+			&:hover
+				opacity 0.5
+
+	.text
+		color black
+
+		p
+			margin-top 22px
+			&:first-child
+				margin-top 0
+
+		p+p
+			display none
+
+		ul
+			$mt = 13px
+
+			reset-box-model()
+			margin-top $mt
+
+			>li
+				reset-box-model()
+				padding-left 18px
+				position relative
+
+				&:before
+					pseudo-block('—')
+					absolute left 0 top 0
+
+				& + li
+					margin-top $mt
+
+	&:nth-child(1)
+	&:nth-child(2)
+		p+p
+			display block
+
+	img
+		margin-bottom 17px
+	time + h3
+		margin-top 9px
+	.text
+		margin-top 21px
+
+	&:nth-child(1)
+		h3 a
+			border-bottom-width 2px
+
+			@media (max-width: ($sizes.small))
+				font-size 42px !important
+				line-height 44px !important
+
+		img
+			margin-bottom 20px
+		time + h3
+			margin-top 13px
+		.text
+			margin-top 17px
+
+	&:nth-child(2)
+		@media (max-width: ($sizes.middle))
+			p+p
+				display none

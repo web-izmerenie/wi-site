@@ -318,24 +318,54 @@ module.exports.values =
 			top-line:
 				height: 79px
 			col-left:
-				width: 570px
+				padding-right: 57px
+				padding-bottom: 44px
 			col-right:
 				width: 287px
 			col-right-tags-header:
 				font-size: 21px
 				line-height: 23px
 				padding-top: 49px
+			post-item:
+				padding-top: 32px
+			post-text-font:
+				font-size: 14px
+				line-height: 20px
+			post-special-title-font:
+				font-size: 36px
+				line-height: 38px
+			post-title-font:
+				font-size: 21px
+				line-height: 22px
 		big:
 			top-line:
 				height: 85px
 			col-left:
-				width: 1040px
+				padding-right: 83px
+				padding-bottom: 84px
 			col-right:
 				width: 317px
 			col-right-tags-header:
 				font-size: 24px
 				line-height: 26px
 				padding-top: 56px
+			post-item:
+				padding-top: 40px
+			post-text-font:
+				font-size: 16px
+				line-height: 22px
+			post-special-title-font:
+				font-size: 42px
+				line-height: 44px
+			post-title-font:
+				font-size: 24px
+				line-height: 26px
+	\blog-list-sizes :
+		post-space-percent: 3.84 # 3,846153846%
+		post-space-percent-s: 5.08 # 5,087719298%
+		post-item-width: 30.76 # 30,769230769%
+		post-item-width-s: 47.36 # 47,368421053%
+		post-special-width: 65.38 # 65,384615385%
 
 module.exports.required =
 	\lang
