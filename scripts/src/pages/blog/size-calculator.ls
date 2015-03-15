@@ -24,6 +24,8 @@ $content-zone = $s.find \.content-zone
 $cols = $content-zone.find \>.col
 $col-left = $content-zone.find \>.col-left
 $col-right = $content-zone.find \>.col-right
+$col-right-tags = $col-right.find \.tags
+$col-right-tags-header = $col-right-tags.find \h3
 
 bind-suffix = \.blog-page-sizes-calc
 
@@ -58,8 +60,10 @@ let f = (!-> calc.set-typical-sizes.mb it.0, it.1)
 	do
 		\top-line : $top-line
 		\col-right : $search-form
+		\col-right-tags-header : $col-right-tags-header
 	|> obj-to-pairs
 	|> each f
+
 	do # cols
 		\col-left : $col-left
 		\col-right : $col-right

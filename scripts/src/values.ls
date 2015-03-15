@@ -318,6 +318,10 @@ module.exports.values =
 				width: 570px
 			col-right:
 				width: 287px
+			col-right-tags-header:
+				font-size: 21px
+				line-height: 23px
+				padding-top: 49px
 		big:
 			top-line:
 				height: 85px
@@ -325,6 +329,10 @@ module.exports.values =
 				width: 1040px
 			col-right:
 				width: 317px
+			col-right-tags-header:
+				font-size: 24px
+				line-height: 26px
+				padding-top: 56px
 
 module.exports.required =
 	\lang
