@@ -28,11 +28,15 @@ $col-right-tags = $col-right.find \.tags
 $col-right-tags-header = $col-right-tags.find \h3
 $posts = $col-left.find \ul.posts
 $posts-items = $posts.find \>li
+$posts-items-title = $posts-items.find \h3
 $posts-items-first = $posts.find \>li:first
 $posts-items-first-title = $posts-items-first.find \h3
 $posts-items-without-first = $posts.find \>li |> (-> Array::shift.call it; it)
 $posts-items-without-first-title = $posts-items-without-first.find \h3
 $posts-text-font = $posts-items.find 'time, .text'
+
+is-list = $s.has-class \blog-list
+is-detail = $s.has-class \blog-detail
 
 bind-suffix = \.blog-page-sizes-calc
 
@@ -80,24 +84,22 @@ let f = (!-> calc.set-typical-sizes.mb it.0, it.1)
 		\col-right : $search-form
 		\col-right-tags-header : $col-right-tags-header
 		\post-item : $posts-items
-		\post-special-title-font : $posts-items-first-title
-		\post-title-font : $posts-items-without-first-title
+		\post-title-font : $posts-items-title
 		\post-text-font : $posts-text-font
 	|> obj-to-pairs
 	|> each f
+
+	if is-list
+		do
+			\post-special-title-font : $posts-items-first-title
+		|> obj-to-pairs
+		|> each f
 
 	do # cols
 		\col-left : $col-left
 		\col-right : $col-right
 	|> obj-to-pairs
 	|> each f
-
-/*
-do # small-middle and middle-big
-	\copyright-text-block : $text
-|> obj-to-pairs
-|> each (!-> calc.set-typical-sizes[range-key] it.0, it.1)
-*/
 
 $col-left.css width: $content-zone.width! - $col-right.width!
 
@@ -114,10 +116,12 @@ do !->
 
 	switch
 	| screen-w-abs >= 1400px =>
-		$posts-items-first.css width: "#{list-sizes.post-special-width * w / 100}px"
-		$posts-items-without-first.css width: "#{list-sizes.post-item-width * w / 100}px"
+		$posts-items.css width: "#{list-sizes.post-item-width * w / 100}px"
+		if is-list
+			$posts-items-first.css width: "#{list-sizes.post-special-width * w / 100}px"
 		list-sizes.post-space-percent |> list-space-calc w
 	| _ =>
-		$posts-items-first.css width: "#{w}px"
-		$posts-items-without-first.css width: "#{list-sizes.post-item-width-s * w / 100}px"
+		$posts-items.css width: "#{list-sizes.post-item-width-s * w / 100}px"
+		if is-list
+			$posts-items-first.css width: "#{w}px"
 		list-sizes.post-space-percent-s |> list-space-calc w
