@@ -14,11 +14,14 @@ module.exports.values =
 		en: \en_US
 
 	\workspace-ratio : [1920px, 1100px]
+
+	# see in `variables.styl`, and keep in synchonized with `variables.styl`
 	\responsive-widths :
 		extra-small: 460px
 		small: 840px
 		middle: 1000px
 		big: 1920px
+
 	\header :
 		all:
 			logo:

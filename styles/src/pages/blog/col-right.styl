@@ -6,6 +6,11 @@
 
 &
 	float right
+	padding-bottom 90px
+
+	@media (max-width: ($sizes.small))
+		padding-top 17px
+		text-align left
 
 .tags
 	h3
@@ -13,10 +18,24 @@
 		color black
 		padding-bottom 8px
 
+		@media (max-width: ($sizes.small))
+			display inline-block
+			padding-top 0 !important
+			padding-bottom 0 !important
+			vertical-align top
+			relative top 11px
+			padding-right 21px
+
 	ul
 		reset-box-model()
 		display block
 		margin-left -2px
+
+		@media (max-width: ($sizes.small))
+			display inline
+			relative left -2px
+			margin-left 0
+			vertical-align top
 
 		>li
 			$h = 27px
@@ -84,3 +103,6 @@
 
 	iframe
 		size 100% 300px
+
+	@media (max-width: ($sizes.small))
+		display none
