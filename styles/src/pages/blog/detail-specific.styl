@@ -4,4 +4,162 @@
  * @author Viacheslav Lotsmanov
  */
 
+.top-line .back-link
+	display inline-block
+	vertical-align bottom
+	custom-font('Proxima Nova Rg', normal, 24px, 26px)
+	color black
+	text-decoration none
+	transition opacity $animation-speed $animation-curve
+	padding-left 60px
+	padding-y 9px
+	position relative
 
+	&:hover
+		opacity 0.5
+
+	&:before
+		pseudo-block()
+		icon($icons.back-arrow)
+		absolute left 9px top (3px + 9px)
+
+@media (max-width: 690px)
+	.top-line
+		height auto !important
+		padding-top 39px
+		text-align center
+
+	.top-line .back-link
+		display inline-block
+		padding-right 30px
+
+	.top-line form.search-form
+		relative left 0 right 0 top 0 bottom 0
+		width 100% !important
+
+.content-zone .col.col-left .detail-content
+	.title-block .text
+		custom-font('Proxima Nova Lt', normal, 20px, 28px)
+		color black
+		padding-top 27px
+
+	.title-block time, figure.picture figcaption
+		color $light-content-color-3
+
+	.title-block time, figure.picture figcaption, > .text, > .signature
+		custom-font('Proxima Nova Lt', normal, 16px, 22px)
+
+	figure.picture
+		padding-top 37px
+
+		figcaption
+			padding-top 12px
+
+	.title-block time
+		display block
+		padding-top 27px
+
+	> .text
+		margin-top 40px
+
+	.signature
+		text-align right
+		margin-top 22px
+
+	h1
+		custom-font('Proxima Nova Rg', bold, 50px, 52px)
+		color black
+		margin-top 16px
+		&:first-child
+			margin-top 0
+
+	h2
+		custom-font('Proxima Nova Rg', bold, 32px, 34px)
+		color black
+		margin-top 46px
+		&:first-child
+			margin-top 0
+
+	h3
+		custom-font('Proxima Nova Rg', bold, 22px, 24px)
+		color black
+		margin-top 37px
+		&:first-child
+			margin-top 0
+
+	strong, b
+		just-set-font('Proxima Nova Rg', bold)
+
+	em, i
+		font-style italic
+
+	img
+		height auto !important
+		max-width 100%
+
+	a
+		color $light-content-color-2
+		border-bottom 1px solid $light-content-color-2-4
+		text-decoration none
+		just-set-font('Proxima Nova Rg', bold)
+		transition opacity $animation-speed $animation-curve
+
+		&:hover
+			opacity 0.5
+
+	p
+		margin-top 22px
+
+		&:first-child
+			margin-top 0
+
+	$pl = 60px
+
+	ul, ol
+		reset-box-model()
+		position relative
+
+		>li
+			reset-box-model()
+			padding-left $pl
+			position relative
+			margin-top 22px
+
+			&:before
+				$offset = 6px
+				pseudo-block('⋅')
+				absolute left $offset top -10px
+				size ($pl - $offset) auto
+				text-align center
+				custom-font('Proxima Nova Rg', bold, 34px, 36px)
+
+	ol
+		counter-reset ordered
+
+		>li
+			&:before
+				content counters(ordered, ".", decimal) ". "
+				counter-increment ordered
+				custom-font('Proxima Nova Rg', bold, 16px, 18px)
+				size $pl auto
+				left 0
+				top 2px
+
+	blockquote
+		display block
+		margin-left $pl
+
+	ul + p, ol + p
+		margin-top 32px
+
+.content-zone .col.col-left .separate-line
+	position relative
+	box-sizing border-box
+	padding-top 2px
+	margin-top 37px
+
+	&:before
+		pseudo-block()
+		size 100% 2px
+		absolute left 0 top 0
+		background $light-content-color-5
