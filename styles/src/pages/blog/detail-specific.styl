@@ -5,6 +5,7 @@
  */
 
 .top-line .back-link
+.content-zone .col.col-left .separate-line .back-link
 	display inline-block
 	vertical-align bottom
 	custom-font('Proxima Nova Rg', normal, 24px, 26px)
@@ -30,7 +31,6 @@
 		text-align center
 
 	.top-line .back-link
-		display inline-block
 		padding-right 30px
 
 	.top-line form.search-form
@@ -38,6 +38,10 @@
 		width 100% !important
 
 .content-zone .col.col-left .detail-content
+	display block
+	overflow hidden
+	width 100%
+
 	.title-block .text
 		custom-font('Proxima Nova Lt', normal, 20px, 28px)
 		color black
@@ -153,13 +157,56 @@
 		margin-top 32px
 
 .content-zone .col.col-left .separate-line
+	$pt = (2px + 19px)
 	position relative
 	box-sizing border-box
-	padding-top 2px
+	padding-top $pt
 	margin-top 37px
+	padding-bottom 47px
+	overflow hidden
 
 	&:before
 		pseudo-block()
 		size 100% 2px
 		absolute left 0 top 0
 		background $light-content-color-5
+
+	&:after
+		pseudo-block()
+		clear both
+
+	.back-link
+		float left
+		padding-right 20px
+
+	.buttons
+		display block
+
+		ul
+			reset-box-model()
+			display table
+			height 44px
+
+			>li
+				reset-box-model()
+				display table-cell
+				vertical-align middle
+				text-align center
+
+	@media (max-width: ($sizes.middle))
+		text-align center
+
+		.back-link
+			float none
+			padding-right 30px
+			margin-top 44px
+
+		.buttons
+			absolute top ($pt - 4px) left 0
+			width 100%
+
+			ul
+				width 100% !important
+
+				>li
+					width 25%

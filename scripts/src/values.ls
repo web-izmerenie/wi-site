@@ -337,6 +337,8 @@ module.exports.values =
 			post-title-font:
 				font-size: 21px
 				line-height: 22px
+			social-buttons-block:
+				width: 360px
 		big:
 			top-line:
 				height: 85px
@@ -360,6 +362,8 @@ module.exports.values =
 			post-title-font:
 				font-size: 24px
 				line-height: 26px
+			social-buttons-block:
+				width: 679px
 	\blog-list-sizes :
 		post-space-percent: 3.84 # 3,846153846%
 		post-space-percent-s: 5.08 # 5,087719298%

@@ -12,6 +12,7 @@ require! {
 	\../../basics : {get-val}
 	\../../get-rel-screen-size
 	\../../size-calc-helpers
+	\relative-number : relnum
 }
 
 $w = $ window
@@ -34,6 +35,11 @@ $posts-items-first-title = $posts-items-first.find \h3
 $posts-items-without-first = $posts.find \>li |> (-> Array::shift.call it; it)
 $posts-items-without-first-title = $posts-items-without-first.find \h3
 $posts-text-font = $posts-items.find 'time, .text'
+
+$separate-line = $col-left.find \.separate-line
+$separate-line-back-link = $separate-line.find \>.back-link
+$social-buttons-block = $separate-line.find \>.buttons
+$social-buttons-ul = $social-buttons-block.find \>ul
 
 is-list = $s.has-class \blog-list
 is-detail = $s.has-class \blog-detail
@@ -102,6 +108,9 @@ let f = (!-> calc.set-typical-sizes.mb it.0, it.1)
 	|> each f
 
 $col-left.css width: $content-zone.width! - $col-right.width!
+w = $col-left.width!
+
+$social-buttons-ul.css width: "#{$separate-line.width! - $separate-line-back-link.inner-width!}px"
 
 do !->
 	# reset
@@ -111,8 +120,6 @@ do !->
 	$posts-items.css do
 		margin-left: ''
 		width: ''
-
-	w = $col-left.width!
 
 	switch
 	| screen-w-abs >= 1400px =>
