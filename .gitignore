@@ -16,6 +16,7 @@ tmp
 front-end-gulp
 node_modules
 bower_components
+lsc
 
 styles/build
 scripts/build

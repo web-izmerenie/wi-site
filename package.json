@@ -20,10 +20,11 @@
     "distclean": [
       "./front-end-gulp",
       "./node_modules",
-      "./bower_components"
+      "./bower_components",
+      "./lsc"
     ],
     "scripts": {
-      "main": {
+      "site": {
         "type": "browserify",
         "path": "./scripts/",
         "mainSrc": "main.ls",
@@ -83,7 +84,7 @@
       }
     },
     "styles": {
-      "main": {
+      "site": {
         "type": "stylus",
         "path": "./styles/",
         "mainSrc": "main.styl",
