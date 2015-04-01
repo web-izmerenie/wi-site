@@ -20,3 +20,5 @@ lsc
 
 styles/build
 scripts/build
+
+config.yaml
