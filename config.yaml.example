@@ -1,25 +1,15 @@
-DATABASE:
-  HOST: localhost
-  LOGIN: _
-  PASSWORD: _
-  DATABASE_NAME: _
-
-SERVER:
+SERVER: # http-server
   PORT: 8017
   HOST: 127.0.0.1
 
+SECRET_SALT: some random stuff
+
 TEMPLATES_PATH: ./templates
 STATIC_PATH: ./static
-UPLOADED_FILES_PATH: ./uploaded-files
 
 LANG: ru
-TIME_ZONE_UTC: 3
-GC_HOUR: 2 # hour to start GC every day
 
 EMAIL:
   PROVIDER: Yandex
   USER: _
   PASS: _
-  EMAIL_RECIPIENT: _
-  EMAIL_SENDER: _
-  SUBJECT: _

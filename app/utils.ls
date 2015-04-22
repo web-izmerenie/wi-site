@@ -10,7 +10,7 @@ require! {
 	winston: {Logger, transports: logger-transports}
 }
 
-module.exports.logger = new Logger do
+export logger = new Logger do
 	transports:
 		new logger-transports.Console do
 			colorize: \all
