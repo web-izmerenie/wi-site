@@ -15,7 +15,11 @@ require! {
 
 export get = (app, req, res)-> co ->*
 	cfg = yield config
-	data = {is-main-page: yes} <<< (yield get-typical-page-data app, req)
+	data =
+		do
+			is-main-page: yes
+			html-classes: <[general-page]>
+		<<< (yield get-typical-page-data app, req)
 	yield render-promise res, "pages/#{cfg.LANG}/main", {data}
 
 export head = !-> get ... # delegate HEAD to GET

@@ -34,6 +34,8 @@
       "site": {
         "type": "browserify",
         "path": "./scripts/",
+        "srcDir": "./scripts/",
+        "destDir": "./static/",
         "mainSrc": "main.ls",
         "buildFile": "build.js",
         "transform": [
@@ -98,6 +100,8 @@
       "site": {
         "type": "stylus",
         "path": "./styles/",
+        "srcDir": "./styles/",
+        "destDir": "./static/",
         "mainSrc": "main.styl",
         "buildFile": "build.css",
         "shim": [

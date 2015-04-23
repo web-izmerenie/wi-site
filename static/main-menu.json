@@ -1,3 +1,24 @@
 {
-  "ru": []
+  "ru": [
+    {
+      "href": "/#portfolio",
+      "title": "Работы"
+    },
+    {
+      "href": "/#team",
+      "title": "Команда"
+    },
+    {
+      "href": "/#reviews",
+      "title": "Отзывы"
+    },
+    {
+      "href": "/#contacts",
+      "title": "Контакты"
+    },
+    {
+      "href": "/#order",
+      "title": "Сделать заказ"
+    }
+  ]
 }

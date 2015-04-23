@@ -18,7 +18,7 @@ node_modules
 bower_components
 lsc
 
-styles/build
-scripts/build
+static/build.css
+static/build.js
 
 config.yaml

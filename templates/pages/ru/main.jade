@@ -1,4 +1,139 @@
 extends ../../layout
 
 block page-block
-	p check
+	.general-cards
+		#card-n1.card-n1
+			.bg
+			.content
+				h1
+					span Яркие решения для вашего
+					span стремительного роста
+				h2
+				a.next(href="/#portfolio")
+					span Далее
+	#portfolio.portfolio
+		.title-block
+			h2 Работы
+			h3 Более 100 проектов за 7 лет работы
+		ul
+			li
+				img.bg(
+					alt = "Текстильная фабрика «ДМ-Текстиль»"
+					src = staticUrl("images/portfolio/dmtextile.jpg"))
+				.text
+					h3 ДМ-Текстиль
+					h4 Сайт текстильной фабрики
+				a(href="http://dmtextile.ru/" target="_blank") Перейти на сайт
+			li
+				img.bg(
+					alt = "Portland"
+					src = staticUrl("images/portfolio/portlandshow.jpg"))
+				.text
+					h3 Portland
+					h4 Сайт для арт-шоу ресторана Portland
+				a(href="http://portlandshow.ru/" target="_blank") Перейти на сайт
+			li
+				img.bg(
+					alt = "Даная"
+					src = staticUrl("images/portfolio/danaia.jpg"))
+				.text
+					h3 Даная
+					h4 Сайт ювелирного дома
+				a(href="http://jhdanaya.ru/" target="_blank") Перейти на сайт
+		.more-block
+			a(href="/#portfolio-more")
+				i.a
+				i.b
+				span.title Показать ещё
+	#team.team
+		.title-block
+			h1 Команда
+			h2
+				span Пара слов про сплоченный коллектив суровых суперменов и
+				span супервуменов, готовых наброситься на любую задачу
+			ul.people
+				mixin teamItem(id, picFile)
+					li
+						a(href="#" + id)
+							img(alt="" src=staticUrl("images/people/" + picFile))
+						blockquote(id=id)
+							.content-wrap
+								h3 Дизайнер:
+								p.
+									Настоящий профи<br>
+									всегда внимателен к<br>
+									деталям. Сдвинь-ка<br>
+									чекбокс на 7px<br>
+									вправо, бро!
+				+teamItem("team-people-1", "01.png")
+				+teamItem("team-people-2", "02.png")
+				+teamItem("team-people-3", "03.png")
+				+teamItem("team-people-4", "04.png")
+				+teamItem("team-people-5", "05.png")
+				+teamItem("team-people-6", "06.png")
+	#reviews.reviews
+		.inside
+			h2
+				span Каждый наш&nbsp;клиент уникален. Но&nbsp;все похожи в&nbsp;одном&nbsp;—&nbsp;в
+				span стремлении к&nbsp;выдающимся результатам
+			ul.reviews-list
+				mixin reviewItem(id, logoFile)
+					li
+						a(href="#" + id)
+							img(alt="" src=staticUrl("images/reviews-logos/" + logoFile))
+						blockquote(id=id)
+							.inside
+								.text
+									p.
+										Работа со студией «Веб-Измерение» нас вполне
+										удовлетворила. Коллектив очень творческий и
+										активный. Менеджеры работают чётко и все этапы
+										выполнялись в оговоренные сроки. Наш сайт
+										получился на достойном уровне как мы этого
+										и хотели.
+								.signature
+									p
+										strong Лысенко А.Е.
+										em Главный инженер «СЕВКАВНИПИАГРОПРОМ»
+				+reviewItem("reviews-item-1", "sb-invest.png")
+				+reviewItem("reviews-item-2", "rostvertol.png")
+				+reviewItem("reviews-item-3", "danaia.png")
+				+reviewItem("reviews-item-4", "industria-krasoty.png")
+				+reviewItem("reviews-item-5", "hi-home.png")
+				+reviewItem("reviews-item-6", "sb-invest.png")
+				+reviewItem("reviews-item-7", "rostvertol.png")
+	#contacts.contacts
+		.head
+			h2
+				img(alt="Контакты" src=staticUrl("images/contacts.svg"))
+			.map(
+				data-mark-x = "39.7646"
+				data-mark-y = "47.2520"
+				data-pos-x  = "39.7646"
+				data-pos-y  = "47.2585"
+				data-zoom   = "14")
+				img.marker(alt="" src=staticUrl("images/map-marker.svg"))
+		.second
+			.col
+				.phone
+					a(href="tel:+78632215622")  8 (863) 22-156-22
+				.email
+					a(href="mailto:info@web-izmerenie.ru") info@web-izmerenie.ru
+				address
+					span 344022, Ростов-на-Дону,
+					=' '
+					span пр. Сельмаша 90А/17Б, оф. 1204
+			.col
+				form#order
+					label.text
+						input(type="text" name="name" value="")
+						span Ваше имя
+					label.text
+						input(type="text" name="phonemail" value="")
+						span Телефон или почта
+					label.textarea
+						textarea(name="message")
+						span Сообщение
+					label.submit
+						input(type="submit" value="Отправить")
+						span Отправить

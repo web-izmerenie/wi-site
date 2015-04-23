@@ -35,7 +35,7 @@ co ->*
 		.engine \jade, jade.__express
 		.set \views, path.resolve process.cwd!, cfg.TEMPLATES_PATH
 		.set 'view engine', \jade
-		.use /^\/static\//,\
+		.use /^\/static/,\
 			express.static path.resolve process.cwd!, cfg.STATIC_PATH
 
 	{PORT, HOST} = cfg.SERVER

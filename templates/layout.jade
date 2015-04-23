@@ -1,13 +1,49 @@
 doctype html
 html(
 	lang = lang
-	class = htmlClass
-	data-localization-path = staticUrl('localization.json')
+	class = ['no-js'].concat(htmlClasses || []).join(' ')
 )
 	head
-		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 		meta(charset=charset)
-		title= local.pageTitle
-		link(href=staticUrl("build.css") rel="stylesheet" type="text/css")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		title= pageTitle
+		link.main-styles(href=staticUrl("build.css") rel="stylesheet" type="text/css")
 		script(src=staticUrl("build.js"))
-	body
+	body(class=[].concat(bodyClasses || []).join(' '))
+		.top-part
+			header
+				a.logo(href="/#card-n1")
+					img.logo-image(alt="Логотип" src=staticUrl("images/wi-logo.svg"))
+					span.logo-text Web izmerenie
+				.fixed-header
+					.bg-helper
+					a.call-menu(href="#menu" title="Открыть меню") Открыть меню
+					#menu.menu
+						a.logo(href="/#card-n1")
+							img.logo-image(alt="Логотип" src=staticUrl("images/wi-logo.svg"))
+							span.logo-text Web izmerenie
+						nav
+							.wrap
+								each item in menu.main
+									if item.current
+										span.active= item.title
+									else if item.active
+										a(href=item.href).active= item.title
+									else
+										a(href=item.href)= item.title
+			block page-block
+			.prop
+		footer#footer
+			.text
+				p ©2003–2015 «Веб&nbsp;Измерение»
+			nav.footer-links
+				ul
+					li.facebook(data-icon=staticUrl("images/footer-icons/facebook.svg"))
+						a(href="https://www.facebook.com/webizmerenie")
+							span Наша страница на Facebook
+					li.vkontakte(data-icon=staticUrl("images/footer-icons/vkontakte.svg"))
+						a(href="#vkontakte")
+							span Наша страница «В Контакте»
+					li.rss(data-icon=staticUrl("images/footer-icons/rss.svg"))
+						a(href="#rss")
+							span RSS лента
