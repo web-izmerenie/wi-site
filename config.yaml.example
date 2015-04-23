@@ -10,6 +10,10 @@ STATIC_PATH: ./static
 LANG: ru
 
 EMAIL:
-  PROVIDER: Yandex
+  SERVICE: Yandex
   USER: _
   PASS: _
+
+FORMS:
+  FEEDBACK:
+    TO: _ # email address

@@ -21,12 +21,14 @@ handlers-list = <[
 	error404
 	blog
 	blog-detail
+	feedback-post
 ]>
 
 routes = [
 	* /^\/$/, \main
 	* /^\/blog.html/, \blog
 	* /^\/blog-detail.html/, \blog-detail
+	* /^\/feedback-post.json/, \feedback-post
 	* \*, \error404
 ]
 

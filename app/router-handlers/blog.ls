@@ -23,4 +23,3 @@ export get = (app, req, res)-> co ->*
 	yield render-promise res, "pages/#{cfg.LANG}/blog", {data}
 
 export head = !-> get ... # delegate HEAD to GET
-

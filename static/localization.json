@@ -1,4 +1,11 @@
 {
   "ru": {
+    "siteName": "Web-izmerenie",
+    "blog": "Блог",
+    "forms": {
+      "feedback": {
+        "subject": "На сайте Web izmerenie оставлен отзыв"
+      }
+    }
   }
 }
