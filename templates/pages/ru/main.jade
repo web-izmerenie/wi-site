@@ -2,7 +2,7 @@ extends ../../layout
 
 block page-block
 	.general-cards
-		#card-n1.card-n1
+		section#card-n1.card-n1
 			.bg
 			.content
 				h1
@@ -11,7 +11,7 @@ block page-block
 				h2
 				a.next(href="/#portfolio")
 					span Далее
-	#portfolio.portfolio
+	section#portfolio.portfolio
 		.title-block
 			h2 Работы
 			h3 Более 100 проектов за 7 лет работы
@@ -45,7 +45,7 @@ block page-block
 				i.a
 				i.b
 				span.title Показать ещё
-	#team.team
+	section#team.team
 		.title-block
 			h1 Команда
 			h2
@@ -71,7 +71,7 @@ block page-block
 				+teamItem("team-people-4", "04.png")
 				+teamItem("team-people-5", "05.png")
 				+teamItem("team-people-6", "06.png")
-	#reviews.reviews
+	section#reviews.reviews
 		.inside
 			h2
 				span Каждый наш&nbsp;клиент уникален. Но&nbsp;все похожи в&nbsp;одном&nbsp;—&nbsp;в
@@ -102,7 +102,7 @@ block page-block
 				+reviewItem("reviews-item-5", "hi-home.png")
 				+reviewItem("reviews-item-6", "sb-invest.png")
 				+reviewItem("reviews-item-7", "rostvertol.png")
-	#contacts.contacts
+	section#contacts.contacts
 		.head
 			h2
 				img(alt="Контакты" src=staticUrl("images/contacts.svg"))

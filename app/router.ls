@@ -19,10 +19,14 @@ methods = <[head get post]> # for handlers methods filtering
 handlers-list = <[
 	main
 	error404
+	blog
+	blog-detail
 ]>
 
 routes = [
 	* /^\/$/, \main
+	* /^\/blog.html/, \blog
+	* /^\/blog-detail.html/, \blog-detail
 	* \*, \error404
 ]
 
