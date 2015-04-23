@@ -10,5 +10,7 @@ export render-promise = (res, template, {data={}})->
 	new Promise (resolve, reject)!->
 		res.render template, data, (err, html)!->
 			return reject err if err?
-			res.end html
+			res
+				.set 'Content-Type': 'text/html; charset=utf-8'
+				.end html
 			resolve!
