@@ -11,8 +11,6 @@ require! {
 	express
 	jade
 	\body-parser
-	\express-session : session
-	multer
 	path
 	http
 	co
@@ -24,13 +22,11 @@ require! {
 co ->*
 	cfg = yield config
 
+	logger.level = \debug if cfg.DEBUG
+
 	logger.debug 'application.ls',\
 		"Express.js application instance initialization..."
 	app = express!
-		.use session do
-			secret: cfg.SECRET_SALT
-			save-uninitialized: no
-			resave: off
 		.use body-parser.urlencoded extended: true
 		.engine \jade, jade.__express
 		.set \views, path.resolve process.cwd!, cfg.TEMPLATES_PATH
