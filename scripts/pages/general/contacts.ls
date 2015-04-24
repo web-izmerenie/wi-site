@@ -35,8 +35,9 @@ $inputs = $form.find 'label.text input, label.textarea textarea'
 |> (-> $inputs.on \change, it .on \focus, it .on \blur, it .trigger \change)
 
 $form.on \submit, ->
-	window.alert get-local-text \err, \not-implemented-yet
-	false
+	void
+	#window.alert get-local-text \err, \not-implemented-yet
+	#false
 
 (err, ymaps) <-! dynamic-api get-api-url!, \ymaps
 return if err?

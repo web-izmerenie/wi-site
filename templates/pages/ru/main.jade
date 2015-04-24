@@ -124,7 +124,8 @@ block page-block
 					=' '
 					span пр. Сельмаша 90А/17Б, оф. 1204
 			.col
-				form#order
+				form#order(action="/feedback-post.json" method="post")
+					input.bot(type="text" name="q" value="" style="display:none;")
 					label.text
 						input(type="text" name="name" value="")
 						span Ваше имя
