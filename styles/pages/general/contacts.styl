@@ -215,13 +215,45 @@
 				span
 					orange-button()
 					z-index 1
-					position relative
+
+					&:after
+						$s = 32px
+
+						pseudo-block()
+						size $s
+						bg('wi-logo.svg', center center no-repeat)
+						background-size contain
+						absolute left 50% top 50%
+						margin-left (-($s / 2))
+						margin-top (-($s / 2))
+						z-index 10
+						transition opacity $animation-speed $animation-curve
+						opacity 0
+
+						@keyframes circlerotation
+							from
+								transform rotate(0deg)
+							to
+								transform rotate(360deg)
+						animation circlerotation 2s linear infinite
 
 				input
 					absolute left 50% top 50%
 					transform translate(-50%, -50%)
 					z-index -1
 					opacity 0
+
+		&.process
+			label.submit, label.submit *
+				cursor default
+
+			label.submit span
+				background $light-bg-color-2 !important
+				color alpha(black, 0%)
+
+				&:after
+					opacity 1
+
 
 @media (max-width: 720px)
 	.second .col:first-child

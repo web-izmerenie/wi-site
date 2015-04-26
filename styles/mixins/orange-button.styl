@@ -8,17 +8,21 @@ orange-button()
 	$h = 50px
 	$fs = 18px
 	$lh = ($fs + 2px)
+
 	height $h
 	display inline-block
+	color black
 	background $light-bg-color-1
 	custom-font('Proxima Nova Rg', normal, $fs, $lh)
 	box-sizing border-box
 	padding-top (($h - $lh + 2px) / 2)
 	text-transform uppercase
 	border-radius ($h / 2)
-	transition background-color $animation-speed $animation-curve
+	transition background-color $animation-speed $animation-curve,
+		color $animation-speed $animation-curve
 	cursor pointer
 	padding-x 40px
+	position relative
 
 	&:hover
 		background alpha($light-bg-color-1, 50%)
