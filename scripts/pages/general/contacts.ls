@@ -6,7 +6,7 @@
 
 require! {
 	jquery: $
-	prelude: {Obj, is-type, Num}
+	prelude: {Obj, is-type, Num, Str}
 	\../../basics : {dynamic-api, get-val, get-local-text}
 }
 
@@ -25,7 +25,8 @@ $marker = $map.find \img.marker
 $address = $s.find \address
 $second = $s.find \.second
 $form = $second.find \form
-$inputs = $form.find 'label.text input, label.textarea textarea'
+$inputs-labels = $form.find 'label.text, label.textarea'
+$inputs = $inputs-labels.find 'input, textarea'
 
 !->
 	if !!($ @ .val!)
@@ -34,10 +35,75 @@ $inputs = $form.find 'label.text input, label.textarea textarea'
 		$ @ .remove-class \has-value
 |> (-> $inputs.on \change, it .on \focus, it .on \blur, it .trigger \change)
 
+is-response-valid = ->
+	unless $.is-plain-object it
+		err = new Error "Incorrect JSON response: '#{it}'"
+		window.alert err.message
+		console.error err
+		return false
+	true
+
+$form.on \reset, !->
+	$inputs-labels.trigger \remove-error-message
+	$inputs.val '' .trigger \blur
+
 $form.on \submit, ->
-	void
-	#window.alert get-local-text \err, \not-implemented-yet
-	#false
+	return false if $form.has-class \process
+
+	$form.add-class \process
+	$inputs-labels.trigger \remove-error-message
+
+	$.ajax do
+		url: '/feedback-post.json'
+		data-type: \json
+		method: \POST
+		cache: false
+		async: true
+		data: $form.serialize!
+	.success (json, text-status, jq-XHR)!->
+		return unless is-response-valid json
+
+		if json.status is \success
+			window.alert get-local-text \forms, \feedback-success-msgbox
+			$form.trigger \reset
+		else
+			window.alert get-local-text \err, \ajax, \unknown-error
+	.error (jq-XHR, text-status, error-thrown)!->
+		json = jq-XHR.response-JSON
+		return unless is-response-valid json
+
+		if json.status is \error and \
+		json.error-code in <[required-fields incorrect-fields]> and \
+		json.fields?
+			(field) <-! json.fields.for-each
+			$input = $form.find "input[name='#{field}'], textarea[name='#{field}']"
+			$label = $input.closest \label
+			$label.add-class \error
+			$label
+				.data \error-message-jq-el, ($ '<div/>', class: \error-message)
+				.data \error-message-jq-el
+				.html (get-local-text \err, \ajax, (json.error-code.slice 0, -1))
+			$label
+				.append $label.data \error-message-jq-el
+				.on \remove-error-message, !->
+					$input.off \focus.error-message-hide
+					$label
+						.off \remove-error-message
+						.remove-class \error
+					$label
+						.data \error-message-jq-el
+						.animate {opacity: 0}, (get-val \animation-speed), !->
+							$ @ .remove!
+							$input = void
+							$label = void
+			$input.on \focus.error-message-hide ->
+				$label.trigger \remove-error-message
+		else
+			window.alert get-local-text \err, \ajax, \unknown-error
+	.complete !->
+		$form.remove-class \process
+
+	false
 
 (err, ymaps) <-! dynamic-api get-api-url!, \ymaps
 return if err?

@@ -111,6 +111,8 @@
 	form
 		text-align right
 
+		$error-color = red
+
 		label
 			display block
 			position relative
@@ -118,6 +120,16 @@
 			&.text, &.textarea
 				display block
 				background $light-bg-color-2
+				border-box box-sizing
+
+				&:after
+					pseudo-block()
+					size 100%
+					box-sizing border-box
+					transition border-width $animation-speed $animation-curve,
+						border-color $animation-speed $animation-curve
+					border 0 solid alpha(white, 0%)
+					absolute left 0 top 0
 
 				span, input, textarea
 					reset-box-model()
@@ -143,7 +155,8 @@
 						z-index -1
 						border 2px solid $light-content-color-2-3
 						opacity 0
-						transition opacity $animation-speed $animation-curve
+						transition opacity $animation-speed $animation-curve,
+							border-color $animation-speed $animation-curve
 
 				input, textarea
 					display block
@@ -159,6 +172,25 @@
 
 					&:before
 						opacity 1
+
+				.error-message
+					absolute left 0 top 100%
+					custom-font('Proxima Nova Lt', normal, 16px, 22px)
+					text-align left
+					padding-x 5px
+					size 100% 22px
+					box-sizing border-box
+					background alpha(white, 90%)
+					color $error-color
+					opacity 1
+					transition opacity $animation-speed $animation-curve
+					z-index 200
+
+				&.error
+					&:after
+						border 2px solid $error-color
+					span:before
+						border-color $error-color
 
 			&.text
 				span

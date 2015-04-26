@@ -68,3 +68,13 @@ module.exports =
 			\not-implemented-yet : '''
 				Ещё не реализовано.
 			'''
+
+			\ajax :
+				\required-field : "Не заполнено обязательное поле"
+				\incorrect-field : "Поле заполнено некорректно"
+				\unknown-error : "Неизвестная ошибка в ответе от сервера."
+
+		\forms :
+			\feedback-success-msgbox : '''
+				Спасибо! Ваше сообщение успешно отправлено.
+			'''
