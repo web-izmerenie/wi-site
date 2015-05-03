@@ -14,7 +14,7 @@ $d = $ document
 $header = $ \header
 $height-helper = $header.find \.height-helper
 
-sections = <[card-n1 portfolio team]>
+sections = <[card-n0 portfolio team]>
 	|> map (-> "\##it")
 	|> map (-> $ it)
 
