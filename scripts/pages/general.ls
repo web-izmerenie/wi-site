@@ -26,8 +26,8 @@ $header = $body.find \header
 $logo = $header.find \>.logo
 $logo-img = $logo.find \img
 
-$cards = $ \.general-cards
-$card-n0 = $cards.find \.card-n0
+$cards-wrap = $ \.general-cards
+$card-n0 = $cards-wrap.find \.card-n0
 $card-n0-bg = $card-n0.find \.bg
 $card-n0-next = $card-n0.find \.next
 
@@ -37,6 +37,27 @@ logo-vals = size-calculator.get-logo-vals!
 loading-animation = true
 
 bind-before!
+
+# start this callback after all preparations
+init-all-other-sections = !->
+	$body .add-class \loaded
+	$page .scroll-top 0
+
+	require! {
+		\./general/size-calculator : {}
+		\./general/portfolio : {}
+		\./general/team : {}
+		\./general/reviews : {}
+		\./general/contacts : {init: contacts-init}
+	}
+	contacts-init!
+	$w
+		.trigger \resize.header-size-calc
+		.trigger \resize
+	bind-after!
+
+	go-to-anchor = $html.data \go-to-anchor
+	go-to-anchor! if go-to-anchor |> is-type \Function
 
 $card-n0-next.click link-handler
 
@@ -73,26 +94,7 @@ preload-cb = !->
 		left: logo-vals.left
 		top: logo-vals.top
 		translate: [\0%,\0%]
-	<-! $logo.stop!.transition vals, speed, \in-out
-
-	$body .add-class \loaded
-	$page .scroll-top 0
-
-	require! {
-		\./general/size-calculator : {}
-		\./general/portfolio : {}
-		\./general/team : {}
-		\./general/reviews : {}
-		\./general/contacts : {init: contacts-init}
-	}
-	contacts-init!
-	$w
-		.trigger \resize.header-size-calc
-		.trigger \resize
-	bind-after!
-
-	go-to-anchor = $html.data \go-to-anchor
-	go-to-anchor! if go-to-anchor |> is-type \Function
+	$logo.stop!.transition vals, speed, \in-out, init-all-other-sections
 
 # preload logo first (for use this logo as loading spinner)
 
@@ -114,9 +116,11 @@ if err
 		\#IMAGE_SRC# : img-src
 	return
 
-loading-loop!
+loading-loop! # run loading animation asynchonusly
 
+# load yandex.maps api
 (err, ymaps) <-! dynamic-api get-yandex-maps-api-url!, \ymaps
 window.alert get-local-text \err, \yandex-map-load-api, \#ERROR_CODE# : err if err?
 
+# start preload images and after that - "preload-db"
 preload preload-cb
