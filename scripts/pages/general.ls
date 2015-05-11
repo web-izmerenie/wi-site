@@ -45,11 +45,13 @@ init-all-other-sections = !->
 
 	require! {
 		\./general/size-calculator : {}
+		\./general/cards/cards : {init: cards-init}
 		\./general/portfolio : {}
 		\./general/team : {}
 		\./general/reviews : {}
 		\./general/contacts : {init: contacts-init}
 	}
+	<-! cards-init
 	contacts-init!
 	$w
 		.trigger \resize.header-size-calc
