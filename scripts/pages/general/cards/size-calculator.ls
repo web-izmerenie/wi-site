@@ -14,15 +14,15 @@ require! {
 
 $w = $ window
 
-s-class = \cards-switcher
+s-class     = \cards-switcher
 bind-suffix = \.cards-switcher
 
 # get values
-widths = \responsive-widths |> get-val
-vals-src = \general-page |> get-val
+widths      = \responsive-widths |> get-val
+vals-src    = \general-page |> get-val
 
-vals = [<[small middle]> <[middle big]>]
-	|> map -> [(it |> map Str.take 1 |> Str.unchars), it]
+vals = [<[extra-small small]> <[small middle]> <[middle big]>]
+	|> map -> [(it |> map Str.take 1 |> Str.unchars), (it |> map camelize)]
 	|> pairs-to-obj
 	|> Obj.map map (-> [vals-src[it]] |> lists-to-obj [it])
 
@@ -33,11 +33,13 @@ calc = <[get-rel-vals]>
 	|> Obj.map (-> vals |> Obj.map it)
 
 on-resize = ({$cards-switcher})!->
+
 	{screen-w} = get-rel-screen-size!
 
 	range-key = do ->
+		| screen-w >= widths.small  => \sm
 		| screen-w >= widths.middle => \mb
-		| _ => \sm
+		| otherwise                 => \es
 
 	let el-name = \cards-switcher, vals = <[width bottom]>
 		vals |>= calc.get-rel-vals[range-key] el-name
@@ -51,10 +53,11 @@ on-resize = ({$cards-switcher})!->
 
 export init = (cb)!->
 
-	$cards-wrap = $ \.general-cards
-	$controls = $cards-wrap.find \.controls
+	$cards-wrap     = $ \.general-cards
+	$controls       = $cards-wrap.find \.controls
 	$cards-switcher = $controls.find "svg.#{s-class}"
 
+	# bind on page resize
 	$w.on "resize#bind-suffix", (on-resize.bind null, {$cards-switcher})
 
 	cb!

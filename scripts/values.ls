@@ -116,7 +116,12 @@ module.exports.values =
 				font-size: 16px
 				line-height: 18px
 	\general-page :
-		extra-small: {}
+		extra-small:
+			cards-switcher:
+				width: 420px
+				bottom: 63px
+			cards-switcher-active-line:
+				opacity: 1
 		small:
 			cards-switcher:
 				width: 670px
