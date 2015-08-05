@@ -41,9 +41,9 @@ do -> # people scroll centering
 		|> (/ 2)
 		|> $list.scroll-left _
 
-$s
-	.find \ul.people>li>a
-	.on \click, -> false
+$links = $s.find \ul.people>li>a
+$links.on \click, (e)-> e.prevent-default!
+$people-list-elems.on \mouseenter, !-> $links.blur!
 
 <-! $people-links.each
 $link = $ @
