@@ -53,6 +53,17 @@ card-n1-parallax-init = !->
 		$w.trigger "scroll#{card-n1-bg-parallax-bind-suffix}"
 
 	$w.trigger "resize#{card-n1-bg-parallax-bind-suffix}"
+	
+card-n1-next-button-jitter-init = !->
+	speed = 800
+	wait = 5000
+	jitter = !->
+		$card-n1-next.css top: 0
+		<-! set-timeout _, wait
+		<-! $card-n1-next.stop!.transition top: \-7%, speed
+		<-! $card-n1-next.stop!.transition top: 0px, speed
+		jitter!
+	jitter!
 
 # rotate Wi logo before finish loading
 loading-loop = !->
@@ -65,6 +76,7 @@ loading-loop = !->
 # callback after all images is preloaded (see icons.styl)
 preload-cb = !->
 	card-n1-parallax-init!
+	card-n1-next-button-jitter-init!
 	loading-animation := false
 	<-! $logo-img.stop!.transition rotate: \360deg, speed, \linear
 	<-! $card-n1-bg.stop!.transition opacity: 1, scale: 1, speed, \in-out
