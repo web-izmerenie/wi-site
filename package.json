@@ -90,6 +90,35 @@
           "relative-number": {
             "path": "./js-useful-umd-modules/relative_number/relative_number.js",
             "exports": ""
+          },
+          "jquery-ui": {
+            "path": "./bower_components/Smooth-Div-Scroll/js/jquery-ui-1.10.3.custom.min.js",
+            "exports": "",
+            "depends": {
+              "jquery": "jQuery"
+            }
+          },
+          "jquery-kinetic": {
+            "path": "./bower_components/Smooth-Div-Scroll/js/jquery.kinetic.min.js",
+            "exports": ""
+          },
+          "jquery-mousewheel-source": {
+            "path": "./bower_components/Smooth-Div-Scroll/js/jquery.mousewheel.min.js",
+            "exports": ""
+          },
+          "jquery-mousewheel": {
+            "path": "./browserify-shim/jquery.mousewheel.js",
+            "exports": ""
+          },
+          "smooth-div": {
+            "path": "./bower_components/Smooth-Div-Scroll/js/jquery.smoothdivscroll-1.3-min.js",
+            "exports": "",
+            "depends": {
+              "jquery": "jQuery",
+              "jquery-ui": "",
+              "jquery-mousewheel": "",
+              "jquery-kinetic": ""
+            }
           }
         }
       }

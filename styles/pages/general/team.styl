@@ -45,108 +45,134 @@ ul.people
 	overflow auto
 	white-space nowrap
 
-	>li
-		$bq-s = 239px
+	.scrollingHotSpotLeft
+		min-width 75px
+		width 25%
+		height 100%
+		position absolute
+		z-index 200
+		left 0
 
-		display inline-block
-		vertical-align bottom
-		size auto
+	.scrollingHotSpotRight
+		min-width 75px
+		width 25%
+		height 100%
+		position absolute
+		z-index 200
+		right 0
+
+	.scrollWrapper
 		position relative
-		z-index 10
-		padding-top ($bq-s + 50px)
-
-		blockquote
-			$bg = #ffd60a
-
-			display block
-			position absolute
-			absolute bottom 100% left 50%
-			transform translateY(100%)
-			white-space normal
-			background $bg
-			size $bq-s
-			border-radius ($bq-s / 2)
-			opacity 0
-			transition opacity ($animation-speed * 2) $animation-curve
-			color black
-			margin-bottom -35px
-
-			.content-wrap
-				display block
-				relative top 50%
-				transform translateY(-50%)
-
-			h3
-				custom-font('Proxima Nova Rg', bold, 21px, 23px)
-				text-transform uppercase
-
-			p
-				custom-font('Proxima Nova Rg', normal, 19px, 21px)
-
-			h3 + p
-				margin-top 10px
-
-			&:before
-				pseudo-block()
-				size 54px 36px
-				bg('baloon-corner.svg', center center no-repeat)
-				absolute left 26px bottom -5px
-
-		&:nth-child(3) blockquote
-			left -90%
-
-		&:nth-child(4) blockquote
-			left 40%
-			bottom 98%
-
-		&:nth-child(5) blockquote
-			bottom 102%
-			left -55%
-
-		&:nth-child(6) blockquote
-			left -90%
-			bottom 102%
-
-		&:nth-child(3) blockquote
-		&:nth-child(5) blockquote
-		&:nth-child(6) blockquote
-			&:before
-				transform scale(-1, 1)
-				absolute left 160px
-
-		&:hover blockquote
-		a:focus + blockquote
-		a:active + blockquote
-			opacity 1
-
-		a
-			display inline-block
-			overflow hidden
+		overflow hidden
+		width 100%
+		height 100%
+		.scrollableArea
 			position relative
+			display block
+			margin 0 auto
+			padding 0
+			>li
+				$bq-s = 239px
 
-			img
-				relative bottom 0
-				transition $animation-speed $animation-curve
+				display inline-block
+				vertical-align bottom
+				size auto
+				position relative
+				z-index 10
+				padding-top ($bq-s + 50px)
 
-		&:hover a, a:focus, a:active
-			img
-				bottom 0 !important
+				blockquote
+					$bg = #ffd60a
 
-		img
-			display inline-block
-			vertical-align bottom
+					display block
+					position absolute
+					absolute bottom 100% left 50%
+					transform translateY(100%)
+					white-space normal
+					background $bg
+					size $bq-s
+					border-radius ($bq-s / 2)
+					opacity 0
+					transition opacity ($animation-speed * 2) $animation-curve
+					color black
+					margin-bottom -35px
 
-		&:nth-child(2)
-			margin-left 39px
-		&:nth-child(3)
-			margin-left 68px
-		&:nth-child(4)
-			margin-left 62px
-		&:nth-child(5)
-			margin-left 12px
-		&:nth-child(6)
-			margin-left 44px
-		&:first-child
-			margin-left 40px
-		&:last-child
-			margin-right 40px
+					.content-wrap
+						display block
+						relative top 50%
+						transform translateY(-50%)
+
+					h3
+						custom-font('Proxima Nova Rg', bold, 21px, 23px)
+						text-transform uppercase
+
+					p
+						custom-font('Proxima Nova Rg', normal, 19px, 21px)
+
+					h3 + p
+						margin-top 10px
+
+					&:before
+						pseudo-block()
+						size 54px 36px
+						bg('baloon-corner.svg', center center no-repeat)
+						absolute left 26px bottom -5px
+
+				&:nth-child(3) blockquote
+					left -90%
+
+				&:nth-child(4) blockquote
+					left 40%
+					bottom 98%
+
+				&:nth-child(5) blockquote
+					bottom 102%
+					left -55%
+
+				&:nth-child(6) blockquote
+					left -90%
+					bottom 102%
+
+				&:nth-child(3) blockquote
+				&:nth-child(5) blockquote
+				&:nth-child(6) blockquote
+					&:before
+						transform scale(-1, 1)
+						absolute left 160px
+
+				&:hover blockquote
+				a:focus + blockquote
+				a:active + blockquote
+					opacity 1
+
+				a
+					display inline-block
+					overflow hidden
+					position relative
+
+					img
+						relative bottom 0
+						transition $animation-speed $animation-curve
+
+				&:hover a, a:focus, a:active
+					img
+						bottom 0 !important
+
+				img
+					display inline-block
+					vertical-align bottom
+
+				&:nth-child(2)
+					margin-left 39px
+				&:nth-child(3)
+					margin-left 68px
+				&:nth-child(4)
+					margin-left 62px
+				&:nth-child(5)
+					margin-left 12px
+				&:nth-child(6)
+					margin-left 44px
+				&:first-child
+					margin-left 40px
+				&:last-child
+					margin-right 40px
