@@ -12,25 +12,33 @@
 
 @import 'header-mixins'
 
-.card-n1
+.card
+	size 100%
+	min-height $min-height
+	overflow hidden
+	z-index 0
+	absolute left 0 top 0
+
+	.bg
+		size 100%
+		absolute left 0 top 0
+		z-index 0
+
+.card.card-n0
 	$bg-from-color = #315d9a
 	$bg-to-color = #2b75ba
 	$next-button-color = #10476e
 	$speed = ($animation-speed * 4)
 
-	size 100%
-	min-height $min-height
 	background linear-gradient(top, $bg-from-color, $bg-to-color)
-	z-index 0
-	position relative
 	text-align center
-	overflow hidden
+	position relative
+	z-index 1
 
 	.bg
 		size 200%
 		absolute top -50% left -50%
-		z-index 0
-		bg($general-page-card-n1-bg, center center repeat)
+		bg($general-page-card-n0-bg, center center repeat)
 		background-attachment fixed
 		transform scale(0.7)
 		opacity 0
@@ -85,3 +93,29 @@
 					transform translate(-50%, -50%)
 
 		// see for some `body.loaded` selector styles in `general.styl`
+
+.card-n1
+	// ...
+
+.controls
+	absolute left 0 top 0
+	size 100%
+
+	ul.cards-switcher
+		display none
+
+	svg.cards-switcher
+		display block
+		absolute left 50% bottom 0
+		transform translateX(-50%)
+		z-index 1
+
+		.line
+			stroke rgba(255, 255, 255, 0.3)
+			stroke-width 4px
+
+		.point
+			fill white
+
+		.opacity-group
+			opacity 0.5

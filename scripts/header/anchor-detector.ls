@@ -29,8 +29,8 @@ bind-suffix = \.header-menu-auto-detect-current-anchor
 cur-page-hashes = {}
 
 if main-page # TODO many cards
-	cur-page-hashes[\#card-n1] =
-		$section: $ \#card-n1
+	cur-page-hashes[\#card-n0] =
+		$section: $ \#card-n0
 		$nav-link: null
 
 pathname = window.location.pathname
