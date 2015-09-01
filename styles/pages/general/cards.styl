@@ -110,6 +110,8 @@
 		transform translateX(-50%)
 		z-index 1
 
+		$active-color = #f0d625
+
 		.line
 			stroke rgba(255, 255, 255, 0.3)
 			stroke-width 4px
@@ -119,3 +121,24 @@
 
 		.opacity-group
 			opacity 0.5
+
+		.marker
+		.marker-mask-c
+			fill rgba(255, 255, 255, 0)
+			stroke $active-color
+			stroke-width 2px
+
+		.marker-mask-bg
+			fill #fff
+		.marker-mask-c
+			fill #000
+			stroke #000
+
+		.text-number
+			custom-font('Proxima Nova Rg', bold, 20px, 22px)
+			fill $active-color
+			text-anchor middle
+			dominant-baseline middle
+		.numbers-mask
+			fill #fff
+			stroke #fff
