@@ -75,16 +75,16 @@ card-n0-parallax-init = !->
 	$w.on "resize#{card-n0-bg-parallax-bind-suffix}", !->
 		$w.trigger "scroll#{card-n0-bg-parallax-bind-suffix}"
 
-	$w.trigger "resize#{card-n1-bg-parallax-bind-suffix}"
+	$w.trigger "resize#{card-n0-bg-parallax-bind-suffix}"
 
-card-n1-next-button-jitter-init = !->
+card-n0-next-button-jitter-init = !->
 	speed = 800
 	wait = 5000
 	jitter = !->
-		$card-n1-next.css top: 0
+		$card-n0-next.css top: 0
 		<-! set-timeout _, wait
-		<-! $card-n1-next.stop!.transition top: \-7%, speed
-		<-! $card-n1-next.stop!.transition top: 0px, speed
+		<-! $card-n0-next.stop!.transition top: \-7%, speed
+		<-! $card-n0-next.stop!.transition top: 0px, speed
 		jitter!
 	jitter!
 
@@ -98,8 +98,8 @@ loading-loop = !->
 
 # callback after all images is preloaded (see icons.styl)
 preload-cb = !->
-	card-n1-parallax-init!
-	card-n1-next-button-jitter-init!
+	card-n0-parallax-init!
+	card-n0-next-button-jitter-init!
 
 	loading-animation := false
 	<-! $logo-img.stop!.transition rotate: \360deg, speed, \linear
