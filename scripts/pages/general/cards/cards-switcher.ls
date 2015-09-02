@@ -10,14 +10,14 @@ require! {
 	\Snap.svg
 }
 
-s-class = \cards-switcher
+s-class     = \cards-switcher
 bind-suffix = \.cards-switcher
 
-h = 50px
+h        = 50px
 offset-x = 25px
 center-y = h / 2 |> Math.round
 circle-r = 22px
-point-r =  5px
+point-r  = 5px
 
 # !!! side effects
 set-jq-props = -> it |> each (-> it.$node = $ it.node)
@@ -38,7 +38,7 @@ on-resize = ({s, elems, links})!->
 		|> (* idx)
 		|> (+ offset-x)
 		|> (x)!->
-			elems.points[idx].attr cx: x
+			[..attr cx: x for elems.points[idx].els]
 			elems.numbers[idx].attr x: x
 
 export init = (cb)!->
@@ -77,7 +77,23 @@ export init = (cb)!->
 		# opacity-group :: Snap.Group
 
 		# mask-circles :: [Snap.Element]
+
+		# point-stroke-fixer :: Snap.Element
 	}
+
+	elems.numbers = links.map (_, idx) ->
+		s.text offset-x, (center-y + 1), "#{idx + 1}" .attr class: \text-number
+
+	elems.numbers-mask = s.circle 0, center-y, circle-r .attr class: \numbers-mask
+
+	elems.numbers
+	|> s.group.apply s, _
+	|> (.attr do
+		class: \numbers-group
+		mask: elems.numbers-mask)
+
+	# hack-fix for points stroke
+	elems.point-stroke-fixer = s.rect 0, 0, \100%, \100% .attr opacity: 0
 
 	# draw the line
 	elems.line = s.line offset-x, center-y, 0, center-y .attr class: \line
@@ -85,14 +101,25 @@ export init = (cb)!->
 	# small dots
 	elems.points =
 		links |> map (link)->
-			s.circle 0, center-y, point-r
-				.attr do
+
+			list =
+
+				# small circle which we show to user
+				s.circle 0, center-y, point-r .attr do
 					class      : \point
 					\data-link : link
 					\data-id   : link |> Str.drop 1
 
+				# big circle for big clickable area
+				s.circle 0, center-y, circle-r .attr do
+					class : \big-point
+
+			list
+			|> s.group.apply s, _
+			|> (.els = list ; it)
+			|> (.attr class: \points-group)
+
 	# big circle marker
-	elems.marker = s.circle 0, center-y, circle-r .attr class: \marker
 	elems.marker-mask-bg = s.rect 0, 0, \100%, \100% .attr class: \marker-mask-bg
 	elems.marker-mask-c = s.circle 0, center-y, circle-r .attr class: \marker-mask-c
 	elems.marker-mask-g = s.group elems.marker-mask-bg, elems.marker-mask-c
@@ -100,11 +127,14 @@ export init = (cb)!->
 	# need opacity group, bacuse with simple alpha channel for elements
 	# we can see "line" under "points" and it's a visual bug
 	elems.opacity-group =
-		[elems.line] ++ elems.points
+		[elems.point-stroke-fixer, elems.line] ++ elems.points
 		|> s.group.apply s, _
 		|> (.attr do
 			class: \opacity-group
 			mask: elems.marker-mask-g)
+
+	# big circle marker
+	elems.marker = s.circle 0, center-y, circle-r .attr class: \marker
 
 	# add jQuery-wrapped object properties
 	[s]
@@ -114,15 +144,6 @@ export init = (cb)!->
 		|> map (-> it.1))
 	|> (++ elems.points |> Obj.values)
 	|> set-jq-props
-
-	elems.numbers = links.map (_, idx) ->
-		s.text offset-x, (center-y + 1), "#{idx + 1}" .attr class: \text-number
-
-	elems.numbers-mask = s.circle 0, center-y, circle-r .attr class: \numbers-mask
-
-	elems.numbers
-	|> s.group.apply s, _
-	|> (.attr mask: elems.numbers-mask)
 
 	elems.mask-circles =
 		<[ marker marker-mask-c numbers-mask ]> .map -> elems[camelize it]

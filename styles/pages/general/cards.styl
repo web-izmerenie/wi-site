@@ -113,11 +113,27 @@
 		$active-color = #f0d625
 
 		.line
-			stroke rgba(255, 255, 255, 0.3)
+			stroke rgba(255, 255, 255, .3)
 			stroke-width 4px
 
-		.point
-			fill white
+		.points-group
+			cursor pointer
+
+			.point
+				fill white
+
+				stroke rgba(255, 255, 255, 1)
+				stroke-width 0
+				transition stroke $animation-speed $animation-curve,
+					stroke-width $animation-speed $animation-curve
+
+			.big-point
+				fill rgba(255, 255, 255, 0)
+
+			&:hover
+				.point
+					stroke rgba(255, 255, 255, 0.5)
+					stroke-width 9px
 
 		.opacity-group
 			opacity 0.5
@@ -127,6 +143,8 @@
 			fill rgba(255, 255, 255, 0)
 			stroke $active-color
 			stroke-width 2px
+		.marker
+			cursor default
 
 		.marker-mask-bg
 			fill #fff
@@ -139,6 +157,8 @@
 			fill $active-color
 			text-anchor middle
 			dominant-baseline middle
+			cursor default
+			z-index -1
 		.numbers-mask
 			fill #fff
 			stroke #fff
