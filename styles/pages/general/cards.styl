@@ -109,11 +109,22 @@
 		absolute left 50% bottom 0
 		transform translateX(-50%)
 		z-index 1
+		opacity 1
+
+		transition margin-bottom ($animation-speed * 2) $animation-curve,
+			opacity ($animation-speed * 2) $animation-curve
+
+		&.invisible
+			opacity 0
+			margin-bottom -100px
 
 		$active-color = #f0d625
 
 		.line
 			stroke rgba(255, 255, 255, .3)
+			stroke-width 4px
+		.dark-line
+			stroke rgba(0, 0, 0, .22)
 			stroke-width 4px
 
 		.points-group
@@ -121,19 +132,23 @@
 
 			.point
 				fill white
-
 				stroke rgba(255, 255, 255, 1)
 				stroke-width 0
+
 				transition stroke $animation-speed $animation-curve,
-					stroke-width $animation-speed $animation-curve
+					stroke-width ($animation-speed / 2) $animation-curve,
+					fill $animation-speed $animation-curve
 
 			.big-point
 				fill rgba(255, 255, 255, 0)
 
 			&:hover
 				.point
-					stroke rgba(255, 255, 255, 0.5)
+					stroke rgba(255, 255, 255, .5)
 					stroke-width 9px
+			&.dark
+				.point
+					stroke rgba(0, 0, 0, .125)
 
 		.opacity-group
 			opacity 0.5

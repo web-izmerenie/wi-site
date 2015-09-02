@@ -10,17 +10,23 @@ require! {
 	\Snap.svg
 }
 
-s-class     = \cards-switcher
-bind-suffix = \.cards-switcher
+const $w = $ window
 
-h        = 50px
-offset-x = 25px
-center-y = h / 2 |> Math.round
-circle-r = 22px
-point-r  = 5px
+const s-class     = \cards-switcher
+const bind-suffix = \.cards-switcher
+
+const h        = 50px
+const offset-x = 25px
+const center-y = h / 2 |> Math.round
+const circle-r = 22px
+const point-r  = 5px
 
 # !!! side effects
 set-jq-props = -> it |> each (-> it.$node = $ it.node)
+
+repos = ({s, elems, links})!->
+
+	void
 
 on-resize = ({s, elems, links})!->
 
@@ -41,6 +47,20 @@ on-resize = ({s, elems, links})!->
 			[..attr cx: x for elems.points[idx].els]
 			elems.numbers[idx].attr x: x
 
+on-navigated = ({s, elems, links}, _, route)!->
+
+	class-name = s.attr \class
+	idx = links.index-of "##route"
+
+	if idx is (-1)
+		s.active-idx = 0
+		if (class-name.index-of \invisible) is (-1)
+			s.attr class: "#class-name invisible"
+	else
+		s.active-idx = idx
+		if (class-name.index-of \invisible) isnt (-1)
+			s.attr class: class-name - /invisible/g - /  /g
+
 export init = (cb)!->
 
 	$cards-wrap = $ \.general-cards
@@ -57,22 +77,24 @@ export init = (cb)!->
 	$controls.find "ul.#{s-class}" .remove!
 
 	s = Snap 0px, h
-	s.attr class: s-class # set class from old list
+	s.attr class: "#{s-class} invisible" # set class from old list
+	s.$node = $ s.node
 
 	elems = {
 
-		# line   :: Snap.Element
+		# line      :: Snap.Element
+		# dark-line :: Snap.Element
 
-		# points :: [Snap.Element]
+		# points      :: [Snap.Element]
 		# hover-point :: Snap.Element
 
-		# numbers :: [Snap.Element]
+		# numbers      :: [Snap.Element]
 		# numbers-mask :: Snap.Element
 
-		# marker :: Snap.Element
+		# marker         :: Snap.Element
 		# marker-mask-bg :: Snap.Element
-		# marker-mask-c :: Snap.Element
-		# marker-mask-g :: Snap.Group
+		# marker-mask-c  :: Snap.Element
+		# marker-mask-g  :: Snap.Group
 
 		# opacity-group :: Snap.Group
 
@@ -95,8 +117,9 @@ export init = (cb)!->
 	# hack-fix for points stroke
 	elems.point-stroke-fixer = s.rect 0, 0, \100%, \100% .attr opacity: 0
 
-	# draw the line
-	elems.line = s.line offset-x, center-y, 0, center-y .attr class: \line
+	# draw the lines
+	elems.dark-line = s.line offset-x, center-y, offset-x, center-y .attr class: \dark-line
+	elems.line      = s.line offset-x, center-y, offset-x, center-y .attr class: \line
 
 	# small dots
 	elems.points =
@@ -127,7 +150,12 @@ export init = (cb)!->
 	# need opacity group, bacuse with simple alpha channel for elements
 	# we can see "line" under "points" and it's a visual bug
 	elems.opacity-group =
-		[elems.point-stroke-fixer, elems.line] ++ elems.points
+		[
+			elems.point-stroke-fixer
+			elems.dark-line
+			elems.line
+		]
+		|> (++ elems.points)
 		|> s.group.apply s, _
 		|> (.attr do
 			class: \opacity-group
@@ -152,6 +180,11 @@ export init = (cb)!->
 	s.append-to $controls.get 0
 
 	# bind card-switcher resize handler (will be triggered from "size-calculator")
-	s.$node.on "newsize#bind-suffix", (on-resize.bind null, {s, elems, links})
+	on-resize.bind null, {s, elems, links}
+	|> s.$node.on "newsize#bind-suffix", _
+
+	on-navigated.bind null, {s, elems, links}
+	|> $w.on "hash-navigated#bind-suffix", _
+	$w.trigger "hash-navigated#bind-suffix", (window.location.hash.slice 1)
 
 	cb!
