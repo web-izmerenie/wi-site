@@ -22,7 +22,7 @@ const center-y = h / 2 |> Math.round
 const circle-r = 22px
 const point-r  = 5px
 
-const anim-speed = get-val \animation-speed
+const anim-speed = get-val \animation-speed |> (* 2)
 
 # !!! side effects
 set-jq-props = -> it |> each (-> it.$node = $ it.node)
@@ -155,18 +155,18 @@ export init = (cb)!->
 			list =
 
 				# small circle which we show to user
-				s.circle 0, center-y, point-r .attr do
-					class      : \point
-					\data-link : link
-					\data-id   : link |> Str.drop 1
+				s.circle 0, center-y, point-r .attr class: \point
 
 				# big circle for big clickable area
-				s.circle 0, center-y, circle-r .attr do
-					class : \big-point
+				s.circle 0, center-y, circle-r .attr class: \big-point
 
 			list
 			|> s.group.apply s, _
 			|> (.els = list ; it)
+			|> (.click !->
+				window.location.hash = link if window.location.hash isnt link
+				$w.trigger \hash-nav-handle
+			)
 			|> (.attr class: \points-group)
 
 	# big circle marker

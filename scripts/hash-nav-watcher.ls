@@ -9,6 +9,7 @@ require! {
 }
 
 const interval = 500ms
+const bind-suffix = \.hash-nav-watcher
 
 const $w = $ window
 
@@ -29,8 +30,10 @@ export init = (init-route=null) !->
 
 	last-route := init-route if init-route?
 	timer-id   := set-interval watcher, interval
+	$w.on "hash-nav-handle#bind-suffix", watcher
 
 export destroy = !->
+	$w.off "hash-nav-handle#bind-suffix", watcher
 	clear-interval timer-id
 	timer-id   := null
 	last-route := null
