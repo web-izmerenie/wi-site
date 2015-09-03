@@ -8,6 +8,7 @@ require! {
 	jquery: $
 	prelude: {each, map, Obj, obj-to-pairs, pairs-to-obj, reject, Str, camelize}
 	\Snap.svg
+	\../../../basics : {get-val}
 }
 
 const $w = $ window
@@ -20,6 +21,8 @@ const offset-x = 25px
 const center-y = h / 2 |> Math.round
 const circle-r = 22px
 const point-r  = 5px
+
+const anim-speed = get-val \animation-speed
 
 # !!! side effects
 set-jq-props = -> it |> each (-> it.$node = $ it.node)
@@ -40,9 +43,9 @@ repos = ({s, elems, links})!->
 	s.active-idx
 	|> get-line-x1 line-w, links
 	|> (x)->
-		elems.line.attr x1: x
-		elems.dark-line.attr x2: x
-		[..attr cx: x for elems.all-big-circles]
+		elems.line.stop!.animate x1: x, anim-speed
+		elems.dark-line.stop!.animate x2: x, anim-speed
+		[..stop!.animate cx: x, anim-speed for elems.all-big-circles]
 
 	for _, idx in links
 		class-name = elems.points[idx].attr \class
