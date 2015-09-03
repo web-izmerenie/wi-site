@@ -7,7 +7,7 @@
 require! {
 	jquery: $
 	prelude: {each, map, Obj, obj-to-pairs, pairs-to-obj, reject, Str, camelize}
-	\Snap.svg
+	\Snap.svg # also `mina` in global scope
 	\../../../basics : {get-val}
 }
 
@@ -22,7 +22,8 @@ const center-y = h / 2 |> Math.round
 const circle-r = 22px
 const point-r  = 5px
 
-const anim-speed = get-val \animation-speed |> (* 2)
+const anim-speed = get-val \animation-speed |> (* 4)
+const anim-curve = mina.easeinout
 
 # !!! side effects
 set-jq-props = -> it |> each (-> it.$node = $ it.node)
@@ -35,17 +36,17 @@ get-line-x1 = (line-w, links, idx)-->
 	|> (+ offset-x)
 
 # visual navigation
-repos = ({s, elems, links})!->
+repos = ({s, elems, links, total-w, line-w})!->
 
-	total-w = s.$node.width!
-	line-w = total-w |> (- offset-x * 2)
+	total-w ?= s.$node.width!
+	line-w  ?= total-w |> (- offset-x * 2)
 
 	s.active-idx
 	|> get-line-x1 line-w, links
 	|> (x)->
-		elems.line.stop!.animate x1: x, anim-speed
-		elems.dark-line.stop!.animate x2: x, anim-speed
-		[..stop!.animate cx: x, anim-speed for elems.all-big-circles]
+		elems.line.stop!.animate x1: x, anim-speed, anim-curve
+		elems.dark-line.stop!.animate x2: x, anim-speed, anim-curve
+		[..stop!.animate cx: x, anim-speed, anim-curve for elems.all-big-circles]
 
 	for _, idx in links
 		class-name = elems.points[idx].attr \class
@@ -70,7 +71,7 @@ on-resize = ({s, elems, links})!->
 			[..attr cx: x for elems.points[idx].els]
 			elems.numbers[idx].attr x: x
 
-	repos {s, elems, links}
+	repos {s, elems, links, total-w, line-w}
 
 on-navigated = ({s, elems, links}, _, route)!->
 
@@ -133,7 +134,7 @@ export init = (cb)!->
 	elems.numbers = links.map (_, idx) ->
 		s.text offset-x, (center-y + 1), "#{idx + 1}" .attr class: \text-number
 
-	elems.numbers-mask = s.circle 0, center-y, circle-r .attr class: \numbers-mask
+	elems.numbers-mask = s.circle offset-x, center-y, circle-r .attr class: \numbers-mask
 
 	elems.numbers
 	|> s.group.apply s, _
@@ -171,7 +172,7 @@ export init = (cb)!->
 
 	# big circle marker
 	elems.marker-mask-bg = s.rect 0, 0, \100%, \100% .attr class: \marker-mask-bg
-	elems.marker-mask-c = s.circle 0, center-y, circle-r .attr class: \marker-mask-c
+	elems.marker-mask-c = s.circle offset-x, center-y, circle-r .attr class: \marker-mask-c
 	elems.marker-mask-g = s.group elems.marker-mask-bg, elems.marker-mask-c
 
 	# need opacity group, bacuse with simple alpha channel for elements
@@ -189,7 +190,7 @@ export init = (cb)!->
 			mask: elems.marker-mask-g)
 
 	# big circle marker
-	elems.marker = s.circle 0, center-y, circle-r .attr class: \marker
+	elems.marker = s.circle offset-x, center-y, circle-r .attr class: \marker
 
 	# add jQuery-wrapped object properties
 	[s]
@@ -214,4 +215,4 @@ export init = (cb)!->
 	|> $w.on "hash-navigated#bind-suffix", _
 	$w.trigger "hash-navigated#bind-suffix", (window.location.hash.slice 1)
 
-	cb!
+	cb |> set-timeout _, 0
