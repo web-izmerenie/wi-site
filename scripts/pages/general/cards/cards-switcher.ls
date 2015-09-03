@@ -24,9 +24,34 @@ const point-r  = 5px
 # !!! side effects
 set-jq-props = -> it |> each (-> it.$node = $ it.node)
 
+get-line-x1 = (line-w, links, idx)-->
+	links.length
+	|> (- 1)
+	|> (-> line-w / it)
+	|> (* idx)
+	|> (+ offset-x)
+
+# visual navigation
 repos = ({s, elems, links})!->
 
-	void
+	total-w = s.$node.width!
+	line-w = total-w |> (- offset-x * 2)
+
+	s.active-idx
+	|> get-line-x1 line-w, links
+	|> (x)->
+		elems.line.attr x1: x
+		elems.dark-line.attr x2: x
+		[..attr cx: x for elems.all-big-circles]
+
+	for _, idx in links
+		class-name = elems.points[idx].attr \class
+		if idx <= s.active-idx
+			if (class-name.index-of \dark) is (-1)
+				elems.points[idx].attr class: "#class-name dark"
+		else
+			if (class-name.index-of \dark) isnt (-1)
+				elems.points[idx].attr class: class-name - /dark/g - /  /g
 
 on-resize = ({s, elems, links})!->
 
@@ -35,17 +60,14 @@ on-resize = ({s, elems, links})!->
 
 	elems.line.attr x2: total-w - offset-x
 
-	[..attr cx: offset-x for elems.mask-circles]
-
 	for _, idx in links
-		links.length
-		|> (- 1)
-		|> (-> line-w / it)
-		|> (* idx)
-		|> (+ offset-x)
+		idx
+		|> get-line-x1 line-w, links
 		|> (x)!->
 			[..attr cx: x for elems.points[idx].els]
 			elems.numbers[idx].attr x: x
+
+	repos {s, elems, links}
 
 on-navigated = ({s, elems, links}, _, route)!->
 
@@ -60,6 +82,8 @@ on-navigated = ({s, elems, links}, _, route)!->
 		s.active-idx = idx
 		if (class-name.index-of \invisible) isnt (-1)
 			s.attr class: class-name - /invisible/g - /  /g
+
+	repos {s, elems, links}
 
 export init = (cb)!->
 
@@ -98,7 +122,7 @@ export init = (cb)!->
 
 		# opacity-group :: Snap.Group
 
-		# mask-circles :: [Snap.Element]
+		# all-big-circles :: [Snap.Element]
 
 		# point-stroke-fixer :: Snap.Element
 	}
@@ -173,7 +197,7 @@ export init = (cb)!->
 	|> (++ elems.points |> Obj.values)
 	|> set-jq-props
 
-	elems.mask-circles =
+	elems.all-big-circles =
 		<[ marker marker-mask-c numbers-mask ]> .map -> elems[camelize it]
 
 	# append new svg switcher to controls

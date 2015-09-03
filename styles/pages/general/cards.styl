@@ -121,11 +121,12 @@
 		$active-color = #f0d625
 
 		.line
-			stroke rgba(255, 255, 255, .3)
-			stroke-width 4px
 		.dark-line
-			stroke rgba(0, 0, 0, .22)
 			stroke-width 4px
+		.line
+			stroke rgba(255, 255, 255, .3)
+		.dark-line
+			stroke rgba(0, 0, 0, .5)
 
 		.points-group
 			cursor pointer
@@ -145,10 +146,14 @@
 			&:hover
 				.point
 					stroke rgba(255, 255, 255, .5)
-					stroke-width 9px
+					stroke-width 12px
 			&.dark
 				.point
-					stroke rgba(0, 0, 0, .125)
+					fill rgba(0, 0, 0, 1)
+					stroke rgba(0, 0, 0, 1)
+			&.dark:hover
+				.point
+					stroke rgba(0, 0, 0, .5)
 
 		.opacity-group
 			opacity 0.5
