@@ -17,12 +17,37 @@
 	min-height $min-height
 	overflow hidden
 	z-index 0
-	absolute left 0 top 0
+	position relative
+	margin 0 auto
 
-	.bg
-		size 100%
-		absolute left 0 top 0
-		z-index 0
+	.wrap
+		width 1400px
+		margin 0 auto
+		position relative
+		top: 50%
+		transform translateY(-40%)
+		color #FFF
+		display flex
+		justify-content space-between
+
+		h2
+			custom-font('Proxima Nova Rg', bold, 55px, 60px)
+			text-transform uppercase
+
+			.num
+				display inline-block
+				vertical-align top
+				padding-right 3%
+
+				&:after
+					content ' /'
+
+			.title
+				display inline-block
+				width 85%
+
+		.description
+			custom-font('Proxima Nova Lt', normal, 20px, 1.5)
 
 .card.card-n0
 	$bg-from-color = #315d9a
@@ -142,3 +167,18 @@
 		.numbers-mask
 			fill #fff
 			stroke #fff
+
+.card-n1
+	background #1d90b1
+
+.card-n2
+	background #a3668e
+
+.card-n3
+	background #c3584a
+
+.card-n4
+	background #e6914c
+
+.card-n5
+	background #7d8c40
