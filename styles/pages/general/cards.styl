@@ -146,15 +146,51 @@
 		absolute left 50% bottom 0
 		transform translateX(-50%)
 		z-index 1
+		opacity 1
+
+		transition margin-bottom ($animation-speed * 2) $animation-curve,
+			opacity ($animation-speed * 2) $animation-curve
+
+		&.invisible
+			opacity 0
+			margin-bottom -100px
 
 		$active-color = #f0d625
 
 		.line
-			stroke rgba(255, 255, 255, 0.3)
+		.dark-line
 			stroke-width 4px
+		.line
+			stroke rgba(255, 255, 255, .3)
+		.dark-line
+			stroke rgba(0, 0, 0, .5)
 
-		.point
-			fill white
+		.points-group
+			cursor pointer
+
+			.point
+				fill white
+				stroke rgba(255, 255, 255, 1)
+				stroke-width 0
+
+				transition stroke $animation-speed $animation-curve,
+					stroke-width ($animation-speed / 2) $animation-curve,
+					fill ($animation-speed * 2) $animation-curve
+
+			.big-point
+				fill rgba(255, 255, 255, 0)
+
+			&:hover
+				.point
+					stroke rgba(255, 255, 255, .5)
+					stroke-width 12px
+			&.dark
+				.point
+					fill rgba(0, 0, 0, 1)
+					stroke rgba(0, 0, 0, 1)
+			&.dark:hover
+				.point
+					stroke rgba(0, 0, 0, .5)
 
 		.opacity-group
 			opacity 0.5
@@ -164,6 +200,8 @@
 			fill rgba(255, 255, 255, 0)
 			stroke $active-color
 			stroke-width 2px
+		.marker
+			cursor default
 
 		.marker-mask-bg
 			fill #fff
@@ -176,6 +214,8 @@
 			fill $active-color
 			text-anchor middle
 			dominant-baseline middle
+			cursor default
+			z-index -1
 		.numbers-mask
 			fill #fff
 			stroke #fff

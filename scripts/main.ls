@@ -10,6 +10,7 @@ require! {
 	modernizr: Modernizr
 	\./basics : {init}
 	\./has-el-by-hash
+	\./hash-nav-watcher
 }
 
 hash = window.location.hash |> drop-while (isnt \#)
@@ -25,10 +26,11 @@ if hash.length > 1
 
 <-! init # when dom and styles are ready
 
-$html = $ \html
-$body = $html.find \body
+$html   = $ \html
+$body   = $html.find \body
 $header = $body.find \header
 $helper = $ \<div>, class: \height-helper
+
 $header.append $helper
 
 # scroll to anchor if exists by hash
@@ -58,5 +60,7 @@ if $html.has-class \sub-page
 	$body.add-class \loaded
 	$ window .trigger \resize
 
+hash-nav-watcher.init hash
+
 require \./pages/general if $html.has-class \general-page
-require \./pages/blog if $html.has-class \blog-page
+require \./pages/blog    if $html.has-class \blog-page
