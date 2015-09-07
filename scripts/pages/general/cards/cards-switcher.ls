@@ -93,6 +93,25 @@ export init = (cb)!->
 
 	$cards-wrap = $ \.general-cards
 	$controls = $cards-wrap.find \.controls
+	$startBut = $cards-wrap.find \.next
+
+	$startBut.click (e)!->
+		e.preventDefault!
+		$mainCard = $(this).closest \.card-n0
+		$h1 = $mainCard.find '.content h1'
+
+		$h1.stop!.animate top: \-100%,
+			anim-speed,
+			!-> $(this).hide!
+
+		$(this).stop!.animate top: \100%,
+			anim-speed,
+			!-> $(this).hide!
+
+		$mainCard.animate opacity: 0,
+			anim-speed * 2,
+			!-> $(this).hide!
+
 
 	links =
 		$controls

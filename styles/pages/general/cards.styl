@@ -17,8 +17,10 @@
 	min-height $min-height
 	overflow hidden
 	z-index 0
-	position relative
+	position absolute
 	margin 0 auto
+	top 0
+	left 0
 
 	.wrap
 		width 100%
@@ -36,6 +38,7 @@
 		h2
 			custom-font('Proxima Nova Rg', bold, 3vw, normal)
 			text-transform uppercase
+			padding-top 6%
 
 			.num
 				display inline-block
@@ -94,6 +97,8 @@
 			margin-bottom -99px
 			box-sizing border-box
 			padding-x 40px
+			position relative
+			display block
 
 			>span
 				display block
@@ -113,6 +118,7 @@
 			position relative
 			background $next-button-color
 			transition background-color $animation-speed $animation-curve
+			position relative
 
 			&:hover
 				background $round-button-hover-color
