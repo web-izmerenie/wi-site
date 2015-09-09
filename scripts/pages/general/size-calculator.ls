@@ -167,7 +167,7 @@ $w.on "resize#bind-suffix", !->
 	|> obj-to-pairs
 	|> each (!-> calc.set-typical-sizes-to-array[range-key] it.0, it.1)
 
-	# team
+	$cards.css height: w-h
 	$cards-list.css height: w-h
 	$team.css height: w-h - header-offset
 	$top-part.css height: \auto
