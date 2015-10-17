@@ -3,16 +3,15 @@ require! {
 	\../../../basics : {get-val}
 }
 
-const $w = $ window
-const anim-speed = get-val \animation-speed |> (* 4)
+const $w          = $ window
+const anim-speed  = get-val \animation-speed |> (* 4)
 const $cards-wrap = $ \.general-cards
-const $main-card = $cards-wrap.find \.card-n0
-const $h1 = $main-card.find '.content h1'
-const $start-btn = $main-card.find \.next
+const $main-card  = $cards-wrap.find \.card-n0
+const $h1         = $main-card.find '.content h1'
+const $start-btn  = $main-card.find \.next
 const bind-suffix = \.cards-navigator
 
-hide-it = !->
-	$ @ .hide!
+hide-it = !-> $ @ .hide!
 
 hide-card-n0 = !->
 	$h1.stop!.animate top: \-100%,
@@ -31,7 +30,9 @@ show-card-n0 = !->
 	$main-card.show!
 
 on-navigated = (_, route) !->
+
 	return if route |> (.index-of \card-n) |> (isnt 0)
+
 	if route is \card-n0 then do show-card-n0 else do hide-card-n0
 
 export init = (cb)!->

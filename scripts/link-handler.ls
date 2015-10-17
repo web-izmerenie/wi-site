@@ -29,19 +29,19 @@ return false if scrolling
 scrolling := true
 
 unless $html
-	$page := $ 'html, body'
-	$html := $ \html
-	$body := $html.find \body
-	$header := $body.find \header
+	$page          := $ 'html, body'
+	$html          := $ \html
+	$body          := $html.find \body
+	$header        := $body.find \header
 	$height-helper := $header.find \.height-helper
-	$nav-links := $header .find '.menu nav a'
+	$nav-links     := $header .find '.menu nav a'
 
 $body.add-class \scrolling
 
 # parse link href
-href = @href
+href     = @href
 pathname = @pathname
-hash = @hash
+hash     = @hash
 
 pathname = window.location.pathname if empty pathname
 
@@ -56,9 +56,14 @@ unless has-el-by-hash hash
 	$body.remove-class \scrolling
 	return false
 
+# header menu links
 $nav-links.each !->
+
 	@pathname = window.location.pathname if empty @pathname
+
+	# if it's different page
 	return if @pathname is not pathname
+
 	if @pathname + @hash is pathname + hash
 		$ @ .add-class \active
 	else
