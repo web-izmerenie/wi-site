@@ -17,24 +17,25 @@ require! {
 	\jquery.transit : {}
 }
 
-$w = $ window
-$html = $ \html
-$page = $ 'html, body'
+const $w    = $ window
+const $html = $ \html
+const $page = $ 'html, body'
 
-$body = $html.find \body
-$header = $body.find \header
-$logo = $header.find \>.logo
-$logo-img = $logo.find \img
+const $body     = $html.find \body
+const $header   = $body.find \header
+const $logo     = $header.find \>.logo
+const $logo-img = $logo.find \img
 
-$cards-wrap = $ \.general-cards
-$card-n0 = $cards-wrap.find \.card-n0
-$card-n0-bg = $card-n0.find \.bg
-$card-n0-next = $card-n0.find \.next
+const $cards-wrap   = $body.find \.general-cards
+const $cards-bgs    = $cards-wrap.find \.backgrounds
+const $card-n0      = $cards-wrap.find \.card-n0
+const $card-n0-bg   = $cards-bgs.find '.card-bg-n0 .bg-pattern'
+const $card-n0-next = $card-n0.find \.next
 
-speed = get-val \animation-speed |> (* 4)
-logo-vals = size-calculator.get-logo-vals!
+const speed = get-val \animation-speed |> (* 4)
+const logo-vals = size-calculator.get-logo-vals!
 
-loading-animation = true
+loading-animation = true # mutable
 
 bind-before!
 

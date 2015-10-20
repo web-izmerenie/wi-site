@@ -2,86 +2,94 @@ extends ../../layout
 
 block page-block
 	.general-cards
-		section#card-n0.card.card-n0
-			.bg
-			.content
-				h1
-					span Яркие решения для вашего
-					span стремительного роста
-				h2
-				a.next(href="#card-n1")
-					span Далее
-		section#card-n1.card.card-n1
-			.wrap
-				img(src = staticUrl("images/cards/slide1.png"))
-				.text
+		.backgrounds
+			.card-bg.card-bg-n0(data-card-num=0)
+				.bg-pattern
+			.card-bg.card-bg-n1(data-card-num=1)
+			.card-bg.card-bg-n2(data-card-num=2)
+			.card-bg.card-bg-n3(data-card-num=3)
+			.card-bg.card-bg-n4(data-card-num=4)
+			.card-bg.card-bg-n5(data-card-num=5)
+		.cards
+			section#card-n0.card.card-n0(data-card-num=0)
+				.content
+					h1
+						span Яркие решения для вашего
+						span стремительного роста
 					h2
-						span.num 1
-						span.title Изучаем и проектируем
-					.description
-						p.
-							Внимательное изучение бизнеса клиентов позволяет нам
-							предлагать эффективные решения.<br>
-							Результатом этого этапа работ являются прототипы,
-							наглядно показывающие концепцию и структуру
-							будущего сайта.
-		section#card-n2.card.card-n2
-			.wrap
-				img(src = staticUrl("images/cards/slide2.png"))
-				.text
-					h2
-						span.num 2
-						span.title Визуализируем
-					.description
-						p.
-							Решения, принимаемые человеком на 100% эмоциональны.
-							Доводы разума служат лишь оправданием уже сделанного
-							выбора.<br>
-							Поэтому мы уделяем особое внимание сильной визуальной
-							и эмоциональной составляющей.<br>
-							Дизайн должен нравиться!
-		section#card-n3.card.card-n3
-			.wrap
-				img(src = staticUrl("images/cards/slide3.png"))
-				.text
-					h2
-						span.num 3
-						span.title Готовим материал
-					.description
-						p.
-							Наши маркетологи и копирайтеры уделяют особое внимание
-							подготовке материалов к публикации.<br>
-							Посетители вашего сайта получают нужное сообщение о
-							продукте в доступной и понятной форме. Интересный
-							контент — залог успеха сайта.
-		section#card-n4.card.card-n4
-			.wrap
-				img(src = staticUrl("images/cards/slide4.png"))
-				.text
-					h2
-						span.num 4
-						span.title Верстаем адаптивно!
-					.description
-						p.
-							Адаптивная верстка наших решений совместима с широким
-							спектром устройств — от смартфонов и планшетов, до
-							телевизоров. Ваш сайт доступен для посетителей
-							где бы они не находились!
-		section#card-n5.card.card-n5
-			.wrap
-				img(src = staticUrl("images/cards/slide5.png"))
-				.text
-					h2
-						span.num 5
-						span.title Развиваем и продвигаем
-					.description
-						p.
-							Любая реклама действует только при попадании в поле
-							зрения своей целевой аудитории.<br>
-							Мы обеспечиваем продуманное продвижение сайта,
-							именно то, которое нужно данному бизнесу —
-							SEO, SMM, контекстная, медийная реклама и
-							вирусный маркетинг.
+					a.next(href="#card-n1")
+						span Далее
+			section#card-n1.card.card-n1(data-card-num=1)
+				.wrap
+					img(src = staticUrl("images/cards/slide1.png"))
+					.text
+						h2
+							span.num 1
+							span.title Изучаем и проектируем
+						.description
+							p.
+								Внимательное изучение бизнеса клиентов позволяет нам
+								предлагать эффективные решения.<br>
+								Результатом этого этапа работ являются прототипы,
+								наглядно показывающие концепцию и структуру
+								будущего сайта.
+			section#card-n2.card.card-n2(data-card-num=2)
+				.wrap
+					img(src = staticUrl("images/cards/slide2.png"))
+					.text
+						h2
+							span.num 2
+							span.title Визуализируем
+						.description
+							p.
+								Решения, принимаемые человеком на 100% эмоциональны.
+								Доводы разума служат лишь оправданием уже сделанного
+								выбора.<br>
+								Поэтому мы уделяем особое внимание сильной визуальной
+								и эмоциональной составляющей.<br>
+								Дизайн должен нравиться!
+			section#card-n3.card.card-n3(data-card-num=3)
+				.wrap
+					img(src = staticUrl("images/cards/slide3.png"))
+					.text
+						h2
+							span.num 3
+							span.title Готовим материал
+						.description
+							p.
+								Наши маркетологи и копирайтеры уделяют особое внимание
+								подготовке материалов к публикации.<br>
+								Посетители вашего сайта получают нужное сообщение о
+								продукте в доступной и понятной форме. Интересный
+								контент — залог успеха сайта.
+			section#card-n4.card.card-n4(data-card-num=4)
+				.wrap
+					img(src = staticUrl("images/cards/slide4.png"))
+					.text
+						h2
+							span.num 4
+							span.title Верстаем адаптивно!
+						.description
+							p.
+								Адаптивная верстка наших решений совместима с широким
+								спектром устройств — от смартфонов и планшетов, до
+								телевизоров. Ваш сайт доступен для посетителей
+								где бы они не находились!
+			section#card-n5.card.card-n5(data-card-num=5)
+				.wrap
+					img(src = staticUrl("images/cards/slide5.png"))
+					.text
+						h2
+							span.num 5
+							span.title Развиваем и продвигаем
+						.description
+							p.
+								Любая реклама действует только при попадании в поле
+								зрения своей целевой аудитории.<br>
+								Мы обеспечиваем продуманное продвижение сайта,
+								именно то, которое нужно данному бизнесу —
+								SEO, SMM, контекстная, медийная реклама и
+								вирусный маркетинг.
 		.controls
 			ul.cards-switcher
 				li
