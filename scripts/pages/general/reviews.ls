@@ -6,6 +6,9 @@
 
 require! {
 	jquery: $
+	\jquery-kinetic : {}
+	\smooth-div : {}
+	modernizr: {}
 }
 
 $s = $ \.reviews
@@ -39,3 +42,11 @@ $list-links
 		$list-elems.remove-class \focused
 		$ @ .closest \li .add-class \focused
 	.on \blur !-> $ @ .closest \li .remove-class \focused
+
+$list.smooth-div-scroll do
+	if Modernizr.touch
+		touchScrolling: true
+		hotSpotScrolling: false
+	else
+		touchScrolling: false
+		hotSpotScrolling: true

@@ -25,11 +25,11 @@ maps = []
 
 $cards = $ \.general-cards
 $cards-list = $cards.children!
-$card-n1 = $cards.find \.card-n1
-$card-n1-next = $card-n1.find \.next
-$card-n1-next-icon = $card-n1-next.find \>span
-headers-n1.push <| $card-n1.find \h1
-headers-n2.push <| $card-n1.find \h2
+$card-n0 = $cards.find \.card-n0
+$card-n0-next = $card-n0.find \.next
+$card-n0-next-icon = $card-n0-next.find \>span
+headers-n1.push <| $card-n0.find \h1
+headers-n2.push <| $card-n0.find \h2
 
 $portfolio = $ \.portfolio
 $portfolio-title-block = $portfolio.find \.title-block
@@ -110,12 +110,12 @@ $w.on "resize#bind-suffix", !->
 	let el-key = \next
 		let vals = <[icon-top scale]>
 			vals |>= calc.get-rel-vals.mb el-key
-			$card-n1-next-icon.css do
+			$card-n0-next-icon.css do
 				margin-top: "#{vals.icon-top}px"
 				transform: "scale(#{vals.scale})"
 		let vals = <[size margin-top]>
 			vals |>= calc.get-rel-vals.mb el-key
-			$card-n1-next.css do
+			$card-n0-next.css do
 				width: "#{vals.size}px"
 				height: "#{vals.size}px"
 				border-radius: "#{vals.size / 2}px"
@@ -167,7 +167,7 @@ $w.on "resize#bind-suffix", !->
 	|> obj-to-pairs
 	|> each (!-> calc.set-typical-sizes-to-array[range-key] it.0, it.1)
 
-	# team
+	$cards.css height: w-h
 	$cards-list.css height: w-h
 	$team.css height: w-h - header-offset
 	$top-part.css height: \auto

@@ -4,7 +4,7 @@
  * @author Viacheslav Lotsmanov
  */
 
-&
+& // .general-cards
 	size 100%
 	min-height $min-height
 	z-index 0
@@ -12,28 +12,72 @@
 
 @import 'header-mixins'
 
-.card-n1
-	$bg-from-color = #315d9a
-	$bg-to-color = #2b75ba
-	$next-button-color = #10476e
-	$speed = ($animation-speed * 4)
+.cards
+	size 100%
+	overflow hidden
+	absolute left 0 top 0
+	z-index 3
 
+	.fix
+		size 100%
+		absolute left 0 top 0
+		z-index 2
+		background red
+
+.card
 	size 100%
 	min-height $min-height
-	background linear-gradient(top, $bg-from-color, $bg-to-color)
-	z-index 0
-	position relative
-	text-align center
 	overflow hidden
+	absolute left 0% top 0%
+	opacity 0
+	z-index 3
 
-	.bg
-		size 200%
-		absolute top -50% left -50%
-		z-index 0
-		bg($general-page-card-n1-bg, center center repeat)
-		background-attachment fixed
-		transform scale(0.7)
-		opacity 0
+	.wrap
+		width 100%
+		max-width 1440px
+		margin 0 auto
+		position relative
+		top: 50%
+		transform translateY(-40%)
+		color #FFF
+		display flex
+		justify-content space-between
+		box-sizing border-box
+		padding 0px 5%
+
+		h2
+			custom-font('Proxima Nova Rg', bold, 3vw, normal)
+			text-transform uppercase
+			padding-top 6%
+
+			.num
+				display inline-block
+				vertical-align top
+				padding-right 3%
+
+				&:after
+					content ' /'
+
+			.title
+				display inline-block
+				width 85%
+
+		.text
+			width 50%
+
+			.description
+				custom-font('Proxima Nova Lt', normal, 20px, 1.5)
+				margin-left 4.7vw
+
+		img
+			width 43%
+			max-height 100%
+
+.card.card-n0
+	$next-button-color = #10476e
+
+	text-align center
+	display block
 
 	.content
 		display block
@@ -49,6 +93,8 @@
 			margin-bottom -99px
 			box-sizing border-box
 			padding-x 40px
+			position relative
+			display block
 
 			>span
 				display block
@@ -68,6 +114,7 @@
 			position relative
 			background $next-button-color
 			transition background-color $animation-speed $animation-curve
+			position relative
 
 			&:hover
 				background $round-button-hover-color
@@ -85,3 +132,140 @@
 					transform translate(-50%, -50%)
 
 		// see for some `body.loaded` selector styles in `general.styl`
+
+.controls
+	absolute left 0 top 0
+	size 100%
+	min-height $min-height
+
+	ul.cards-switcher
+		display none
+
+	svg.cards-switcher
+		display block
+		absolute left 50% bottom 0
+		transform translateX(-50%)
+		z-index 5
+		opacity 1
+
+		transition margin-bottom ($animation-speed * 2) $animation-curve,
+			opacity ($animation-speed * 2) $animation-curve
+
+		&.invisible
+			opacity 0
+			margin-bottom -100px
+
+		$active-color = #f0d625
+
+		.line
+		.dark-line
+			stroke-width 4px
+		.line
+			stroke rgba(255, 255, 255, .3)
+		.dark-line
+			stroke rgba(0, 0, 0, .5)
+
+		.points-group
+			cursor pointer
+
+			.point
+				fill white
+				stroke rgba(255, 255, 255, 1)
+				stroke-width 0
+
+				transition stroke $animation-speed $animation-curve,
+					stroke-width ($animation-speed / 2) $animation-curve,
+					fill ($animation-speed * 2) $animation-curve
+
+			.big-point
+				fill rgba(255, 255, 255, 0)
+
+			&:hover
+				.point
+					stroke rgba(255, 255, 255, .5)
+					stroke-width 12px
+			&.dark
+				.point
+					fill rgba(0, 0, 0, 1)
+					stroke rgba(0, 0, 0, 1)
+			&.dark:hover
+				.point
+					stroke rgba(0, 0, 0, .5)
+
+		.opacity-group
+			opacity 0.5
+
+		.marker
+		.marker-mask-c
+			fill rgba(255, 255, 255, 0)
+			stroke $active-color
+			stroke-width 2px
+		.marker
+			cursor default
+
+		.marker-mask-bg
+			fill #fff
+		.marker-mask-c
+			fill #000
+			stroke #000
+
+		.text-number
+			custom-font('Proxima Nova Rg', bold, 20px, 22px)
+			fill $active-color
+			text-anchor middle
+			dominant-baseline middle
+			cursor default
+			z-index -1
+		.numbers-mask
+			fill #fff
+			stroke #fff
+
+.backgrounds
+	min-height $min-height
+	margin 0 auto
+	z-index 0
+	overflow hidden
+
+	&, .card-bg
+		size 100%
+		absolute left 0 top 0
+		overflow hidden
+		z-index 2
+
+	.card-bg
+		opacity 0
+		transition opacity ($animation-speed * 4) $animation-curve
+
+		&.active
+			opacity 1
+
+	.card-bg-n0
+		$bg-from-color = #315d9a
+		$bg-to-color = #2b75ba
+		background linear-gradient(top, $bg-from-color, $bg-to-color)
+		z-index 1
+		opacity 1
+
+		.bg-pattern
+			pseudo-block()
+			size 200%
+			absolute top -50% left -50%
+			bg($general-page-card-n0-bg, center center repeat)
+			background-attachment fixed
+			transform scale(0.7)
+			opacity 0
+
+	.card-bg-n1
+		background #1d90b1
+
+	.card-bg-n2
+		background #a3668e
+
+	.card-bg-n3
+		background #c3584a
+
+	.card-bg-n4
+		background #e6914c
+
+	.card-bg-n5
+		background #7d8c40

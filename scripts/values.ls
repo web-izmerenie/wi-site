@@ -116,8 +116,19 @@ module.exports.values =
 				font-size: 16px
 				line-height: 18px
 	\general-page :
-		extra-small: {}
+		extra-small:
+			cards-switcher:
+				width: 420px
+				bottom: 63px
+			cards-switcher-active-line:
+				opacity: 1
 		small:
+			cards-switcher:
+				width: 670px
+				bottom: 63px
+			cards-switcher-active-line:
+				opacity: 1
+
 			# contacts
 			contacts-second-font-n1:
 				font-size: 24px
@@ -159,6 +170,12 @@ module.exports.values =
 				margin-top: 42px
 				scale: 0.69
 				icon-top: 2px
+
+			cards-switcher:
+				width: 890px
+				bottom: 50px
+			cards-switcher-active-line:
+				opacity: 0.7
 
 			# portfolio
 			portfolio-title-block:
@@ -239,6 +256,12 @@ module.exports.values =
 				margin-top: 62px
 				scale: 1.0
 				icon-top: 3px
+
+			cards-switcher:
+				width: 1410px
+				bottom: 150px
+			cards-switcher-active-line:
+				opacity: 0.7
 
 			# portfolio
 			portfolio-title-block:

@@ -17,42 +17,77 @@ require! {
 	\jquery.transit : {}
 }
 
-$w = $ window
-$html = $ \html
-$page = $ 'html, body'
+const $w    = $ window
+const $html = $ \html
+const $page = $ 'html, body'
 
-$body = $html.find \body
-$header = $body.find \header
-$logo = $header.find \>.logo
-$logo-img = $logo.find \img
+const $body     = $html.find \body
+const $header   = $body.find \header
+const $logo     = $header.find \>.logo
+const $logo-img = $logo.find \img
 
-$cards = $ \.general-cards
-$card-n1 = $cards.find \.card-n1
-$card-n1-bg = $card-n1.find \.bg
-$card-n1-next = $card-n1.find \.next
+const $cards-wrap   = $body.find \.general-cards
+const $cards-bgs    = $cards-wrap.find \.backgrounds
+const $card-n0      = $cards-wrap.find \.card-n0
+const $card-n0-bg   = $cards-bgs.find '.card-bg-n0 .bg-pattern'
+const $card-n0-next = $card-n0.find \.next
 
-speed = get-val \animation-speed |> (* 4)
-logo-vals = size-calculator.get-logo-vals!
+const speed = get-val \animation-speed |> (* 4)
+const logo-vals = size-calculator.get-logo-vals!
 
-loading-animation = true
+loading-animation = true # mutable
 
 bind-before!
 
-$card-n1-next.click link-handler
+# start this callback after all preparations
+init-all-other-sections = !->
+	$body .add-class \loaded
+	$page .scroll-top 0
 
-card-n1-parallax-init = !->
-	card-n1-bg-parallax-bind-suffix = \.card-n1-bg-parallax
+	require! {
+		\./general/size-calculator : {}
+		\./general/cards/cards : {init: cards-init}
+		\./general/portfolio : {}
+		\./general/team : {}
+		\./general/reviews : {}
+		\./general/contacts : {init: contacts-init}
+	}
+	<-! cards-init
+	contacts-init!
+	$w
+		.trigger \resize.header-size-calc
+		.trigger \resize
+	bind-after!
 
-	$w.on "scroll#{card-n1-bg-parallax-bind-suffix}", !->
+	go-to-anchor = $html.data \go-to-anchor
+	go-to-anchor! if go-to-anchor |> is-type \Function
+
+$card-n0-next.click link-handler
+
+card-n0-parallax-init = !->
+	card-n0-bg-parallax-bind-suffix = \.card-n0-bg-parallax
+
+	$w.on "scroll#{card-n0-bg-parallax-bind-suffix}", !->
 		st = $w.scroll-top!
-		return if st > $card-n1.height!
+		return if st > $card-n0.height!
 		val = st / 2
-		$card-n1-bg.css \background-position, "center #{val}px"
+		$card-n0-bg.css \background-position, "center #{val}px"
 
-	$w.on "resize#{card-n1-bg-parallax-bind-suffix}", !->
-		$w.trigger "scroll#{card-n1-bg-parallax-bind-suffix}"
+	$w.on "resize#{card-n0-bg-parallax-bind-suffix}", !->
+		$w.trigger "scroll#{card-n0-bg-parallax-bind-suffix}"
 
-	$w.trigger "resize#{card-n1-bg-parallax-bind-suffix}"
+	$w.trigger "resize#{card-n0-bg-parallax-bind-suffix}"
+
+card-n0-next-button-jitter-init = !->
+	speed = 800
+	wait = 5000
+	jitter = !->
+		$card-n0-next.css top: 0
+		<-! set-timeout _, wait
+		<-! $card-n0-next.stop!.transition top: \-7%, speed
+		<-! $card-n0-next.stop!.transition top: 0px, speed
+		jitter!
+	jitter!
 
 # rotate Wi logo before finish loading
 loading-loop = !->
@@ -64,35 +99,18 @@ loading-loop = !->
 
 # callback after all images is preloaded (see icons.styl)
 preload-cb = !->
-	card-n1-parallax-init!
+	card-n0-parallax-init!
+	card-n0-next-button-jitter-init!
+
 	loading-animation := false
 	<-! $logo-img.stop!.transition rotate: \360deg, speed, \linear
-	<-! $card-n1-bg.stop!.transition opacity: 1, scale: 1, speed, \in-out
+	<-! $card-n0-bg.stop!.transition opacity: 1, scale: 1, speed, \in-out
 	$logo.add-class \logo-move
 	vals =
 		left: logo-vals.left
 		top: logo-vals.top
 		translate: [\0%,\0%]
-	<-! $logo.stop!.transition vals, speed, \in-out
-
-	$body .add-class \loaded
-	$page .scroll-top 0
-
-	require! {
-		\./general/size-calculator : {}
-		\./general/portfolio : {}
-		\./general/team : {}
-		\./general/reviews : {}
-		\./general/contacts : {init: contacts-init}
-	}
-	contacts-init!
-	$w
-		.trigger \resize.header-size-calc
-		.trigger \resize
-	bind-after!
-
-	go-to-anchor = $html.data \go-to-anchor
-	go-to-anchor! if go-to-anchor |> is-type \Function
+	$logo.stop!.transition vals, speed, \in-out, init-all-other-sections
 
 # preload logo first (for use this logo as loading spinner)
 
@@ -114,9 +132,11 @@ if err
 		\#IMAGE_SRC# : img-src
 	return
 
-loading-loop!
+loading-loop! # run loading animation asynchonusly
 
+# load yandex.maps api
 (err, ymaps) <-! dynamic-api get-yandex-maps-api-url!, \ymaps
 window.alert get-local-text \err, \yandex-map-load-api, \#ERROR_CODE# : err if err?
 
+# start preload images and after that - "preload-db"
 preload preload-cb

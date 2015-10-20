@@ -6,6 +6,9 @@
 
 require! {
 	jquery: $
+	\jquery-kinetic : {}
+	\smooth-div : {}
+	modernizr: {}
 }
 
 $s = $ \.team
@@ -41,9 +44,9 @@ do -> # people scroll centering
 		|> (/ 2)
 		|> $list.scroll-left _
 
-$s
-	.find \ul.people>li>a
-	.on \click, -> false
+$links = $s.find \ul.people>li>a
+$links.on \click, (e)-> e.prevent-default!
+$people-list-elems.on \mouseenter, !-> $links.blur!
 
 <-! $people-links.each
 $link = $ @
@@ -57,3 +60,11 @@ $to-load = $ \<img/>
 			.css bottom: -5px
 			.add-class \loaded
 	.attr \src, $img.attr \src
+
+$people-list.smooth-div-scroll do
+	if Modernizr.touch
+		touchScrolling: true
+		hotSpotScrolling: false
+	else
+		touchScrolling: false
+		hotSpotScrolling: true
