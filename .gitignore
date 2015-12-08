@@ -22,3 +22,7 @@ static/build.css
 static/build.js
 
 config.yaml
+
+robots.txt
+html/
+webstat/
