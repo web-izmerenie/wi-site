@@ -34,44 +34,45 @@
 
 	.wrap
 		width 100%
-		max-width 1440px
+		max-width 1335px
 		margin 0 auto
-		position relative
-		top: 50%
-		transform translateY(-40%)
 		color #FFF
-		display flex
-		justify-content space-between
-		box-sizing border-box
-		padding 0px 5%
+		position: relative
+		top 50%
+		transform translateY(-50%)
 
 		h2
-			custom-font('Proxima Nova Rg', bold, 3vw, normal)
+			custom-font('Proxima Nova Rg', bold, 59px, 1.05)
 			text-transform uppercase
-			padding-top 6%
 
 			.num
 				display inline-block
 				vertical-align top
-				padding-right 3%
+				width 13.2%
 
 				&:after
 					content ' /'
 
 			.title
 				display inline-block
-				width 85%
+				width 86%
 
 		.text
-			width 50%
+			display inline-block
+			vertical-align top
+			width 47.2%
+			margin-left 6%
+			margin-top  32px
 
 			.description
-				custom-font('Proxima Nova Lt', normal, 20px, 1.5)
-				margin-left 4.7vw
+				custom-font('Proxima Nova Lt', normal, 20px, 1.6)
+				margin-top 37px
+				margin-left 82px
 
 		img
-			width 43%
-			max-height 100%
+			display inline-block
+			vertical-align top
+			width 45.8%
 
 .card.card-n0
 	$next-button-color = #10476e
@@ -132,6 +133,56 @@
 					transform translate(-50%, -50%)
 
 		// see for some `body.loaded` selector styles in `general.styl`
+
+#card-n2
+	.text
+		margin-top 65px
+
+		h2
+			font-size 55px
+
+			.num
+				width 14%
+
+		.description
+			line-height 1.7
+			margin-top 46px
+			margin-left 87px
+
+#card-n3
+	.text
+		margin-top 34px
+		margin-left 7%
+
+	h2
+		line-height 1.1
+
+	.description
+		line-height 1.7
+		margin-top 40px
+		margin-left 87px
+
+#card-n4
+	.text
+		margin-top 35px
+
+	h2
+		line-height 1.15
+
+	.description
+		margin-top 45px
+
+#card-n5
+	.text
+		margin-left 7%
+		margin-top 110px
+
+		h2
+			line-height 1.2
+			font-size 53px
+
+		.description
+			margin-top 47px
 
 .controls
 	absolute left 0 top 0
