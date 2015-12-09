@@ -84,7 +84,7 @@ card-n0-next-button-jitter-init = !->
 	jitter = !->
 		$card-n0-next.css top: 0
 		<-! set-timeout _, wait
-		<-! $card-n0-next.stop!.transition top: \-7%, speed
+		<-! $card-n0-next.stop!.transition top: \-30px, speed
 		<-! $card-n0-next.stop!.transition top: 0px, speed
 		jitter!
 	jitter!
