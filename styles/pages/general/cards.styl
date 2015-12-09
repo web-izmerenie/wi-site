@@ -45,6 +45,12 @@
 			custom-font('Proxima Nova Rg', bold, 59px, 1.05)
 			text-transform uppercase
 
+			@media (max-width: ($sizes.middle))
+				font-size 40px !important
+
+			@media (max-width: ($sizes.small))
+				white-space nowrap
+
 			.num
 				display inline-block
 				vertical-align top
@@ -64,15 +70,32 @@
 			margin-left 6%
 			margin-top  32px
 
+			@media (max-width: ($sizes.small))
+				display block !important
+				margin 60px auto 0 !important
+				width 62.5%
+
 			.description
 				custom-font('Proxima Nova Lt', normal, 20px, 1.6)
 				margin-top 37px
-				margin-left 82px
+				margin-left 14%
+
+				@media (max-width: ($sizes.middle))
+					font-size 17px
+
+				@media (max-width: ($sizes.small))
+					width 100%
+					font-size 16px
 
 		img
 			display inline-block
 			vertical-align top
 			width 45.8%
+
+			@media (max-width: ($sizes.small))
+				display block
+				margin 0 auto
+				width 62.5%
 
 .card.card-n0
 	$next-button-color = #10476e
@@ -147,7 +170,6 @@
 		.description
 			line-height 1.7
 			margin-top 46px
-			margin-left 87px
 
 #card-n3
 	.text
@@ -160,7 +182,6 @@
 	.description
 		line-height 1.7
 		margin-top 40px
-		margin-left 87px
 
 #card-n4
 	.text
