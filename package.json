@@ -110,6 +110,10 @@
             "path": "./browserify-shim/jquery.mousewheel.js",
             "exports": ""
           },
+          "gmaps": {
+            "path": "./bower_components/gmaps/gmaps.min.js",
+            "exports": "GMaps"
+          },
           "smooth-div": {
             "path": "./bower_components/Smooth-Div-Scroll/js/jquery.smoothdivscroll-1.3-min.js",
             "exports": "",

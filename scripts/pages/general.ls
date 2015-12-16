@@ -134,9 +134,5 @@ if err
 
 loading-loop! # run loading animation asynchonusly
 
-# load yandex.maps api
-(err, ymaps) <-! dynamic-api get-yandex-maps-api-url!, \ymaps
-window.alert get-local-text \err, \yandex-map-load-api, \#ERROR_CODE# : err if err?
-
 # start preload images and after that - "preload-db"
 preload preload-cb

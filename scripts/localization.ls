@@ -55,8 +55,8 @@ module.exports =
 				Ссылка: "#LINK_HREF#"
 			'''
 
-			\yandex-map-load-api : '''
-				Произошла ошибка при попытке загрузить API Янднекс.Карт.
+			\google-map-load-api : '''
+				Произошла ошибка при попытке загрузить API Google map.
 
 				Ошибка: #ERROR_CODE#
 			'''

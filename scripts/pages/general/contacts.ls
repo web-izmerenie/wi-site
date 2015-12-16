@@ -10,18 +10,12 @@ require! {
 	\../../basics : {dynamic-api, get-val, get-local-text}
 }
 
-get-api-url = module.exports.get-yandex-maps-api-url = ->
-	api-lang = get-val \yandex-maps-api-lang |> (."#{get-val \lang}")
-	"http://api-maps.yandex.ru/2.1/?lang=#api-lang"
-
 <-! (!-> module.exports.init = it)
 
 (i) <-! $ \.contacts .each
 
 $s = $ @
 $head = $s.find \.head
-$map = $head.find \.map
-$marker = $map.find \img.marker
 $address = $s.find \address
 $second = $s.find \.second
 $form = $second.find \form
@@ -105,53 +99,97 @@ $form.on \submit, ->
 
 	false
 
-(err, ymaps) <-! dynamic-api get-api-url!, \ymaps
-return if err?
-<-! ymaps.ready
 
-data =
-	mark-x: $map.attr \data-mark-x |> parse-float
-	mark-y: $map.attr \data-mark-y |> parse-float
-	pos-x: $map.attr \data-pos-x |> parse-float
-	pos-y: $map.attr \data-pos-y |> parse-float
-	zoom: $map.attr \data-zoom |> parse-int _, 10
+require! \gmaps
+$map = $s.find \.map
+$marker = $map.find \img.marker
+$pos-y = $map.data \pos-y
+$pos-x = $map.data \pos-x
+$mark-y = $map.data \mark-y
+$mark-x = $map.data \mark-x
+$zoom = $map.data \zoom
+$icon = $map.find(\.marker).attr \src
 
-try
-	data |> Obj.map ->
-		if (it |> is-type \Number |> (not)) or (it |> Num.is-it-NaN)
-			throw new Error!
-catch
-	return window.alert get-local-text \err, \yandex-map-not-enough-data
+styles =	[
+	{
+		"featureType": \all
+		"elementType": \labels.text.fill
+		"stylers": [{"color": \#ffffff}]
+	}
+	{
+		"featureType": \all
+		"elementType": \labels.text.stroke
+		"stylers": [
+				{"visibility": \on}
+				{"color": \#2e3537}
+				{	"weight": 2}
+				{	"gamma": 0.84}
+		]
+	}
+	{
+		"featureType": \all
+		"elementType": \labels.icon
+		"stylers": [{"visibility": \off}]
+	}
+	{
+		"featureType": \administrative
+		"elementType": \geometry
+		"stylers": [{"weight": 0.6	}]
+	}
+	{
+		"featureType": \landscape
+		"elementType": \geometry
+		"stylers": [{"color": \#4c6374}]
+	}
+	{
+		"featureType": \poi
+		"elementType": \geometry
+		"stylers": [{"color": \#667f90}]
+	}
+	{
+		"featureType": \poi.park
+		"elementType": \geometry
+		"stylers": [{"color": \#667f90}]
+	}
+	{
+		"featureType": \road
+		"elementType": \geometry
+		"stylers": [
+				{"color": \#264258}
+				{"lightness": -37	}
+		]
+	}
+	{
+		"featureType": \transit
+		"elementType": \geometry
+		"stylers": [{"color": \#5b7283}]
+	}
+	{
+		"featureType": \water
+		"elementType": \geometry
+		"stylers": [{"color": \#66bcf7}]
+	}
+]
 
-map-id = "yandex_map_#i"
-$map.attr \id, map-id
+map = new GMaps(
+	div: $map.selector
+	lat: $pos-y
+	lng: $pos-x
+	zoom: $zoom
+	zoomControl: true
+	zoomControlOptions:
+		position: google.maps.ControlPosition.LEFT_CENTER
+	mapTypeControl: false
+	scaleControl: false
+	scrollwheel: false
+	)
 
-marker-path = $marker.attr \src
-$img = $ \<img/>
-<-! (!-> $img.on \load, it; $img.attr \src, marker-path)
-img = @
+map.addMarker(
+	lat: $mark-y
+	lng: $mark-x
+	icon: $icon
+	)
 
-map = new ymaps.Map map-id, do
-	center: [data.pos-y, data.pos-x]
-	zoom: data.zoom
-	controls: []
-
-map.behaviors.disable \scrollZoom
-
-map.controls.add \zoomControl, do
-	float: 'none'
-	position: left: 10, top: 10
-
-marker = new ymaps.Placemark [data.mark-y, data.mark-x], do
-	hint-content: $address.text!
-	icon-content: \sheeeit
-, do
-	icon-layout: \default#image
-	icon-image-href: marker-path
-	icon-image-size: [img.width, img.height]
-	icon-image-offset: [-(img.width/2), -img.height]
-
-map.geo-objects.add marker
-
-<-! (!-> $map.on \resize-map it .trigger \resize-map)
-map.container.fit-to-viewport!
+map.setOptions(
+	styles: styles
+)
