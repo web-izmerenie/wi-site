@@ -120,10 +120,10 @@ styles =	[
 		"featureType": \all
 		"elementType": \labels.text.stroke
 		"stylers": [
-				{"visibility": \on}
-				{"color": \#2e3537}
-				{	"weight": 2}
-				{	"gamma": 0.84}
+			{"visibility": \on}
+			{"color": \#2e3537}
+			{	"weight": 2}
+			{	"gamma": 0.84}
 		]
 	}
 	{
@@ -155,8 +155,8 @@ styles =	[
 		"featureType": \road
 		"elementType": \geometry
 		"stylers": [
-				{"color": \#264258}
-				{"lightness": -37	}
+			{"color": \#264258}
+			{"lightness": -37	}
 		]
 	}
 	{
@@ -182,7 +182,7 @@ map = new GMaps(
 	mapTypeControl: false
 	scaleControl: false
 	scrollwheel: false
-	)
+)
 
 map.addMarker(
 	lat: $mark-y
@@ -190,6 +190,4 @@ map.addMarker(
 	icon: $icon
 	)
 
-map.setOptions(
-	styles: styles
-)
+map.setOptions(styles: styles)
