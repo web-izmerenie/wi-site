@@ -4,6 +4,8 @@
  * @author Viacheslav Lotsmanov
  */
 
+ @import "../../variables"
+
 &
 	background white
 	padding-top (150px - 22px)
@@ -34,21 +36,23 @@ ul.reviews-list
 	padding-top 121px
 	padding-bottom 60px
 
-	.scrollingHotSpotLeft
+	.scrollingHotSpotLeft, .scrollingHotSpotRight
 		min-width 75px
-		width 25%
-		height 100%
+		width 30%
+		height 320px
 		position absolute
 		z-index 200
 		left 0
 
+		&:hover
+			cursor url($images-path"/arrow_left_small.png"), auto
+
 	.scrollingHotSpotRight
-		min-width 75px
-		width 25%
-		height 100%
-		position absolute
-		z-index 200
+		left auto
 		right 0
+
+		&:hover
+			cursor url($images-path"/arrow_right_small.png"), auto
 
 	.scrollWrapper
 		position relative

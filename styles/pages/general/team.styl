@@ -45,21 +45,23 @@ ul.people
 	overflow auto
 	white-space nowrap
 
-	.scrollingHotSpotLeft
+	.scrollingHotSpotLeft, .scrollingHotSpotRight
 		min-width 75px
-		width 25%
+		width 30%
 		height 100%
 		position absolute
 		z-index 200
 		left 0
 
+		&:hover
+			cursor url($images-path"/arrow_left_small.png"), auto
+
 	.scrollingHotSpotRight
-		min-width 75px
-		width 25%
-		height 100%
-		position absolute
-		z-index 200
+		left auto
 		right 0
+
+		&:hover
+			cursor url($images-path"/arrow_right_small.png"), auto
 
 	.scrollWrapper
 		position relative

@@ -68,3 +68,5 @@ $people-list.smooth-div-scroll do
 	else
 		touchScrolling: false
 		hotSpotScrolling: true
+		hotSpotScrollingStep: 5
+		hotSpotMouseDownSpeedBooster: 1
