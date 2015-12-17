@@ -242,14 +242,16 @@
 		.points-group
 			cursor pointer
 
+			point-transit()
+				transition stroke $animation-speed $animation-curve,
+					stroke-width ($animation-speed / 2) $animation-curve,
+					fill ($animation-speed * 2) $animation-curve
+
 			.point
 				fill white
 				stroke rgba(255, 255, 255, 1)
 				stroke-width 0
-
-				transition stroke $animation-speed $animation-curve,
-					stroke-width ($animation-speed / 2) $animation-curve,
-					fill ($animation-speed * 2) $animation-curve
+				point-transit()
 
 			.big-point
 				fill rgba(255, 255, 255, 0)
@@ -265,6 +267,24 @@
 			&.dark:hover
 				.point
 					stroke rgba(0, 0, 0, .5)
+
+			&.selected + .points-group
+				.point
+					@keyframes point-jitter
+						0%
+							stroke rgba(255, 255, 255, 1)
+							stroke-width 0
+						60%
+							stroke rgba(255, 255, 255, 1)
+							stroke-width 0
+						80%
+							stroke rgba(255, 255, 255, .5)
+							stroke-width 12px
+					animation-name point-jitter
+					animation-duration 2s
+					animation-iteration-count infinite
+				&:hover .point
+					animation-name none
 
 		.opacity-group
 			opacity 0.5

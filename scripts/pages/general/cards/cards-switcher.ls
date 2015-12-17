@@ -55,7 +55,7 @@ repos = ({s, elems, links, total-w, line-w})!->
 				elems.points[idx].attr class: "#class-name dark"
 		else
 			if (class-name.index-of \dark) isnt (-1)
-				elems.points[idx].attr class: class-name - /dark/g - /  /g
+				elems.points[idx].attr class: (class-name - /dark/g).replace(/ +/g, ' ')
 
 on-resize = ({s, elems, links})!->
 
@@ -85,7 +85,12 @@ on-navigated = ({s, elems, links}, _, route)!->
 	else
 		s.active-idx = idx
 		if (class-name.index-of \invisible) isnt (-1)
-			s.attr class: class-name - /invisible/g - /  /g
+			s.attr class: (class-name - /invisible/g).replace(/ +/g, ' ')
+
+	elems.points
+		|> map  (-> [it, it.attr \class])
+		|> each (!-> it.0.attr class: (it.1 - /selected/g).replace(/ +/g, ' '))
+	(x = elems.points[s.active-idx] ; x.attr class: "#{x.attr \class} selected")
 
 	repos {s, elems, links}
 
