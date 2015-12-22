@@ -31,9 +31,9 @@
     "scripts": {
       "site": {
         "type": "browserify",
-        "path": "./scripts/",
-        "srcDir": "./scripts/",
-        "destDir": "./static/",
+        "path": "./bitrix/templates/main/scripts/",
+        "srcDir": "./bitrix/templates/main/scripts/",
+        "destDir": "./bitrix/templates/main/static/",
         "mainSrc": "main.ls",
         "buildFile": "build.js",
         "transform": [
@@ -61,7 +61,7 @@
             "exports": "Modernizr"
           },
           "jquery.timers": {
-            "path": "./scripts/lib/jquery.timers.js",
+            "path": "./bitrix/templates/main/scripts/lib/jquery.timers.js",
             "exports": "",
             "depends": {
               "jquery": "jQuery"
@@ -130,9 +130,9 @@
     "styles": {
       "site": {
         "type": "stylus",
-        "path": "./styles/",
-        "srcDir": "./styles/",
-        "destDir": "./static/",
+        "path": "./bitrix/templates/main/styles/",
+        "srcDir": "./bitrix/templates/main/styles/",
+        "destDir": "./bitrix/templates/main/static/",
         "mainSrc": "main.styl",
         "buildFile": "build.css",
         "shim": [

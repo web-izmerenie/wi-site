@@ -2,7 +2,7 @@
 var gulp = require('gulp');
 var jade = require('gulp-jade');
 
-var tplPath = './';
+var tplPath = './bitrix/templates/main';
 
 gulp.task('jade', function () {
 	gulp.src(tplPath + '/templates/**/*.jade')

@@ -12,11 +12,14 @@
 *.rar
 
 tmp
+Thumbs.db
+.DS_Store
 
 front-end-gulp
 node_modules
 bower_components
 lsc
+.source_of_symbolic_links
 
 static/build.css
 static/build.js
@@ -26,3 +29,55 @@ config.yaml
 robots.txt
 html/
 webstat/
+
+# bitrix tmp dirs
+bitrix/cache
+bitrix/managed_cache
+bitrix/tmp
+
+#SYMBOLIC_LINKS_START#
+# configs (security)
+dbconfig.php
+bitrix/license_key.php
+
+# backups
+bitrix/backup
+
+# bitrix system dirs
+bitrix/.access.php
+bitrix/activities
+bitrix/activity_limit.php
+bitrix/admin
+bitrix/click.php
+bitrix/components/bitrix
+bitrix/coupon_activation.php
+bitrix/fonts
+bitrix/footer.php
+bitrix/gadgets
+bitrix/header.php
+bitrix/image_uploader
+bitrix/images
+bitrix/index.php
+bitrix/js
+bitrix/modules
+bitrix/otp
+bitrix/p3p.xml
+bitrix/panel
+bitrix/redirect.php
+bitrix/rk.php
+bitrix/rss.php
+bitrix/services
+bitrix/sounds
+bitrix/spread.php
+bitrix/template
+bitrix/themes
+bitrix/tools
+bitrix/urlrewrite.php
+bitrix/virtual_file_system.php
+bitrix/web.config
+bitrix/wizards
+bitrix/updates
+bitrix/css
+
+# upload dir
+upload
