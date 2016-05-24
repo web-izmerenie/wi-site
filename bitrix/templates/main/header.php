@@ -20,8 +20,9 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 <!DOCTYPE html>
 <html lang="ru" class="no-js <?=$html_classes;?>">
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title><?$APPLICATION->ShowTitle()?></title>
 		<?$APPLICATION->ShowHead();?>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="<?=$tpPath;?>/static/build.css" rel="stylesheet" type="text/css" class="main-styles">
 		<script src="http://maps.google.com/maps/api/js"></script>
 		<script src="<?=$tpPath;?>/static/build.js"></script>

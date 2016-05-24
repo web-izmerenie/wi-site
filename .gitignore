@@ -21,8 +21,8 @@ bower_components
 lsc
 .source_of_symbolic_links
 
-static/build.css
-static/build.js
+bitrix/templates/main/static/build.css
+bitrix/templates/main/static/build.js
 
 config.yaml
 

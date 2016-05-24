@@ -1,7 +1,7 @@
 <?
-$sSectionName = 'Главная';
+$sSectionName = '';
 $arDirProperties = array(
-	'title' => '',
+	'title' => 'Web-Izmerenie',
 	'description' => '',
 	'keywords' => '',
 	'robots' => 'index, follow'
