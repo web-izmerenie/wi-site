@@ -3,116 +3,15 @@ define('MAIN_PAGE', 'Y');
 require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 $APPLICATION->SetTitle('Главная');
 ?>
-<div class="general-cards">
-  <div class="backgrounds">
-    <div data-card-num='0' class="card-bg card-bg-n0">
-      <div class="bg-pattern"></div>
-    </div>
-    <div data-card-num='1' class="card-bg card-bg-n1"></div>
-    <div data-card-num='2' class="card-bg card-bg-n2"></div>
-    <div data-card-num='3' class="card-bg card-bg-n3"></div>
-    <div data-card-num='4' class="card-bg card-bg-n4"></div>
-    <div data-card-num='5' class="card-bg card-bg-n5"></div>
-  </div>
-  <div class="cards">
-    <section id="card-n0" data-card-num='0' class="card card-n0">
-      <div class="content">
-        <h1><span>Яркие решения для вашего</span><span>стремительного роста</span></h1>
-        <h2></h2><a href="#card-n1" class="next"><span>Далее</span></a>
-      </div>
-    </section>
-    <section id="card-n1" data-card-num='1' class="card card-n1">
-      <div class="wrap"><img src="<?=$tpPath;?>/static/images/cards/slide1.png">
-        <div class="text">
-          <h2><span class="num">1</span><span class="title">Изучаем и проектируем</span></h2>
-          <div class="description">
-            <p>
-              Внимательное изучение бизнеса клиентов позволяет нам
-              предлагать эффективные решения.<br>
-              Результатом этого этапа работ являются прототипы,
-              наглядно показывающие концепцию и структуру <br>
-              будущего сайта.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="card-n2" data-card-num='2' class="card card-n2">
-      <div class="wrap"><img src="<?=$tpPath;?>/static/images/cards/slide2.png">
-        <div class="text">
-          <h2><span class="num">2</span><span class="title">Визуализируем</span></h2>
-          <div class="description">
-            <p>
-              Решения, принимаемые человеком на 100% <br> эмоциональны.
-              Доводы разума служат лишь <br> оправданием уже сделанного
-              выбора.<br>
-              Поэтому мы уделяем особое внимание сильной <br> визуальной
-              и эмоциональной составляющей.<br>
-              Дизайн должен нравиться!
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="card-n3" data-card-num='3' class="card card-n3">
-      <div class="wrap"><img src="<?=$tpPath;?>/static/images/cards/slide3.png">
-        <div class="text">
-          <h2><span class="num">3</span><span class="title">Готовим материал</span></h2>
-          <div class="description">
-            <p>
-              Наши маркетологи и копирайтеры уделяют особое внимание
-              подготовке материалов к публикации.<br>
-              Посетители вашего сайта получают нужное сообщение о
-              продукте в доступной и понятной форме. Интересный
-              контент — залог успеха сайта.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="card-n4" data-card-num='4' class="card card-n4">
-      <div class="wrap"><img src="<?=$tpPath;?>/static/images/cards/slide4.png">
-        <div class="text">
-          <h2><span class="num">4</span><span class="title">Верстаем адаптивно!</span></h2>
-          <div class="description">
-            <p>
-              Адаптивная верстка наших решений совместима с <br> широким
-              спектром устройств — от смартфонов и планшетов, до
-              телевизоров. Ваш сайт доступен для посетителей
-              где бы они не находились!
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="card-n5" data-card-num='5' class="card card-n5">
-      <div class="wrap"><img src="<?=$tpPath;?>/static/images/cards/slide5.png">
-        <div class="text">
-          <h2><span class="num">5</span><span class="title">Развиваем <br> и продвигаем</span></h2>
-          <div class="description">
-            <p>
-              Любая реклама действует только при попадании в поле
-              зрения своей целевой аудитории.<br>
-              Мы обеспечиваем продуманное продвижение сайта,
-              именно то, которое нужно данному бизнесу —
-              SEO, SMM, контекстная, медийная реклама и
-              вирусный маркетинг.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="controls">
-    <ul class="cards-switcher">
-      <li><a href="#card-n1">1</a></li>
-      <li><a href="#card-n2">2</a></li>
-      <li><a href="#card-n3">3</a></li>
-      <li><a href="#card-n4">4</a></li>
-      <li><a href="#card-n5">5</a></li>
-    </ul>
-  </div>
-</div>
+<?$APPLICATION->IncludeComponent(
+	"bitrix:main.include",
+	"",
+	Array(
+		"AREA_FILE_SHOW" => "page",
+		"AREA_FILE_SUFFIX" => "inc_main_slider",
+		"EDIT_TEMPLATE" => ""
+	)
+);?>
 <?$APPLICATION->IncludeComponent("bitrix:news.list", "portfolio", Array(
 	"ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
 		"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
@@ -173,157 +72,78 @@ $APPLICATION->SetTitle('Главная');
 	),
 	false
 );?>
-<section id="team" class="team">
-  <div class="title-block">
-    <h1>Команда</h1>
-    <h2><span>Пара слов про сплоченный коллектив суровых суперменов и</span><span>супервуменов, готовых наброситься на любую задачу</span></h2>
-    <ul class="people">
-                  <li><a href="#team-people-1"><img alt="" src="<?=$tpPath;?>/static/images/people/01.png"></a>
-                    <blockquote id="team-people-1">
-                      <div class="content-wrap">
-                        <h3>Дизайнер:</h3>
-                        <p>
-                          Настоящий профи<br>
-                          всегда внимателен к<br>
-                          деталям. Сдвинь-ка<br>
-                          чекбокс на 7px<br>
-                          вправо, бро!
-                        </p>
-                      </div>
-                    </blockquote>
-                  </li>
-                  <li><a href="#team-people-2"><img alt="" src="<?=$tpPath;?>/static/images/people/02.png"></a>
-                    <blockquote id="team-people-2">
-                      <div class="content-wrap">
-                        <h3>Дизайнер:</h3>
-                        <p>
-                          Настоящий профи<br>
-                          всегда внимателен к<br>
-                          деталям. Сдвинь-ка<br>
-                          чекбокс на 7px<br>
-                          вправо, бро!
-                        </p>
-                      </div>
-                    </blockquote>
-                  </li>
-                  <li><a href="#team-people-3"><img alt="" src="<?=$tpPath;?>/static/images/people/03.png"></a>
-                    <blockquote id="team-people-3">
-                      <div class="content-wrap">
-                        <h3>Дизайнер:</h3>
-                        <p>
-                          Настоящий профи<br>
-                          всегда внимателен к<br>
-                          деталям. Сдвинь-ка<br>
-                          чекбокс на 7px<br>
-                          вправо, бро!
-                        </p>
-                      </div>
-                    </blockquote>
-                  </li>
-                  <li><a href="#team-people-4"><img alt="" src="<?=$tpPath;?>/static/images/people/04.png"></a>
-                    <blockquote id="team-people-4">
-                      <div class="content-wrap">
-                        <h3>Дизайнер:</h3>
-                        <p>
-                          Настоящий профи<br>
-                          всегда внимателен к<br>
-                          деталям. Сдвинь-ка<br>
-                          чекбокс на 7px<br>
-                          вправо, бро!
-                        </p>
-                      </div>
-                    </blockquote>
-                  </li>
-                  <li><a href="#team-people-5"><img alt="" src="<?=$tpPath;?>/static/images/people/05.png"></a>
-                    <blockquote id="team-people-5">
-                      <div class="content-wrap">
-                        <h3>Дизайнер:</h3>
-                        <p>
-                          Настоящий профи<br>
-                          всегда внимателен к<br>
-                          деталям. Сдвинь-ка<br>
-                          чекбокс на 7px<br>
-                          вправо, бро!
-                        </p>
-                      </div>
-                    </blockquote>
-                  </li>
-                  <li><a href="#team-people-6"><img alt="" src="<?=$tpPath;?>/static/images/people/06.png"></a>
-                    <blockquote id="team-people-6">
-                      <div class="content-wrap">
-                        <h3>Дизайнер:</h3>
-                        <p>
-                          Настоящий профи<br>
-                          всегда внимателен к<br>
-                          деталям. Сдвинь-ка<br>
-                          чекбокс на 7px<br>
-                          вправо, бро!
-                        </p>
-                      </div>
-                    </blockquote>
-                  </li>
-    </ul>
-  </div>
-</section>
+<?$APPLICATION->IncludeComponent(
+	"bitrix:main.include",
+	"",
+	Array(
+		"AREA_FILE_SHOW" => "page",
+		"AREA_FILE_SUFFIX" => "inc_main_team",
+		"EDIT_TEMPLATE" => ""
+	)
+);?>
 
-<?$APPLICATION->IncludeComponent("bitrix:news.list", "reviews", Array(
-	"ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
-		"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
-		"AJAX_MODE" => "N",	// Включить режим AJAX
-		"AJAX_OPTION_ADDITIONAL" => "",	// Дополнительный идентификатор
-		"AJAX_OPTION_HISTORY" => "N",	// Включить эмуляцию навигации браузера
-		"AJAX_OPTION_JUMP" => "N",	// Включить прокрутку к началу компонента
-		"AJAX_OPTION_STYLE" => "Y",	// Включить подгрузку стилей
-		"CACHE_FILTER" => "N",	// Кешировать при установленном фильтре
-		"CACHE_GROUPS" => "Y",	// Учитывать права доступа
-		"CACHE_TIME" => "36000000",	// Время кеширования (сек.)
-		"CACHE_TYPE" => "A",	// Тип кеширования
-		"CHECK_DATES" => "Y",	// Показывать только активные на данный момент элементы
-		"DETAIL_URL" => "",	// URL страницы детального просмотра (по умолчанию - из настроек инфоблока)
-		"DISPLAY_BOTTOM_PAGER" => "N",	// Выводить под списком
-		"DISPLAY_DATE" => "Y",	// Выводить дату элемента
-		"DISPLAY_NAME" => "Y",	// Выводить название элемента
-		"DISPLAY_PICTURE" => "Y",	// Выводить изображение для анонса
-		"DISPLAY_PREVIEW_TEXT" => "Y",	// Выводить текст анонса
-		"DISPLAY_TOP_PAGER" => "N",	// Выводить над списком
-		"FIELD_CODE" => array(	// Поля
+<?$APPLICATION->IncludeComponent(
+	"bitrix:news.list",
+	"reviews",
+	array(
+		"ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"AJAX_MODE" => "N",
+		"AJAX_OPTION_ADDITIONAL" => "",
+		"AJAX_OPTION_HISTORY" => "N",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"CACHE_FILTER" => "N",
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"CHECK_DATES" => "Y",
+		"DETAIL_URL" => "",
+		"DISPLAY_BOTTOM_PAGER" => "N",
+		"DISPLAY_DATE" => "Y",
+		"DISPLAY_NAME" => "Y",
+		"DISPLAY_PICTURE" => "Y",
+		"DISPLAY_PREVIEW_TEXT" => "Y",
+		"DISPLAY_TOP_PAGER" => "N",
+		"FIELD_CODE" => array(
 			0 => "",
 			1 => "",
 		),
-		"FILTER_NAME" => "",	// Фильтр
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",	// Скрывать ссылку, если нет детального описания
-		"IBLOCK_ID" => "2",	// Код информационного блока
-		"IBLOCK_TYPE" => "main",	// Тип информационного блока (используется только для проверки)
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",	// Включать инфоблок в цепочку навигации
-		"INCLUDE_SUBSECTIONS" => "N",	// Показывать элементы подразделов раздела
-		"MESSAGE_404" => "",	// Сообщение для показа (по умолчанию из компонента)
-		"NEWS_COUNT" => "20",	// Количество новостей на странице
-		"PAGER_BASE_LINK_ENABLE" => "N",	// Включить обработку ссылок
-		"PAGER_DESC_NUMBERING" => "N",	// Использовать обратную навигацию
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",	// Время кеширования страниц для обратной навигации
-		"PAGER_SHOW_ALL" => "N",	// Показывать ссылку "Все"
-		"PAGER_SHOW_ALWAYS" => "N",	// Выводить всегда
-		"PAGER_TEMPLATE" => ".default",	// Шаблон постраничной навигации
-		"PAGER_TITLE" => "Новости",	// Название категорий
-		"PARENT_SECTION" => "",	// ID раздела
-		"PARENT_SECTION_CODE" => "",	// Код раздела
-		"PREVIEW_TRUNCATE_LEN" => "",	// Максимальная длина анонса для вывода (только для типа текст)
-		"PROPERTY_CODE" => array(	// Свойства
+		"FILTER_NAME" => "",
+		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+		"IBLOCK_ID" => "2",
+		"IBLOCK_TYPE" => "main",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"INCLUDE_SUBSECTIONS" => "N",
+		"MESSAGE_404" => "",
+		"NEWS_COUNT" => "20",
+		"PAGER_BASE_LINK_ENABLE" => "N",
+		"PAGER_DESC_NUMBERING" => "N",
+		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+		"PAGER_SHOW_ALL" => "N",
+		"PAGER_SHOW_ALWAYS" => "N",
+		"PAGER_TEMPLATE" => ".default",
+		"PAGER_TITLE" => "Новости",
+		"PARENT_SECTION" => "",
+		"PARENT_SECTION_CODE" => "",
+		"PREVIEW_TRUNCATE_LEN" => "",
+		"PROPERTY_CODE" => array(
 			0 => "AUTHOR",
 			1 => "POSITION",
 			2 => "",
 		),
-		"SET_BROWSER_TITLE" => "N",	// Устанавливать заголовок окна браузера
-		"SET_LAST_MODIFIED" => "N",	// Устанавливать в заголовках ответа время модификации страницы
-		"SET_META_DESCRIPTION" => "N",	// Устанавливать описание страницы
-		"SET_META_KEYWORDS" => "N",	// Устанавливать ключевые слова страницы
-		"SET_STATUS_404" => "N",	// Устанавливать статус 404
-		"SET_TITLE" => "N",	// Устанавливать заголовок страницы
-		"SHOW_404" => "N",	// Показ специальной страницы
-		"SORT_BY1" => "SORT",	// Поле для первой сортировки новостей
-		"SORT_BY2" => "ACTIVE_FROM",	// Поле для второй сортировки новостей
-		"SORT_ORDER1" => "ASC",	// Направление для первой сортировки новостей
-		"SORT_ORDER2" => "DESC",	// Направление для второй сортировки новостей
+		"SET_BROWSER_TITLE" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_META_KEYWORDS" => "N",
+		"SET_STATUS_404" => "N",
+		"SET_TITLE" => "N",
+		"SHOW_404" => "N",
+		"SORT_BY1" => "SORT",
+		"SORT_BY2" => "ACTIVE_FROM",
+		"SORT_ORDER1" => "ASC",
+		"SORT_ORDER2" => "DESC",
+		"COMPONENT_TEMPLATE" => "reviews"
 	),
 	false
 );?>
