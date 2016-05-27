@@ -48,7 +48,7 @@ $form.on \submit, ->
 	$inputs-labels.trigger \remove-error-message
 
 	$.ajax do
-		url: '/feedback-post.json'
+		url: '/ajax/send_mail.php'
 		data-type: \json
 		method: \POST
 		cache: false
@@ -56,7 +56,6 @@ $form.on \submit, ->
 		data: $form.serialize!
 	.success (json, text-status, jq-XHR)!->
 		return unless is-response-valid json
-
 		if json.status is \success
 			window.alert get-local-text \forms, \feedback-success-msgbox
 			$form.trigger \reset
@@ -65,9 +64,9 @@ $form.on \submit, ->
 	.error (jq-XHR, text-status, error-thrown)!->
 		json = jq-XHR.response-JSON
 		return unless is-response-valid json
-
+		
 		if json.status is \error and \
-		json.error-code in <[required-fields incorrect-fields]> and \
+		json.error_code in <[required-fields incorrect-fields]> and \
 		json.fields?
 			(field) <-! json.fields.for-each
 			$input = $form.find "input[name='#{field}'], textarea[name='#{field}']"
@@ -76,7 +75,7 @@ $form.on \submit, ->
 			$label
 				.data \error-message-jq-el, ($ '<div/>', class: \error-message)
 				.data \error-message-jq-el
-				.html (get-local-text \err, \ajax, (json.error-code.slice 0, -1))
+				.html (get-local-text \err, \ajax, (json.error_code.slice 0, -1))
 			$label
 				.append $label.data \error-message-jq-el
 				.on \remove-error-message, !->
