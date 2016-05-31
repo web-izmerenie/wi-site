@@ -1,4 +1,6 @@
 <?
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+
 $json_result = array();
 $error = null;
 $arrErorInput = array();
@@ -46,7 +48,15 @@ if($error == "required-fields"){
 	);
 }else{
 	header('Content-Type: application/json', true);
-	
+
+	$arSend = array(
+		"NAME" => $_POST['name'],
+		"PHONEMAIL" => $_POST['phonemail'],
+		"MSG" => $_POST['message']
+	);
+
+	CEvent::Send('SEND_FROM', "s1", $arSend);
+
 	$json_result = array(
 		"status" => "success"
 	);
