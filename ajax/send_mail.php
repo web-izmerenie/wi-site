@@ -57,6 +57,24 @@ if($error == "required-fields"){
 
 	CEvent::Send('SEND_FROM', "s1", $arSend);
 
+	if(CModule::IncludeModule('iblock')) {
+
+		$name = htmlspecialchars($_POST['name']);
+		$phonemail = htmlspecialchars($_POST['phonemail']);
+		$message = htmlspecialchars($_POST['message']);
+
+		$el = new CIBlockElement;
+		$arLoadProductArray = Array(
+			"IBLOCK_SECTION_ID" => false,
+			"IBLOCK_ID"      => 3,
+			"NAME"           => sprintf('%s - %s', $name, date('d.m.Y H:i:s')),
+			"ACTIVE"         => "Y",
+			"PREVIEW_TEXT"   => $phonemail,
+			"DETAIL_TEXT"    => $message
+		);
+		$el->Add($arLoadProductArray);
+	}
+
 	$json_result = array(
 		"status" => "success"
 	);

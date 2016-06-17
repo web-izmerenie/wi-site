@@ -31,11 +31,13 @@ $this->setFrameMode(true);
       </li>
     <?}?>
   </ul>
+	<?if(($arResult['NAV_RESULT']->NavPageCount - $arResult['NAV_RESULT']->NavPageNomer)>0){?>
   <div class="more-block">
-    <a href="/#portfolio-more">
+    <a href="/#portfolio-more" data-page="1">
       <i class="a"></i>
       <i class="b"></i>
       <span class="title">Показать ещё</span>
     </a>
   </div>
+	<?}?>
 </section>

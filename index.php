@@ -15,7 +15,7 @@ $APPLICATION->SetTitle('Главная');
 <?$APPLICATION->IncludeComponent("bitrix:news.list", "portfolio", Array(
 	"ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
 		"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
-		"AJAX_MODE" => "Y",	// Включить режим AJAX
+		"AJAX_MODE" => "N",	// Включить режим AJAX
 		"AJAX_OPTION_ADDITIONAL" => "",	// Дополнительный идентификатор
 		"AJAX_OPTION_HISTORY" => "N",	// Включить эмуляцию навигации браузера
 		"AJAX_OPTION_JUMP" => "N",	// Включить прокрутку к началу компонента
@@ -26,7 +26,7 @@ $APPLICATION->SetTitle('Главная');
 		"CACHE_TYPE" => "A",	// Тип кеширования
 		"CHECK_DATES" => "Y",	// Показывать только активные на данный момент элементы
 		"DETAIL_URL" => "",	// URL страницы детального просмотра (по умолчанию - из настроек инфоблока)
-		"DISPLAY_BOTTOM_PAGER" => "N",	// Выводить под списком
+		"DISPLAY_BOTTOM_PAGER" => "Y",	// Выводить под списком
 		"DISPLAY_DATE" => "N",	// Выводить дату элемента
 		"DISPLAY_NAME" => "Y",	// Выводить название элемента
 		"DISPLAY_PICTURE" => "Y",	// Выводить изображение для анонса
