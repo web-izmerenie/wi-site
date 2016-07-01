@@ -14,6 +14,9 @@
 tmp
 Thumbs.db
 .DS_Store
+.bash_history
+.mc/
+.v8flags*
 
 front-end-gulp
 node_modules

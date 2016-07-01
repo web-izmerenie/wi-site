@@ -16,6 +16,10 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 		$html_classes[] = 'blog-page';
 
 	$html_classes = implode(' ', $html_classes);
+
+	if(defined('MAIN_PAGE'))
+		$APPLICATION->AddHeadScript("http://maps.google.com/maps/api/js");
+	$APPLICATION->AddHeadScript($tpPath."/static/build.js");
 ?>
 <!DOCTYPE html>
 <html lang="ru" class="no-js <?=$html_classes;?>">
@@ -24,8 +28,6 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 		<?$APPLICATION->ShowHead();?>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="<?=$tpPath;?>/static/build.css" rel="stylesheet" type="text/css" class="main-styles">
-		<script src="http://maps.google.com/maps/api/js"></script>
-		<script src="<?=$tpPath;?>/static/build.js"></script>
 	</head>
 	<body>
 		<?$APPLICATION->ShowPanel();?>

@@ -179,19 +179,10 @@
 		float left
 		padding-right 20px
 
-	.buttons
-		display block
-
-		ul
-			reset-box-model()
-			display table
-			height 44px
-
-			>li
-				reset-box-model()
-				display table-cell
-				vertical-align middle
-				text-align center
+	#soc
+		.ya-share2__list
+			display: flex
+			justify-content: space-around
 
 	@media (max-width: ($sizes.middle))
 		text-align center

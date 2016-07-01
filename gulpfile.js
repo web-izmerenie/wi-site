@@ -13,7 +13,7 @@ gulp.task('jade', function () {
 					return '/static/'+item;
 				},
 				menu: {
-					main: require('./static/main-menu.json').ru
+					main: require(tplPath + '/static/main-menu.json')
 				},
 				formData: {
 					name: ""
