@@ -81,6 +81,7 @@ bitrix/web.config
 bitrix/wizards
 bitrix/updates
 bitrix/css
+bitrix/html_pages/
 
 # upload dir
 upload
