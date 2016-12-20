@@ -25,7 +25,9 @@ maps = []
 
 $cards = $ \.general-cards
 $cards-list = $cards.children!
-$card-n0 = $cards.find \.card-n0
+$main-card = $ \.main-card
+$main-card-list = $main-card.children!
+$card-n0 = $main-card.find \.card-n0
 $card-n0-next = $card-n0.find \.next
 $card-n0-next-icon = $card-n0-next.find \>span
 headers-n1.push <| $card-n0.find \h1
@@ -169,6 +171,8 @@ $w.on "resize#bind-suffix", !->
 
 	$cards.css height: w-h
 	$cards-list.css height: w-h
+	$main-card.css height: w-h
+	$main-card-list.css height: w-h
 	$team.css height: w-h - header-offset
 	$top-part.css height: \auto
 

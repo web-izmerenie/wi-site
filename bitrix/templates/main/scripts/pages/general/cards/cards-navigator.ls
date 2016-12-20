@@ -16,6 +16,8 @@ const $bgs =
 	|> reject (-> $ it .has-class \.card-bg-n0)
 	|> $
 
+($ $bgs.0).addClass 'active'
+
 const bind-suffix = \.cards-navigator
 const anim-speed  = get-val \animation-speed |> (* 4)
 

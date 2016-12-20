@@ -33,7 +33,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 		<?$APPLICATION->ShowPanel();?>
 		<div class="top-part">
 			<header>
-				<a href="/#card-n0" class="logo">
+				<a href="/#main-card" class="logo">
 					<img alt="Логотип" src="<?=$tpPath;?>/static/images/wi-logo.svg" class="logo-image">
 					<span class="logo-text">Web izmerenie</span>
 				</a>
@@ -41,7 +41,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 					<div class="bg-helper"></div>
 					<a href="#menu" title="Открыть меню" class="call-menu">Открыть меню</a>
 					<div id="menu" class="menu">
-						<a href="/#card-n0" class="logo">
+						<a href="/#main-card" class="logo">
 							<img alt="Логотип" src="<?=$tpPath;?>/static/images/wi-logo.svg" class="logo-image">
 							<span class="logo-text">Web izmerenie</span>
 						</a>

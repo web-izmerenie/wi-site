@@ -34,76 +34,51 @@
 
 	.wrap
 		width 100%
-		max-width 1335px
+		max-width 1440px
 		margin 0 auto
-		color #FFF
 		position relative
-		top 50%
-		transform translateY(-50%)
+		top: 50%
+		transform translateY(-40%)
+		color #FFF
+		display flex
+		justify-content space-between
 		box-sizing border-box
-		padding 0 15px
+		padding 0px 5%
 
 		h2
-			custom-font('Proxima Nova Rg', bold, 59px, 1.05)
+			custom-font('Proxima Nova Rg', bold, 3vw, normal)
 			text-transform uppercase
-
-			@media (max-width: ($sizes.middle))
-				font-size 40px !important
-
-			@media (max-width: ($sizes.small))
-				white-space nowrap
+			padding-top 6%
 
 			.num
 				display inline-block
 				vertical-align top
-				width 13.2%
+				padding-right 3%
 
 				&:after
 					content ' /'
 
 			.title
 				display inline-block
-				width 86%
+				width 85%
 
 		.text
-			display inline-block
-			vertical-align top
-			width 47.2%
-			margin-left 6%
-			margin-top  32px
-
-			@media (max-width: ($sizes.small))
-				display block !important
-				margin 60px auto 0 !important
-				width 62.5%
+			width 50%
 
 			.description
-				custom-font('Proxima Nova Lt', normal, 20px, 1.6)
-				margin-top 37px
-				margin-left 14%
-
-				@media (max-width: ($sizes.middle))
-					font-size 17px
-
-				@media (max-width: ($sizes.small))
-					width 100%
-					font-size 16px
+				custom-font('Proxima Nova Lt', normal, 20px, 1.5)
+				margin-left 4.7vw
 
 		img
-			display inline-block
-			vertical-align top
-			width 45.8%
-
-			@media (max-width: ($sizes.small))
-				display block
-				margin 0 auto
-				width 62.5%
+			width 43%
+			max-height 100%
 
 .card.card-n0
 	$next-button-color = #10476e
 
 	text-align center
 	display block
+	opacity 1
 
 	.content
 		display block
@@ -158,54 +133,6 @@
 					transform translate(-50%, -50%)
 
 		// see for some `body.loaded` selector styles in `general.styl`
-
-#card-n2
-	.text
-		margin-top 65px
-
-		h2
-			font-size 55px
-
-			.num
-				width 14%
-
-		.description
-			line-height 1.7
-			margin-top 46px
-
-#card-n3
-	.text
-		margin-top 34px
-		margin-left 7%
-
-	h2
-		line-height 1.1
-
-	.description
-		line-height 1.7
-		margin-top 40px
-
-#card-n4
-	.text
-		margin-top 35px
-
-	h2
-		line-height 1.15
-
-	.description
-		margin-top 45px
-
-#card-n5
-	.text
-		margin-left 7%
-		margin-top 110px
-
-		h2
-			line-height 1.2
-			font-size 53px
-
-		.description
-			margin-top 47px
 
 .controls
 	absolute left 0 top 0

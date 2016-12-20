@@ -7,19 +7,18 @@ html(
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 		title= pageTitle
 		link.main-styles(href=staticUrl("build.css") rel="stylesheet" type="text/css")
-		script(src="http://maps.google.com/maps/api/js")
 		script(src=staticUrl("build.js"))
 	body(class=[].concat(bodyClasses || []).join(' '))
 		.top-part
 			header
-				a.logo(href="/#card-n0")
+				a.logo(href="/#main-card")
 					img.logo-image(alt="Логотип" src=staticUrl("images/wi-logo.svg"))
 					span.logo-text Web izmerenie
 				.fixed-header
 					.bg-helper
 					a.call-menu(href="#menu" title="Открыть меню") Открыть меню
 					#menu.menu
-						a.logo(href="/#card-n0")
+						a.logo(href="/#main-card")
 							img.logo-image(alt="Логотип" src=staticUrl("images/wi-logo.svg"))
 							span.logo-text Web izmerenie
 						nav

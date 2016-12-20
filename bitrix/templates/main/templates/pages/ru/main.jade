@@ -1,15 +1,10 @@
 extends ../../layout
 
 block page-block
-	.general-cards
+	section#main-card.main-card
 		.backgrounds
 			.card-bg.card-bg-n0(data-card-num=0)
 				.bg-pattern
-			.card-bg.card-bg-n1(data-card-num=1)
-			.card-bg.card-bg-n2(data-card-num=2)
-			.card-bg.card-bg-n3(data-card-num=3)
-			.card-bg.card-bg-n4(data-card-num=4)
-			.card-bg.card-bg-n5(data-card-num=5)
 		.cards
 			section#card-n0.card.card-n0(data-card-num=0)
 				.content
@@ -19,6 +14,14 @@ block page-block
 					h2
 					a.next(href="#card-n1")
 						span Далее
+	#general-cards.general-cards
+		.backgrounds
+			.card-bg.card-bg-n1(data-card-num=1)
+			.card-bg.card-bg-n2(data-card-num=2)
+			.card-bg.card-bg-n3(data-card-num=3)
+			.card-bg.card-bg-n4(data-card-num=4)
+			.card-bg.card-bg-n5(data-card-num=5)
+		.cards
 			section#card-n1.card.card-n1(data-card-num=1)
 				.wrap
 					img(src = staticUrl("images/cards/slide1.png"))
@@ -31,7 +34,7 @@ block page-block
 								Внимательное изучение бизнеса клиентов позволяет нам
 								предлагать эффективные решения.<br>
 								Результатом этого этапа работ являются прототипы,
-								наглядно показывающие концепцию и структуру <br>
+								наглядно показывающие концепцию и структуру
 								будущего сайта.
 			section#card-n2.card.card-n2(data-card-num=2)
 				.wrap
@@ -42,10 +45,10 @@ block page-block
 							span.title Визуализируем
 						.description
 							p.
-								Решения, принимаемые человеком на 100% <br> эмоциональны.
-								Доводы разума служат лишь <br> оправданием уже сделанного
+								Решения, принимаемые человеком на 100% эмоциональны.
+								Доводы разума служат лишь оправданием уже сделанного
 								выбора.<br>
-								Поэтому мы уделяем особое внимание сильной <br> визуальной
+								Поэтому мы уделяем особое внимание сильной визуальной
 								и эмоциональной составляющей.<br>
 								Дизайн должен нравиться!
 			section#card-n3.card.card-n3(data-card-num=3)
@@ -71,7 +74,7 @@ block page-block
 							span.title Верстаем адаптивно!
 						.description
 							p.
-								Адаптивная верстка наших решений совместима с <br> широким
+								Адаптивная верстка наших решений совместима с широким
 								спектром устройств — от смартфонов и планшетов, до
 								телевизоров. Ваш сайт доступен для посетителей
 								где бы они не находились!
@@ -81,7 +84,7 @@ block page-block
 					.text
 						h2
 							span.num 5
-							span.title Развиваем <br> и продвигаем
+							span.title Развиваем и продвигаем
 						.description
 							p.
 								Любая реклама действует только при попадании в поле
@@ -198,10 +201,10 @@ block page-block
 			h2
 				img(alt="Контакты" src=staticUrl("images/contacts.svg"))
 			.map(
-				data-mark-x = "39.764460"
-				data-mark-y = "47.251650"
-				data-pos-x  = "39.765236"
-				data-pos-y  = "47.256611"
+				data-mark-x = "39.7646"
+				data-mark-y = "47.2520"
+				data-pos-x  = "39.7646"
+				data-pos-y  = "47.2585"
 				data-zoom   = "14")
 				img.marker(alt="" src=staticUrl("images/map-marker.svg"))
 		.second

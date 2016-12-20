@@ -28,8 +28,9 @@ const $logo-img = $logo.find \img
 
 const $cards-wrap   = $body.find \.general-cards
 const $cards-bgs    = $cards-wrap.find \.backgrounds
-const $card-n0      = $cards-wrap.find \.card-n0
-const $card-n0-bg   = $cards-bgs.find '.card-bg-n0 .bg-pattern'
+const $main-card    = $body.find \.main-card
+const $card-n0      = $main-card.find \.card-n0
+const $card-n0-bg   = $main-card.find '.backgrounds .card-bg-n0 .bg-pattern'
 const $card-n0-next = $card-n0.find \.next
 
 const speed = get-val \animation-speed |> (* 4)

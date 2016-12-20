@@ -18,6 +18,7 @@ const $html          = $ \html
 const $page          = $ 'html, body'
 const $body          = $html.find \body
 const $header        = $body.find \header
+const $logo-link     = $header.find \.logo
 const $menu          = $header.find \.menu
 const $nav           = $menu.find \nav
 const $nav-links     = $nav.find \a
@@ -39,7 +40,10 @@ const cur-page-hashes =
 		[ "##{$section.attr \id}", { $section, $nav-link: null } ]
 	))
 	|> (++ $nav-links |> map (->
-		[ it.hash, { $section: ($ it.hash), $nav-link: ($ it) } ]
+		[ it.hash, { $section: ($ it.hash), $nav-link: ($ it) }, {} ]
+	))
+	|> (++ $logo-link |> map (->
+		[ it.hash, { $section: ($ it.hash), $nav-link: ($ it) }, {} ]
 	))
 	|> pairs-to-obj
 
@@ -72,7 +76,7 @@ scroll-handler = !->
 			return null unless it?
 			const hash = it.0
 			if hash |> is-card-hash
-				\#card-n0
+				\#card-n1
 			else
 				hash
 
