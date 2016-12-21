@@ -13,8 +13,6 @@ const $cards         = $cards-wrap.find \.card
 
 const $bgs =
 	$bgs-wrap.find \.card-bg
-	|> reject (-> $ it .has-class \.card-bg-n0)
-	|> $
 
 ($ $bgs.0).addClass 'active'
 

@@ -101,8 +101,8 @@ ul.reviews-list
 					padding-top 39px
 					box-sizing border-box
 					transform translate(-50%, -45%) scale(0)
-					transition opacity $animation-speed $animation-curve,
-						transform $animation-speed $animation-curve
+					transition opacity 100ms $animation-curve,
+						transform 400ms $animation-curve
 
 					&:before
 						pseudo-block()
@@ -165,5 +165,5 @@ ul.reviews-list
 				a:active + blockquote
 					opacity 1
 					transform translate(-50%, -45%) scale(1)
-					transition opacity 50ms $animation-curve,
-						transform $animation-speed $animation-curve
+					transition opacity 100ms $animation-curve,
+						transform 400ms $animation-curve
