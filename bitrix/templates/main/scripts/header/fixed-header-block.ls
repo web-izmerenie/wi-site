@@ -12,7 +12,7 @@ $html = $ \html
 $body = $html.find \body
 $header = $body.find \header
 $height-helper = $header.find \.height-helper
-$cards = $ \.general-cards
+$cards = $ \.main-card
 
 main-page = $html.has-class \general-page
 

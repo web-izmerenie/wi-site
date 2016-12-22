@@ -36,7 +36,8 @@ last-card-route      = null  # mutable, updates every times when route changes a
 last-routed-card-num = null  # mutable, updates after all animations end
 
 # it fixes bug when we see area of left:100%
-heal-cards-wrap = !-> $cards-wrap.scroll-top 0 .scroll-left 0
+heal-cards-wrap = !->
+	$cards-wrap.scroll-top 0 .scroll-left 0
 
 on-navigated = (_, route) !->
 	return unless (route |> is-card-route) # do nothing if it's not card route
